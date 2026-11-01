@@ -316,4 +316,143 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // ---------- 11. Battlestation Web Audio Sound Effects ----------
+  const sfxToggleBtn = document.getElementById('sfxToggleBtn');
+  let audioCtx = null;
+  let sfxEnabled = localStorage.getItem('swanand_sfx') === 'true';
+
+  const getAudioContext = () => {
+    if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContextClass();
+    }
+    return audioCtx;
+  };
+
+  const playSynthesizedSound = (type = 'click') => {
+    if (!sfxEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      if (ctx.state === 'suspended') ctx.resume();
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      const now = ctx.currentTime;
+      if (type === 'hover') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(460, now);
+        osc.frequency.exponentialRampToValueAtTime(780, now + 0.035);
+        gain.gain.setValueAtTime(0.012, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+        osc.start(now);
+        osc.stop(now + 0.035);
+      } else if (type === 'toggle') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(640, now + 0.08);
+        gain.gain.setValueAtTime(0.035, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } else {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(540, now);
+        osc.frequency.exponentialRampToValueAtTime(260, now + 0.05);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }
+    } catch (e) {}
+  };
+
+  const updateSfxBtnState = () => {
+    if (!sfxToggleBtn) return;
+    if (sfxEnabled) {
+      sfxToggleBtn.classList.add('active');
+      sfxToggleBtn.innerHTML = '<span class="sfx-icon">🔊</span> <span class="sfx-text">SFX ON</span>';
+      sfxToggleBtn.setAttribute('aria-pressed', 'true');
+    } else {
+      sfxToggleBtn.classList.remove('active');
+      sfxToggleBtn.innerHTML = '<span class="sfx-icon">🔇</span> <span class="sfx-text">SFX</span>';
+      sfxToggleBtn.setAttribute('aria-pressed', 'false');
+    }
+  };
+
+  if (sfxToggleBtn) {
+    updateSfxBtnState();
+    sfxToggleBtn.addEventListener('click', () => {
+      sfxEnabled = !sfxEnabled;
+      localStorage.setItem('swanand_sfx', sfxEnabled);
+      updateSfxBtnState();
+      if (sfxEnabled) {
+        playSynthesizedSound('toggle');
+        showToast('Battlestation Sound FX Enabled');
+      } else {
+        showToast('Sound FX Muted');
+      }
+    });
+  }
+
+  // Attach sound triggers to interactive targets
+  const interactiveElements = document.querySelectorAll('a, button, .filter-btn, .project-card, .beyond-card');
+  interactiveElements.forEach((el) => {
+    el.addEventListener('mouseenter', () => playSynthesizedSound('hover'), { passive: true });
+    el.addEventListener('click', () => playSynthesizedSound('click'), { passive: true });
+  });
+
+  // ---------- 12. 3D Perspective Card Tilt & Spotlight Follower ----------
+  const tiltCards = document.querySelectorAll('.project-card, .beyond-card, .what-card, .about-attributes-card, .discipline-callout');
+  if (isFinePointer) {
+    tiltCards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -4.5;
+        const rotateY = ((x - centerX) / centerX) * 4.5;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`;
+        card.style.setProperty('--spotlight-x', `${x}px`);
+        card.style.setProperty('--spotlight-y', `${y}px`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+      });
+    });
+  }
+
+  // ---------- 13. Developer Attributes Matrix Animate on Viewport ----------
+  const attrCard = document.querySelector('.about-attributes-card');
+  const attrFills = document.querySelectorAll('.attr-bar-fill');
+  if (attrCard && attrFills.length && 'IntersectionObserver' in window) {
+    const attrObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            attrFills.forEach((fill) => {
+              const targetWidth = fill.style.width;
+              fill.style.width = '0%';
+              setTimeout(() => {
+                fill.style.width = targetWidth;
+              }, 120);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    attrObserver.observe(attrCard);
+  }
 });

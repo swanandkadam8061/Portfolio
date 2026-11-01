@@ -42,11 +42,12 @@
       { name: "Minimal Fashion & Streetwear Editorial", type: "CSS Grid & Typography", status: "Active Build" }
     ],
     interests: [
-      "🏏 Sports (Cricket, energy, teamwork, discipline)",
-      "👕 Fashion (Streetwear, monochrome fits, aesthetic personal style)",
-      "🎬 Movies (Cinematography, visual storytelling)",
-      "📺 TV Series (Character arcs, multi-layered narratives)",
-      "🎌 Anime (Frieren, Attack on Titan, world-building, imaginative lore)"
+      "🏋️‍♂️ Gym & Weight Training (6x/week progressive overload, discipline over motivation)",
+      "🎮 Gaming & Strategy (Tactical competitive play, mechanical mastery, game engines)",
+      "⚔️ Anime & Shonen Drive (Solo Leveling, Hunter x Hunter, relentless growth)",
+      "👕 Streetwear & Visual Aesthetics (Dark monochrome fits, minimalist curation)",
+      "🎬 Movies & Directing (Cinematography, visual pacing, atmospheric world-building)",
+      "🏏 Sports & Team Spirit (Cricket, high energy, clutch competitive focus)"
     ],
     contact: {
       github: "https://github.com/swanandkadam8061",
@@ -172,15 +173,16 @@
              `**Currently learning. Constantly building. Always exploring.**`;
     }
 
-    // 6. Beyond the Code / Hobbies
-    if (q.includes('hobby') || q.includes('beyond') || q.includes('sports') || q.includes('cricket') || q.includes('anime') || q.includes('fashion') || q.includes('movie')) {
+    // 6. Beyond the Code / Hobbies / Gym / Gaming / Anime
+    if (q.includes('hobby') || q.includes('beyond') || q.includes('gym') || q.includes('fitness') || q.includes('workout') || q.includes('gaming') || q.includes('sports') || q.includes('cricket') || q.includes('anime') || q.includes('fashion') || q.includes('movie')) {
       return `🎯 **Beyond the Code:**\n\n` +
-             `Outside of technology and software development, Swanand is inspired by:\n` +
-             `• 🏏 **Sports:** Teamwork, fast energy, and competitive discipline\n` +
-             `• 👕 **Fashion:** Streetwear trends, monochrome fits, and intentional styling\n` +
-             `• 🎬 **Movies:** Directorial storytelling and visual cinematography\n` +
-             `• 📺 **TV Series:** Character narratives and compelling world drama\n` +
-             `• 🎌 **Anime:** Deep storytelling and art (Frieren, Attack on Titan, Chainsaw Man).`;
+             `Outside of technology and software development, Swanand is driven by:\n` +
+             `• 🏋️‍♂️ **Gym & Weight Training:** 6x/week progressive overload discipline. *"Discipline > Motivation"* — the mental blueprint he applies to software architecture.\n` +
+             `• 🎮 **Gaming & Strategy:** Tactical competitive gaming, high APM, game mechanics, and virtual engine tech.\n` +
+             `• ⚔️ **Anime & Shonen Drive:** Inspired by *Solo Leveling*, *Hunter x Hunter*, and relentless protagonist growth.\n` +
+             `• 👕 **Streetwear & Aesthetics:** Dark monochrome fits, clean silhouettes, and intentional minimalist curation.\n` +
+             `• 🎬 **Cinematic Art:** High-contrast cinematography and atmospheric world-building.\n` +
+             `• 🏏 **Sports:** Cricket, fast-paced teamwork, and clutch execution under pressure.`;
     }
 
     // 7. Contact / Socials

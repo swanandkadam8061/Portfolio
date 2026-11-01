@@ -43,6 +43,16 @@
     </ul>
 
     <div class="nav-socials">
+      <div class="nav-status-pill" title="Currently open to software engineering opportunities">
+        <span class="status-live-dot"></span>
+        <span>OPEN TO WORK</span>
+      </div>
+
+      <button id="sfxToggleBtn" class="sfx-toggle-btn" aria-label="Toggle Battlestation Sound Effects" title="Toggle Interactive Sound Effects">
+        <span class="sfx-icon">🔇</span>
+        <span class="sfx-text">SFX</span>
+      </button>
+
       <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="GitHub Profile" title="GitHub">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -88,7 +98,8 @@
     <!-- Left Column: Narrative & CTAs -->
     <div class="hero-content">
       <div class="hero-badge">
-        <span>Hello, I'm 👋</span>
+        <span class="badge-dot"></span>
+        <span>COLLECTION 2025 // EDITORIAL LOOKBOOK</span>
       </div>
 
       <h1 class="hero-name">
@@ -123,16 +134,45 @@
           <span>LinkedIn</span>
         </a>
       </div>
+
+      <!-- Developer, Fashion & Fitness Telemetry -->
+      <div class="hero-telemetry">
+        <div class="telemetry-item">
+          <span class="telemetry-dot dot-red"></span>
+          <span class="telemetry-label">BUILD</span>
+          <span class="telemetry-val">Full-Stack · AI</span>
+        </div>
+        <div class="telemetry-sep">/</div>
+        <div class="telemetry-item">
+          <span class="telemetry-dot dot-purple"></span>
+          <span class="telemetry-label">STYLE</span>
+          <span class="telemetry-val">Minimal High-Fashion</span>
+        </div>
+        <div class="telemetry-sep">/</div>
+        <div class="telemetry-item">
+          <span class="telemetry-dot dot-green"></span>
+          <span class="telemetry-label">GYM</span>
+          <span class="telemetry-val">6x/Wk Discipline</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Right Column: 3D Doll Cartoon Character from Portfolio-Website -->
+    <!-- Right Column: 3D Character Battlestation & Fashion Scene -->
     <div class="hero-visual">
       <div class="hero-3d-stage">
+        <!-- Futuristic Gaming HUD Corner Brackets -->
+        <div class="hud-frame" aria-hidden="true">
+          <span class="hud-bracket tl"></span>
+          <span class="hud-bracket tr"></span>
+          <span class="hud-bracket bl"></span>
+          <span class="hud-bracket br"></span>
+        </div>
+
         <!-- Soft Dark-Red Circular Backdrop -->
         <div class="hero-red-backdrop" aria-hidden="true"></div>
 
         <!-- 3D WebGL Canvas Container -->
-        <div id="characterCanvasContainer" title="Interactive 3D Doll Model (Move cursor to direct gaze)"></div>
+        <div id="characterCanvasContainer" title="Interactive 3D Character (Move cursor to direct gaze)"></div>
 
         <!-- Fallback 2D Avatar if WebGL is unavailable -->
         <div id="heroFallbackAvatar" aria-hidden="true">
@@ -140,7 +180,7 @@
         </div>
 
         <!-- Model Status Badge -->
-        <span class="model-status-tag" id="modelStatusTag">✦ 3D Character Model</span>
+        <span class="model-status-tag" id="modelStatusTag"><span class="status-indicator"></span>FASHION EDITORIAL · LEVEL 99 // BATTLESTATION</span>
       </div>
     </div>
   </section>
@@ -182,6 +222,23 @@
           </p>
           <div class="mindset-motto">Currently learning. Constantly building. Always exploring.</div>
         </div>
+
+        <!-- Gym & Code Philosophy Card -->
+        <div class="discipline-callout glass-card">
+          <div class="discipline-header">
+            <span class="discipline-badge">🏋️‍♂️ PHILOSOPHY &amp; DISCIPLINE</span>
+            <span class="discipline-tag">Progressive Overload</span>
+          </div>
+          <h4 class="discipline-title">Discipline &gt; Motivation</h4>
+          <p class="discipline-desc">
+            Progressive overload isn't just a weightlifting principle — it's the mental blueprint I bring to every line of code. Consistent, deliberate effort every single day transforms raw curiosity into high-performance, resilient software.
+          </p>
+          <div class="discipline-pill-row">
+            <span>6x/Wk Weight Training</span>
+            <span>Relentless Debugging</span>
+            <span>Protagonist Drive</span>
+          </div>
+        </div>
       </div>
 
       <div class="about-side">
@@ -222,6 +279,30 @@
           <div>
             <strong>Current Goal</strong>
             Building impactful software &amp; Hackathons
+          </div>
+        </div>
+
+        <!-- Developer Attribute Matrix -->
+        <div class="about-attributes-card glass-card">
+          <div class="attributes-header">
+            <span class="attr-icon">⚡</span>
+            <strong>Attribute Matrix</strong>
+          </div>
+          <div class="attribute-row">
+            <div class="attr-meta"><span>STR · Resilience &amp; Weight Training</span><span>99%</span></div>
+            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 99%;"></div></div>
+          </div>
+          <div class="attribute-row">
+            <div class="attr-meta"><span>INT · CS Fundamentals &amp; AI</span><span>98%</span></div>
+            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 98%;"></div></div>
+          </div>
+          <div class="attribute-row">
+            <div class="attr-meta"><span>AGI · Modern UI &amp; Rapid Prototyping</span><span>96%</span></div>
+            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 96%;"></div></div>
+          </div>
+          <div class="attribute-row">
+            <div class="attr-meta"><span>STA · Deep Work &amp; Execution</span><span>100%</span></div>
+            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 100%;"></div></div>
           </div>
         </div>
       </div>
@@ -747,88 +828,111 @@
     </div>
 
     <div class="beyond-grid reveal reveal-stagger">
-      <!-- 1. Sports -->
-      <div class="beyond-card glass-card">
+      <!-- 1. Fitness & Weight Training -->
+      <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
-          <span class="beyond-icon">🏏</span>
-          <span class="beyond-tag">Active</span>
+          <span class="beyond-icon">🏋️‍♂️</span>
+          <span class="beyond-tag tag-crimson">Discipline</span>
         </div>
-        <h3 class="beyond-title">Sports</h3>
+        <h3 class="beyond-title">Strength &amp; Weight Training</h3>
         <p class="beyond-desc">
-          Enjoying the high energy, strategic thinking, teamwork, and competitive spirit. Playing and following sports keeps me focused, disciplined, and energized.
+          Passionate about 6x/week weightlifting, progressive overload, and physical discipline. The iron teaches accountability, resilience, and daily consistency — values that translate directly into writing clean, maintainable software.
         </p>
         <div class="beyond-pills">
-          <span>Cricket</span>
-          <span>Teamwork</span>
-          <span>Competitive Spirit</span>
+          <span>Progressive Overload</span>
+          <span>Weight Training</span>
+          <span>Mental Fortitude</span>
+          <span>Consistency</span>
         </div>
       </div>
 
-      <!-- 2. Fashion -->
-      <div class="beyond-card glass-card">
+      <!-- 2. Gaming & Battlestation -->
+      <div class="beyond-card glass-card" data-tilt>
+        <div class="beyond-card-top">
+          <span class="beyond-icon">🎮</span>
+          <span class="beyond-tag tag-cyber">Battlestation</span>
+        </div>
+        <h3 class="beyond-title">Gaming &amp; Strategy</h3>
+        <p class="beyond-desc">
+          Engaged in competitive tactics, high-speed decision making, and immersive virtual environments. Appreciating game mechanics, physics engines, procedural generation, and mechanical mastery.
+        </p>
+        <div class="beyond-pills">
+          <span>Tactical Strategy</span>
+          <span>Game Mechanics</span>
+          <span>Precision</span>
+          <span>High APM</span>
+        </div>
+      </div>
+
+      <!-- 3. Anime & Shonen Drive -->
+      <div class="beyond-card glass-card" data-tilt>
+        <div class="beyond-card-top">
+          <span class="beyond-icon">⚔️</span>
+          <span class="beyond-tag tag-crimson">Solo Leveling</span>
+        </div>
+        <h3 class="beyond-title">Anime &amp; Shonen Philosophy</h3>
+        <p class="beyond-desc">
+          Drawn to themes of self-transcendence, relentless perseverance, and legendary rivalries in series like <em>Solo Leveling</em>, <em>Hunter x Hunter</em>, and <em>Demon Slayer</em>. Channeling the protagonist drive into continuous engineering growth.
+        </p>
+        <div class="beyond-pills">
+          <span>Solo Leveling</span>
+          <span>Protagonist Drive</span>
+          <span>Animation Craft</span>
+          <span>Relentless Growth</span>
+        </div>
+      </div>
+
+      <!-- 4. Fashion & Streetwear -->
+      <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
           <span class="beyond-icon">👕</span>
           <span class="beyond-tag">Aesthetic</span>
         </div>
-        <h3 class="beyond-title">Fashion &amp; Style</h3>
+        <h3 class="beyond-title">Fashion &amp; Aesthetics</h3>
         <p class="beyond-desc">
-          Exploring personal style, silhouettes, contemporary trends, and aesthetic creativity. Valuing minimalism, clean proportions, and intentional curation.
+          Exploring contemporary silhouettes, dark-aesthetic streetwear, clean proportions, and intentional curation. Valuing minimalism, structured lines, and visual harmony in both lifestyle and user interfaces.
         </p>
         <div class="beyond-pills">
           <span>Streetwear</span>
-          <span>Personal Style</span>
-          <span>Visual Aesthetics</span>
+          <span>Dark Monochrome</span>
+          <span>Clean Proportions</span>
+          <span>Curation</span>
         </div>
       </div>
 
-      <!-- 3. Movies -->
-      <div class="beyond-card glass-card">
+      <!-- 5. Cinematic Art & Directing -->
+      <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
           <span class="beyond-icon">🎬</span>
-          <span class="beyond-tag">Cinematic</span>
+          <span class="beyond-tag">Visionary</span>
         </div>
-        <h3 class="beyond-title">Movies</h3>
+        <h3 class="beyond-title">Cinematic Art &amp; Movies</h3>
         <p class="beyond-desc">
-          Appreciating compelling visual storytelling, directorial vision, and immersive cinematic experiences that stretch the imagination.
+          Appreciating compelling visual storytelling, directorial vision, high-contrast cinematography, and immersive soundscapes that stretch imagination and inspire digital product narratives.
         </p>
         <div class="beyond-pills">
-          <span>Cinematic Art</span>
-          <span>Visual Storytelling</span>
-          <span>Screenplays</span>
-        </div>
-      </div>
-
-      <!-- 4. TV Series -->
-      <div class="beyond-card glass-card">
-        <div class="beyond-card-top">
-          <span class="beyond-icon">📺</span>
-          <span class="beyond-tag">Narrative</span>
-        </div>
-        <h3 class="beyond-title">TV Series</h3>
-        <p class="beyond-desc">
-          Exploring nuanced character arcs, complex world-building, high-stakes dramas, and multi-layered narratives across different genres.
-        </p>
-        <div class="beyond-pills">
-          <span>Character Arcs</span>
-          <span>Genre Fiction</span>
-          <span>Engaging Plots</span>
-        </div>
-      </div>
-
-      <!-- 5. Anime -->
-      <div class="beyond-card glass-card">
-        <div class="beyond-card-top">
-          <span class="beyond-icon">🎌</span>
-          <span class="beyond-tag">Animation</span>
-        </div>
-        <h3 class="beyond-title">Anime</h3>
-        <p class="beyond-desc">
-          Drawn to breathtaking animation, imaginative fantasy worlds, existential themes, and unique visual storytelling that challenges creative thinking.
-        </p>
-        <div class="beyond-pills">
-          <span>Animation Art</span>
+          <span>Directorial Vision</span>
+          <span>Cinematography</span>
+          <span>Atmospheric Score</span>
           <span>World-Building</span>
-          <span>Rich Lore</span>
+        </div>
+      </div>
+
+      <!-- 6. Sports & Teamwork -->
+      <div class="beyond-card glass-card" data-tilt>
+        <div class="beyond-card-top">
+          <span class="beyond-icon">🏏</span>
+          <span class="beyond-tag">Active</span>
+        </div>
+        <h3 class="beyond-title">Sports &amp; Team Spirit</h3>
+        <p class="beyond-desc">
+          Enjoying the high energy, split-second tactical thinking, competitive spirit, and collaborative teamwork of cricket. Thriving in high-stakes pressure situations and collective victories.
+        </p>
+        <div class="beyond-pills">
+          <span>Cricket</span>
+          <span>Teamwork</span>
+          <span>High Energy</span>
+          <span>Clutch Execution</span>
         </div>
       </div>
     </div>

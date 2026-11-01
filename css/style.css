@@ -291,11 +291,66 @@ em {
   color: #ffffff;
 }
 
-/* Nav Social Icons */
+/* Nav Socials & Controls */
 .nav-socials {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.65rem;
+}
+
+/* Open to work live indicator pill */
+.nav-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #34d399;
+}
+
+.status-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulse-ring 2s infinite;
+}
+
+/* Battlestation Sound Effects Toggle Button */
+.sfx-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.sfx-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.sfx-toggle-btn.active {
+  background: rgba(229, 9, 20, 0.12);
+  border-color: rgba(229, 9, 20, 0.45);
+  color: #ff4d5a;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.25);
 }
 
 .nav-social-icon {
@@ -462,26 +517,33 @@ em {
 
 /* Headline */
 .hero-name {
-  line-height: 1.05;
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
   margin-bottom: 0.8rem;
+  color: #ffffff;
 }
 
 .hero-name .name-line-1 {
-  display: block;
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  margin-bottom: 0.4rem;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: #ffffff;
+  margin-right: 0.35em;
+  margin-bottom: 0;
 }
 
 .hero-name .name-line-2 {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: clamp(3rem, 6.2vw, 5.2rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  color: #ffffff;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
 }
 
 /* Subtitle & Introduction */
@@ -584,6 +646,68 @@ em {
   color: var(--accent-red);
 }
 
+/* ---------- Hero Developer & Fitness Battlestation Telemetry ---------- */
+.hero-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.8rem;
+  padding: 0.65rem 1.1rem;
+  background: rgba(18, 18, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  max-width: 100%;
+  flex-wrap: wrap;
+  backdrop-filter: blur(8px);
+}
+
+.telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+
+.telemetry-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.telemetry-dot.dot-red {
+  background-color: #e50914;
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.7);
+}
+
+.telemetry-dot.dot-green {
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+}
+
+.telemetry-dot.dot-cyan {
+  background-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
+.telemetry-label {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.telemetry-val {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.telemetry-sep {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.8rem;
+}
+
 /* ============================================
    RIGHT SIDE: 3D DOLL CHARACTER MODEL
    ============================================ */
@@ -603,6 +727,51 @@ em {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Futuristic HUD Corner Brackets */
+.hud-frame {
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hud-bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(229, 9, 20, 0.45);
+  border-style: solid;
+  transition: border-color 0.3s ease;
+}
+
+.hero-3d-stage:hover .hud-bracket {
+  border-color: rgba(229, 9, 20, 0.85);
+}
+
+.hud-bracket.tl {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.hud-bracket.tr {
+  top: 0;
+  right: 0;
+  border-width: 2px 2px 0 0;
+}
+
+.hud-bracket.bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 2px 2px;
+}
+
+.hud-bracket.br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
 }
 
 /* Soft dark-red circular backdrop behind the 3D doll */
@@ -667,14 +836,28 @@ em {
   bottom: 0px;
   font-size: 0.72rem;
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-secondary);
-  background: rgba(18, 18, 18, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0.25rem 0.85rem;
+  background: rgba(18, 18, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 0.95rem;
   border-radius: var(--radius-pill);
   z-index: 5;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  backdrop-filter: blur(8px);
+}
+
+.status-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  display: inline-block;
+  animation: pulse-ring 2s infinite;
 }
 
 /* ============================================
@@ -806,6 +989,86 @@ em {
   letter-spacing: 0.02em;
 }
 
+/* Gym & Code Discipline Philosophy Card */
+.discipline-callout {
+  margin-top: 1.4rem;
+  padding: 1.6rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(12, 12, 12, 0.9));
+  border: 1px solid rgba(229, 9, 20, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.discipline-callout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-red);
+}
+
+.discipline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 0.6rem;
+}
+
+.discipline-badge {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #ff4d5a;
+}
+
+.discipline-tag {
+  font-size: 0.68rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: rgba(229, 9, 20, 0.12);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  color: #ff6b76;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.discipline-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.discipline-desc {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+}
+
+.discipline-pill-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.discipline-pill-row span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
 .about-side {
   display: flex;
   flex-direction: column;
@@ -846,6 +1109,63 @@ em {
   color: #ffffff;
   font-size: 0.88rem;
   font-weight: 500;
+}
+
+/* Developer Attribute Matrix */
+.about-attributes-card {
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(14, 14, 14, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.attributes-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.attr-icon {
+  color: var(--accent-red);
+}
+
+.attribute-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.attr-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.attr-bar-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.attr-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #e50914, #ff4d5a);
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ============================================
@@ -1572,6 +1892,52 @@ em {
   position: relative;
 }
 
+.beyond-tag.tag-crimson {
+  background: rgba(229, 9, 20, 0.14);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  color: #ff4d5a;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+}
+
+.beyond-tag.tag-cyber {
+  background: rgba(99, 102, 241, 0.14);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #818cf8;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+}
+
+/* ---------- 3D Perspective Tilt & Spotlight Follower ---------- */
+.project-card,
+.beyond-card,
+.what-card {
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.project-card::before,
+.beyond-card::before,
+.what-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(229, 9, 20, 0.14), transparent 45%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.project-card:hover::before,
+.beyond-card:hover::before,
+.what-card:hover::before {
+  opacity: 1;
+}
+
 .beyond-card-top {
   display: flex;
   align-items: center;
@@ -1914,6 +2280,16 @@ em {
   .timeline-content {
     padding: 1.8rem 1.5rem;
   }
+
+  .hero-telemetry {
+    justify-content: center;
+    gap: 8px;
+    padding: 0.5rem 0.85rem;
+  }
+
+  .nav-status-pill {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1921,8 +2297,8 @@ em {
     padding: 6.5rem 1.2rem 3rem;
   }
 
-  .hero-name .name-line-2 {
-    font-size: 2.6rem;
+  .hero-name {
+    font-size: 2.5rem;
   }
 
   .hero-cta {
