@@ -1,0 +1,319 @@
+/* ===================================================
+   js/main.js — Swanand Kadam Portfolio
+   Interactions, Custom Cursor, Scroll Spy & Micro-Interactions
+   Lightweight, Smooth & Accessible
+   =================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+  // ---------- 1. Interactive Ambient Glow Follower ----------
+  const ambientGlow = document.getElementById('ambientGlow');
+
+  if (ambientGlow && isFinePointer) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
+
+    const animateGlow = () => {
+      currentX += (mouseX - currentX) * 0.07;
+      currentY += (mouseY - currentY) * 0.07;
+
+      ambientGlow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(animateGlow);
+    };
+
+    animateGlow();
+  }
+
+  // ---------- 2. Custom Magnetic Cursor Follower ----------
+  const customCursor = document.getElementById('customCursor');
+  const cursorDot = document.getElementById('cursorDot');
+
+  if (customCursor && cursorDot && isFinePointer) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+    let isVisible = false;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!isVisible) {
+        customCursor.style.opacity = '1';
+        cursorDot.style.opacity = '1';
+        isVisible = true;
+      }
+
+      // Cursor dot moves instantly
+      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+    }, { passive: true });
+
+    // Smooth lerp for outer cursor ring
+    const renderCursor = () => {
+      cursorX += (mouseX - cursorX) * 0.16;
+      cursorY += (mouseY - cursorY) * 0.16;
+      customCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(renderCursor);
+    };
+    renderCursor();
+
+    document.addEventListener('mouseleave', () => {
+      customCursor.style.opacity = '0';
+      cursorDot.style.opacity = '0';
+      isVisible = false;
+    });
+
+    // Hover effect on interactive elements
+    const hoverTargets = document.querySelectorAll(
+      'a, button, .project-card, .what-card, .beyond-card, .skill-tag, .float-card, .filter-btn'
+    );
+
+    hoverTargets.forEach((target) => {
+      target.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
+      target.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
+    });
+  }
+
+  // ---------- 3. Scroll Progress Bar & Navbar Scroll State ----------
+  const progressBar = document.getElementById('scrollProgressBar');
+  const navbar = document.getElementById('navbar');
+
+  const handleScrollEffects = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    // Progress bar
+    if (progressBar && docHeight > 0) {
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // Navbar scrolled class
+    if (navbar) {
+      if (scrollTop > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+  };
+
+  window.addEventListener('scroll', handleScrollEffects, { passive: true });
+  handleScrollEffects();
+
+  // ---------- 4. Mobile Navigation Drawer ----------
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (navToggle && mobileMenu) {
+    const toggleMenu = (open) => {
+      const isOpen = open !== undefined ? open : !mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      navToggle.classList.toggle('active', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    navToggle.addEventListener('click', () => toggleMenu());
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        toggleMenu(false);
+      }
+    });
+  }
+
+  // ---------- 5. Viewport Scroll Reveal Observer ----------
+  const revealElements = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add('visible'));
+  }
+
+  // ---------- 6. Active Nav Spy on Scroll ----------
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const updateActiveNav = () => {
+    let currentId = '';
+    const scrollPos = window.scrollY + 160;
+
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${currentId}`) {
+        link.classList.add('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+
+  // ---------- 7. Smooth Anchor Link Scrolling with Offset ----------
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#' || targetId === '') return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    });
+  });
+
+  // ---------- 8. Interactive Project Filters ----------
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('#projectsGrid .project-card');
+
+  if (filterButtons.length && projectCards.length) {
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        projectCards.forEach((card) => {
+          const category = card.getAttribute('data-category');
+          if (filterValue === 'all' || category === filterValue) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  }
+
+  // ---------- 9. Journey Timeline Scroll Marker Animation ----------
+  const journeySection = document.getElementById('journey');
+  const timelineTrack = document.getElementById('timelineTrack');
+  const timelineMarker = document.getElementById('timelineMarker');
+
+  if (journeySection && timelineTrack && timelineMarker) {
+    const updateTimelineMarker = () => {
+      const rect = journeySection.getBoundingClientRect();
+      const trackHeight = timelineTrack.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      if (rect.top <= windowHeight * 0.6 && rect.bottom >= windowHeight * 0.4) {
+        const progress = Math.min(
+          Math.max((windowHeight * 0.6 - rect.top) / rect.height, 0),
+          1
+        );
+        timelineMarker.style.top = `${progress * (trackHeight - 10)}px`;
+      }
+    };
+
+    window.addEventListener('scroll', updateTimelineMarker, { passive: true });
+    updateTimelineMarker();
+  }
+
+  // ---------- 10. Copy Email to Clipboard & Toast Notification ----------
+  const copyEmailBtn = document.getElementById('copyEmailBtn');
+  const toastNotification = document.getElementById('toastNotification');
+  const toastMsg = document.getElementById('toastMsg');
+  const copyEmailIcon = document.getElementById('copyEmailIcon');
+  const copyEmailText = document.getElementById('copyEmailText');
+
+  let toastTimeout;
+
+  const showToast = (message) => {
+    if (!toastNotification) return;
+    if (toastMsg) toastMsg.textContent = message;
+    toastNotification.classList.add('show');
+    toastNotification.setAttribute('aria-hidden', 'false');
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toastNotification.classList.remove('show');
+      toastNotification.setAttribute('aria-hidden', 'true');
+    }, 2800);
+  };
+
+  if (copyEmailBtn) {
+    copyEmailBtn.addEventListener('click', async () => {
+      const emailToCopy = copyEmailBtn.getAttribute('data-email') || 'swanandkadam8061@gmail.com';
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(emailToCopy);
+        } else {
+          // Fallback for non-https or older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = emailToCopy;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          document.execCommand('copy');
+          textArea.remove();
+        }
+
+        if (copyEmailText) copyEmailText.textContent = 'Email Copied!';
+        if (copyEmailIcon) copyEmailIcon.textContent = '✓';
+        showToast(`Copied ${emailToCopy} to clipboard!`);
+
+        setTimeout(() => {
+          if (copyEmailText) copyEmailText.textContent = 'Copy Email Address';
+          if (copyEmailIcon) copyEmailIcon.textContent = '📋';
+        }, 2500);
+      } catch (err) {
+        showToast(`Email: ${emailToCopy}`);
+      }
+    });
+  }
+});

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swanand Kadam — Portfolio</title>
+  <meta name="description" content="Portfolio of Swanand Kadam — Student, aspiring software developer, and tech enthusiast passionate about Artificial Intelligence, Web Development, and building innovative digital experiences." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+
+  <!-- Google Fonts: Syne & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
+
+  <!-- Custom Cursor Follower -->
+  <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-brand" aria-label="Swanand Kadam Home">
+      <span class="nav-logo-badge">SK<span class="text-accent">.</span></span>
+      <span class="nav-name">Swanand Kadam</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#beyond">Interests</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-socials">
+      <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="GitHub Profile" title="GitHub">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="LinkedIn Profile" title="LinkedIn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation menu" id="navToggle" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <span class="nav-logo-badge">SK<span class="text-accent">.</span></span>
+      <span>Swanand Kadam</span>
+    </div>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#journey">Journey</a>
+    <a href="#beyond">Interests</a>
+    <a href="#contact">Contact</a>
+    <div class="mobile-menu-socials">
+      <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero" id="hero">
+    <!-- Left Column: Narrative & CTAs -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>Hello, I'm 👋</span>
+      </div>
+
+      <h1 class="hero-name">
+        <span class="name-line-1">Swanand</span>
+        <span class="name-line-2"><span class="text-accent">Kadam</span></span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Student | Aspiring Software Developer | AI &amp; Web Development Enthusiast
+      </p>
+
+      <p class="hero-desc">
+        I enjoy exploring new technologies, solving programming challenges, and building innovative digital experiences.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">
+          <span>Explore My Projects →</span>
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <span>Get in Touch</span>
+        </a>
+      </div>
+
+      <div class="hero-social-row">
+        <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="hero-social-btn" aria-label="GitHub Profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="hero-social-btn" aria-label="LinkedIn Profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: 3D Doll Cartoon Character from Portfolio-Website -->
+    <div class="hero-visual">
+      <div class="hero-3d-stage">
+        <!-- Soft Dark-Red Circular Backdrop -->
+        <div class="hero-red-backdrop" aria-hidden="true"></div>
+
+        <!-- 3D WebGL Canvas Container -->
+        <div id="characterCanvasContainer" title="Interactive 3D Doll Model (Move cursor to direct gaze)"></div>
+
+        <!-- Fallback 2D Avatar if WebGL is unavailable -->
+        <div id="heroFallbackAvatar" aria-hidden="true">
+          <span>👨‍💻</span>
+        </div>
+
+        <!-- Model Status Badge -->
+        <span class="model-status-tag" id="modelStatusTag">✦ 3D Character Model</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT SECTION ===================== -->
+  <section class="section about-section" id="about">
+    <div class="section-header reveal">
+      <span class="section-tag">// 01 · Identity</span>
+      <h2 class="section-title">About <em>Me</em></h2>
+      <p class="section-subtitle">A glimpse into my background, passion for software, and hands-on learning mindset.</p>
+    </div>
+
+    <div class="about-grid reveal">
+      <div class="about-card glass-card">
+        <div class="about-header-mini">
+          <div class="about-avatar text-accent">⚡</div>
+          <div class="about-identity">
+            <h3>Swanand Kadam</h3>
+            <span>Student &amp; Aspiring Software Developer</span>
+          </div>
+        </div>
+        <div class="about-text">
+          <p>
+            Hey, I'm <strong>Swanand Kadam</strong> 👋. I'm a student, aspiring software developer, and tech enthusiast passionate about Artificial Intelligence, Web Development, and building innovative digital experiences.
+          </p>
+          <p>
+            I enjoy exploring new technologies, solving programming challenges, and turning creative ideas into practical, real-world projects. I believe in learning by building, experimenting with new tools, and continuously improving my technical and creative skills.
+          </p>
+          <p>
+            I'm currently strengthening my programming fundamentals in Python and C while exploring the exciting possibilities of Generative AI, open-source AI tools like Google Gemma and Ollama, voice-based applications, and responsive web systems.
+          </p>
+        </div>
+
+        <!-- Mindset Callout -->
+        <div class="mindset-callout">
+          <div class="mindset-badge">🌱 My Mindset</div>
+          <p class="mindset-quote">
+            “I'm someone who loves staying curious, learning new things, and challenging myself to grow. I believe that every project, every bug fixed, and every problem solved is another step forward.”
+          </p>
+          <div class="mindset-motto">Currently learning. Constantly building. Always exploring.</div>
+        </div>
+      </div>
+
+      <div class="about-side">
+        <div class="about-detail-card glass-card">
+          <span class="detail-icon text-accent">🎓</span>
+          <div>
+            <strong>Degree &amp; Education</strong>
+            B.Tech Computer Science (Student)
+          </div>
+        </div>
+
+        <div class="about-detail-card glass-card">
+          <span class="detail-icon text-accent">📍</span>
+          <div>
+            <strong>Location</strong>
+            India
+          </div>
+        </div>
+
+        <div class="about-detail-card glass-card">
+          <span class="detail-icon text-accent">💻</span>
+          <div>
+            <strong>Core Focus</strong>
+            Artificial Intelligence &amp; Web Engineering
+          </div>
+        </div>
+
+        <div class="about-detail-card glass-card">
+          <span class="detail-icon text-accent">🚀</span>
+          <div>
+            <strong>Featured Milestone</strong>
+            VoiceKhata (Hackday Project)
+          </div>
+        </div>
+
+        <div class="about-detail-card glass-card">
+          <span class="detail-icon text-accent">🎯</span>
+          <div>
+            <strong>Current Goal</strong>
+            Building impactful software &amp; Hackathons
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPLORATION / FOCUS AREAS ===================== -->
+  <section class="section what-section" id="exploration">
+    <div class="section-header reveal">
+      <span class="section-tag">// 02 · Focus Areas</span>
+      <h2 class="section-title">What I'm <em>Exploring</em></h2>
+      <p class="section-subtitle">Core technical disciplines where I experiment, write code, and build solutions.</p>
+    </div>
+
+    <div class="what-grid reveal reveal-stagger">
+      <!-- 1. AI & Voice Applications -->
+      <div class="what-card glass-card">
+        <div class="what-corner"></div>
+        <div class="what-card-top">
+          <span class="what-num">01 / INTELLIGENCE</span>
+          <span class="what-icon">🤖</span>
+        </div>
+        <h3 class="what-card-title">AI &amp; Voice Applications</h3>
+        <p class="what-card-desc">
+          Building intelligent interfaces using Generative AI, Google Gemma, Ollama, and open-source AI tools. Exploring voice-first interaction and speech recognition in Hindi &amp; Hinglish.
+        </p>
+        <div class="what-tags-wrap">
+          <span class="what-tag">Generative AI</span>
+          <span class="what-tag">Google Gemma</span>
+          <span class="what-tag">Ollama</span>
+          <span class="what-tag">Speech Recognition</span>
+          <span class="what-tag">Voice Interfaces</span>
+        </div>
+      </div>
+
+      <!-- 2. Web Development -->
+      <div class="what-card glass-card">
+        <div class="what-corner"></div>
+        <div class="what-card-top">
+          <span class="what-num">02 / INTERFACES</span>
+          <span class="what-icon">🌐</span>
+        </div>
+        <h3 class="what-card-title">Web Development &amp; UI Systems</h3>
+        <p class="what-card-desc">
+          Creating responsive, aesthetic, and accessible web experiences. Emphasizing clean structure, fluid CSS layouts, glassmorphism, and subtle micro-interactions that elevate usability.
+        </p>
+        <div class="what-tags-wrap">
+          <span class="what-tag">HTML5 &amp; CSS3</span>
+          <span class="what-tag">JavaScript</span>
+          <span class="what-tag">Responsive Layouts</span>
+          <span class="what-tag">Glassmorphism</span>
+          <span class="what-tag">Modern UI</span>
+        </div>
+      </div>
+
+      <!-- 3. Programming & Developer Tools -->
+      <div class="what-card glass-card">
+        <div class="what-corner"></div>
+        <div class="what-card-top">
+          <span class="what-num">03 / FOUNDATIONS</span>
+          <span class="what-icon">💻</span>
+        </div>
+        <h3 class="what-card-title">Programming &amp; Systems</h3>
+        <p class="what-card-desc">
+          Strengthening core programming logic through Python and C. Mastering loops, recursion, functions, terminal workflows, Git/GitHub version control, Linux environments, and SSH security labs.
+        </p>
+        <div class="what-tags-wrap">
+          <span class="what-tag">Python</span>
+          <span class="what-tag">C Language</span>
+          <span class="what-tag">Linux / Bash</span>
+          <span class="what-tag">Git &amp; GitHub</span>
+          <span class="what-tag">Networking &amp; SSH</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS SECTION ===================== -->
+  <section class="section skills-section" id="skills">
+    <div class="section-header reveal">
+      <span class="section-tag">// 03 · Arsenal</span>
+      <h2 class="section-title">Skills &amp; <em>Technologies</em></h2>
+      <p class="section-subtitle">Technologies and tools I practice and use to build projects.</p>
+    </div>
+
+    <div class="skills-grid reveal reveal-stagger">
+      <!-- 1. Programming -->
+      <div class="skill-category glass-card">
+        <h3 class="skill-cat-title">
+          <span class="text-accent">💻</span>
+          <span>Programming &amp; Logic</span>
+        </h3>
+        <p class="skill-cat-note">Core fundamentals, problem-solving, and algorithmic thinking.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">Logical Problem Solving</span>
+          <span class="skill-tag">Functions &amp; Recursion</span>
+          <span class="skill-tag">Loops &amp; Data Structures</span>
+        </div>
+      </div>
+
+      <!-- 2. Web Development -->
+      <div class="skill-category glass-card">
+        <h3 class="skill-cat-title">
+          <span class="text-accent">🌐</span>
+          <span>Web Development</span>
+        </h3>
+        <p class="skill-cat-note">Frontend structure, responsive layouts, and interactive styling.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">Responsive Design</span>
+          <span class="skill-tag">Frontend Development</span>
+          <span class="skill-tag">CSS Flexbox &amp; Grid</span>
+        </div>
+      </div>
+
+      <!-- 3. Artificial Intelligence -->
+      <div class="skill-category glass-card">
+        <h3 class="skill-cat-title">
+          <span class="text-accent">🧠</span>
+          <span>Artificial Intelligence</span>
+        </h3>
+        <p class="skill-cat-note">Exploring cutting-edge open-source AI tooling and LLMs.</p>
+        <div class="skill-tags">
+          <span class="skill-tag learning">Generative AI</span>
+          <span class="skill-tag learning">Google Gemma</span>
+          <span class="skill-tag learning">Ollama</span>
+          <span class="skill-tag learning">Open-Source AI Tools</span>
+          <span class="skill-tag learning">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <!-- 4. AI Applications -->
+      <div class="skill-category glass-card">
+        <h3 class="skill-cat-title">
+          <span class="text-accent">🎙️</span>
+          <span>AI Applications</span>
+        </h3>
+        <p class="skill-cat-note">Practical voice systems and intelligent web interactions.</p>
+        <div class="skill-tags">
+          <span class="skill-tag learning">Voice-Based Interfaces</span>
+          <span class="skill-tag learning">Speech Recognition</span>
+          <span class="skill-tag learning">Hindi &amp; Hinglish NLP</span>
+          <span class="skill-tag learning">AI-Powered Web Apps</span>
+          <span class="skill-tag learning">VoiceKhata Engine</span>
+        </div>
+      </div>
+
+      <!-- 5. Developer Tools -->
+      <div class="skill-category glass-card">
+        <h3 class="skill-cat-title">
+          <span class="text-accent">🛠️</span>
+          <span>Developer Tools</span>
+        </h3>
+        <p class="skill-cat-note">Tools for efficient workflow, version control, and collaboration.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Linux Terminal</span>
+          <span class="skill-tag">Command-Line Tools</span>
+        </div>
+      </div>
+
+      <!-- 6. Cybersecurity Fundamentals -->
+      <div class="skill-category glass-card">
+        <h3 class="skill-cat-title">
+          <span class="text-accent">🛡️</span>
+          <span>Cybersecurity &amp; Systems</span>
+        </h3>
+        <p class="skill-cat-note">System architecture, network basics, and hands-on labs.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Linux Fundamentals</span>
+          <span class="skill-tag">Computer Networking</span>
+          <span class="skill-tag">SSH Remote Access</span>
+          <span class="skill-tag">Hands-on Security Labs</span>
+          <span class="skill-tag">System Basics</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURED PROJECTS SECTION ===================== -->
+  <section class="section projects-section" id="projects">
+    <div class="section-header reveal">
+      <span class="section-tag">// 04 · Selected Works</span>
+      <h2 class="section-title">Featured <em>Projects</em></h2>
+      <p class="section-subtitle">Real-world applications, open-source collaboration, and technical experiments.</p>
+    </div>
+
+    <!-- VOICEKHATA HERO SPOTLIGHT CARD -->
+    <div class="voicekhata-spotlight glass-card reveal">
+      <div class="spotlight-badge-row">
+        <span class="spotlight-tag">
+          Featured Project — Hackday
+        </span>
+        <span class="spotlight-category">AI-Powered Voice Ledger</span>
+      </div>
+
+      <div class="spotlight-content-grid">
+        <div class="spotlight-info">
+          <div class="spotlight-title-group">
+            <span class="spotlight-icon">🎙️</span>
+            <div>
+              <h3 class="spotlight-title">VoiceKhata</h3>
+              <p class="spotlight-tagline">AI-Powered, Voice-First Digital Ledger for Local Kirana &amp; Vendors</p>
+            </div>
+          </div>
+
+          <p class="spotlight-desc">
+            One of my flagship projects, <strong>VoiceKhata</strong> is an AI-powered, voice-first digital ledger created for small shop owners, local vendors, and kirana businesses. The core idea is making digital bookkeeping simpler and accessible through voice commands in local languages (Hindi &amp; Hinglish).
+          </p>
+
+          <div class="spotlight-explorations">
+            <h4 class="explorations-title">Key Areas Explored &amp; Built:</h4>
+            <ul class="explorations-list">
+              <li><span>✦</span> AI-powered transaction processing &amp; ledger calculation</li>
+              <li><span>✦</span> Voice-based user interaction with intuitive design</li>
+              <li><span>✦</span> Hindi and Hinglish speech recognition workflows</li>
+              <li><span>✦</span> Open-source AI tools and language model integration</li>
+              <li><span>✦</span> Web application development and responsive interface</li>
+              <li><span>✦</span> GitHub team collaboration, version control, and live deployment</li>
+            </ul>
+          </div>
+
+          <div class="spotlight-tech-stack">
+            <span class="sp-pill">Speech Recognition</span>
+            <span class="sp-pill">Hindi &amp; Hinglish NLP</span>
+            <span class="sp-pill">Google Gemma</span>
+            <span class="sp-pill">Open Source AI</span>
+            <span class="sp-pill">Web Frontend</span>
+            <span class="sp-pill">GitHub Pages</span>
+          </div>
+
+          <div class="spotlight-actions">
+            <a href="https://nishantekka2007-sys.github.io/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <span>View Live Project ↗</span>
+            </a>
+            <a href="https://github.com/nishantekka2007-sys/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              <span>GitHub Repository</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="spotlight-preview-panel">
+          <div class="preview-mockup">
+            <div class="mockup-header">
+              <span class="mock-dot red"></span>
+              <span class="mock-dot"></span>
+              <span class="mock-dot"></span>
+              <span class="mock-url">nishantekka2007-sys.github.io/voicekhata-hackday</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-mic-pulse">
+                <span class="mockup-mic-icon">🎙️</span>
+              </div>
+              <div class="mockup-chat-bubble">
+                <span class="mock-speaker">Voice Command:</span>
+                <span class="mock-text">"Ramesh ko ₹450 ka doodh aur bread udhaar likho"</span>
+              </div>
+              <div class="mockup-card-result">
+                <div class="mock-row">
+                  <span class="mock-tag-kirana">Kirana Entry Logged</span>
+                  <span class="mock-amt">+₹450</span>
+                </div>
+                <div class="mock-details">Customer: Ramesh · Type: Credit · Status: Verified ✓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT FILTER TABS -->
+    <div class="project-filters reveal" id="projectFilters" role="tablist">
+      <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects (5)</button>
+      <button class="filter-btn" data-filter="ai" role="tab" aria-selected="false">AI &amp; Voice</button>
+      <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web Development</button>
+      <button class="filter-btn" data-filter="python" role="tab" aria-selected="false">Python &amp; Tools</button>
+    </div>
+
+    <!-- PRESERVED PROJECTS GRID -->
+    <div class="projects-grid reveal reveal-stagger" id="projectsGrid">
+      <!-- Project 1: VoiceKhata (Grid Representation) -->
+      <div class="project-card glass-card" data-category="ai">
+        <div class="project-header">
+          <div class="project-icon">🎙️</div>
+          <span class="project-status status-featured">
+            <span class="pulse-dot"></span>
+            Featured AI
+          </span>
+        </div>
+        <h3 class="project-title">VoiceKhata — Voice Digital Ledger</h3>
+        <p class="project-desc">
+          AI-powered, voice-first digital ledger for kirana vendors and small shop owners. Converts Hindi/Hinglish speech commands into automated bookkeeping entries.
+        </p>
+        <div class="project-tech">
+          <span>AI / NLP</span>
+          <span>Speech Recognition</span>
+          <span>Google Gemma</span>
+          <span>Web App</span>
+        </div>
+        <div class="project-links">
+          <a href="https://nishantekka2007-sys.github.io/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo ↗</a>
+          <a href="https://github.com/nishantekka2007-sys/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="project-link ghost">Repository ↗</a>
+        </div>
+      </div>
+
+      <!-- Project 2: Personal Portfolio Website -->
+      <div class="project-card glass-card" data-category="web">
+        <div class="project-header">
+          <div class="project-icon">🌐</div>
+          <span class="project-status">
+            Completed
+          </span>
+        </div>
+        <h3 class="project-title">Personal Developer Portfolio</h3>
+        <p class="project-desc">
+          A minimalist dark developer space engineered with monochromatic aesthetics, Three.js 3D character integration, responsive grid architecture, and fluid interactions.
+        </p>
+        <div class="project-tech">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>Three.js 3D</span>
+        </div>
+        <div class="project-links">
+          <a href="#hero" class="project-link">Back to Top ↑</a>
+          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- Project 3: Python CLI Calculator & Problem Solver -->
+      <div class="project-card glass-card" data-category="python">
+        <div class="project-header">
+          <div class="project-icon">🧮</div>
+          <span class="project-status">
+            Completed
+          </span>
+        </div>
+        <h3 class="project-title">Python CLI Calculator &amp; Problem Solver</h3>
+        <p class="project-desc">
+          A terminal utility built to master Python syntax, control flow, functions, loops, recursion, and input validation with clean error recovery and edge case handling.
+        </p>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>CLI</span>
+          <span>Problem Solving</span>
+          <span>Algorithms</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">Repository ↗</a>
+        </div>
+      </div>
+
+      <!-- Project 4: Anime Watchlist Tracker -->
+      <div class="project-card glass-card" data-category="web">
+        <div class="project-header">
+          <div class="project-icon">🎴</div>
+          <span class="project-status">
+            In Progress
+          </span>
+        </div>
+        <h3 class="project-title">Anime Watchlist &amp; Media Tracker</h3>
+        <p class="project-desc">
+          A personal media management tracker for cataloging, scoring, and filtering ongoing anime series with responsive card layouts and planned persistent client-side storage.
+        </p>
+        <div class="project-tech">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>LocalStorage</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">In Progress ↗</a>
+        </div>
+      </div>
+
+      <!-- Project 5: Minimal Fashion Editorial -->
+      <div class="project-card glass-card" data-category="web">
+        <div class="project-header">
+          <div class="project-icon">🛍️</div>
+          <span class="project-status">
+            In Progress
+          </span>
+        </div>
+        <h3 class="project-title">Minimal Fashion &amp; Streetwear Editorial</h3>
+        <p class="project-desc">
+          A curated digital editorial layout exploring asymmetric CSS Grid systems, typography rhythm, and mood-board visual styling for modern menswear and techwear aesthetics.
+        </p>
+        <div class="project-tech">
+          <span>CSS Grid</span>
+          <span>Typography Rhythm</span>
+          <span>Minimal Design</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">Preview ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LEARNING JOURNEY (Timeline) ===================== -->
+  <section class="section journey-section" id="journey">
+    <div class="section-header reveal">
+      <span class="section-tag">// 05 · Evolution</span>
+      <h2 class="section-title">My Technical <em>Journey</em></h2>
+      <p class="section-subtitle">
+        I enjoy working across different areas of technology, from writing Python programs to building web interfaces and experimenting with AI-powered applications.
+      </p>
+    </div>
+
+    <div class="timeline-container reveal">
+      <div class="timeline-track" id="timelineTrack">
+        <div class="timeline-glow-marker" id="timelineMarker"></div>
+      </div>
+
+      <!-- Milestone 1 -->
+      <div class="timeline-item">
+        <div class="timeline-node">
+          <span class="node-dot"></span>
+        </div>
+        <div class="timeline-content glass-card">
+          <div class="timeline-meta">
+            <span class="timeline-step">MILESTONE 01</span>
+            <span class="timeline-time">Foundations</span>
+          </div>
+          <h3 class="timeline-title">Programming &amp; Logical Problem Solving</h3>
+          <p class="timeline-desc">
+            Began strengthening core computer science fundamentals through Python and C programming. Practicing functions, loops, recursion, and number-based problem-solving challenges to develop strong algorithmic reasoning.
+          </p>
+          <div class="timeline-tags">
+            <span>Python Fundamentals</span>
+            <span>C Language</span>
+            <span>Loops &amp; Recursion</span>
+            <span>Logic Building</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestone 2 -->
+      <div class="timeline-item">
+        <div class="timeline-node">
+          <span class="node-dot"></span>
+        </div>
+        <div class="timeline-content glass-card">
+          <div class="timeline-meta">
+            <span class="timeline-step">MILESTONE 02</span>
+            <span class="timeline-time">Interface Craft</span>
+          </div>
+          <h3 class="timeline-title">Web Development &amp; Terminal Workflows</h3>
+          <p class="timeline-desc">
+            Expanded into web creation using semantic HTML and CSS to build responsive layouts and modern design systems. Integrated Linux commands, terminal-based workflows, and Git/GitHub for version control and repository management.
+          </p>
+          <div class="timeline-tags">
+            <span>HTML &amp; CSS</span>
+            <span>Responsive Design</span>
+            <span>Linux Workflows</span>
+            <span>Git &amp; GitHub</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestone 3 -->
+      <div class="timeline-item">
+        <div class="timeline-node">
+          <span class="node-dot"></span>
+        </div>
+        <div class="timeline-content glass-card">
+          <div class="timeline-meta">
+            <span class="timeline-step">MILESTONE 03</span>
+            <span class="timeline-time">AI &amp; Hackathon</span>
+          </div>
+          <h3 class="timeline-title">VoiceKhata — AI-Powered Voice Ledger</h3>
+          <p class="timeline-desc">
+            Co-engineered VoiceKhata during a hackday: an AI-driven, voice-first digital ledger for local kirana stores. Integrated speech recognition in Hindi/Hinglish, leveraged open-source models, and deployed a live, real-world application.
+          </p>
+          <div class="timeline-tags">
+            <span>Hackday Project</span>
+            <span>Speech Recognition</span>
+            <span>Open Source AI</span>
+            <span>Team Collaboration</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestone 4 -->
+      <div class="timeline-item">
+        <div class="timeline-node">
+          <span class="node-dot"></span>
+        </div>
+        <div class="timeline-content glass-card">
+          <div class="timeline-meta">
+            <span class="timeline-step">MILESTONE 04</span>
+            <span class="timeline-time">Current Horizon</span>
+          </div>
+          <h3 class="timeline-title">Collaborating, Building &amp; Experimenting</h3>
+          <p class="timeline-desc">
+            Actively building, testing, debugging, and improving projects. Excited about participating in upcoming hackathons, collaborating with fellow developers, and turning ambitious concepts into impactful software.
+          </p>
+          <div class="timeline-tags">
+            <span>Hackathons</span>
+            <span>Google Gemma &amp; Ollama</span>
+            <span>Cybersecurity Labs</span>
+            <span>Open Source</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BEYOND THE CODE SECTION ===================== -->
+  <section class="section beyond-section" id="beyond">
+    <div class="section-header reveal">
+      <span class="section-tag">// 06 · Dimensions</span>
+      <h2 class="section-title">Beyond the <em>Code</em></h2>
+      <p class="section-subtitle">
+        Technology is just one part of who I am. Outside of coding, I enjoy exploring different interests and creative experiences that inspire my perspectives.
+      </p>
+    </div>
+
+    <div class="beyond-grid reveal reveal-stagger">
+      <!-- 1. Sports -->
+      <div class="beyond-card glass-card">
+        <div class="beyond-card-top">
+          <span class="beyond-icon">🏏</span>
+          <span class="beyond-tag">Active</span>
+        </div>
+        <h3 class="beyond-title">Sports</h3>
+        <p class="beyond-desc">
+          Enjoying the high energy, strategic thinking, teamwork, and competitive spirit. Playing and following sports keeps me focused, disciplined, and energized.
+        </p>
+        <div class="beyond-pills">
+          <span>Cricket</span>
+          <span>Teamwork</span>
+          <span>Competitive Spirit</span>
+        </div>
+      </div>
+
+      <!-- 2. Fashion -->
+      <div class="beyond-card glass-card">
+        <div class="beyond-card-top">
+          <span class="beyond-icon">👕</span>
+          <span class="beyond-tag">Aesthetic</span>
+        </div>
+        <h3 class="beyond-title">Fashion &amp; Style</h3>
+        <p class="beyond-desc">
+          Exploring personal style, silhouettes, contemporary trends, and aesthetic creativity. Valuing minimalism, clean proportions, and intentional curation.
+        </p>
+        <div class="beyond-pills">
+          <span>Streetwear</span>
+          <span>Personal Style</span>
+          <span>Visual Aesthetics</span>
+        </div>
+      </div>
+
+      <!-- 3. Movies -->
+      <div class="beyond-card glass-card">
+        <div class="beyond-card-top">
+          <span class="beyond-icon">🎬</span>
+          <span class="beyond-tag">Cinematic</span>
+        </div>
+        <h3 class="beyond-title">Movies</h3>
+        <p class="beyond-desc">
+          Appreciating compelling visual storytelling, directorial vision, and immersive cinematic experiences that stretch the imagination.
+        </p>
+        <div class="beyond-pills">
+          <span>Cinematic Art</span>
+          <span>Visual Storytelling</span>
+          <span>Screenplays</span>
+        </div>
+      </div>
+
+      <!-- 4. TV Series -->
+      <div class="beyond-card glass-card">
+        <div class="beyond-card-top">
+          <span class="beyond-icon">📺</span>
+          <span class="beyond-tag">Narrative</span>
+        </div>
+        <h3 class="beyond-title">TV Series</h3>
+        <p class="beyond-desc">
+          Exploring nuanced character arcs, complex world-building, high-stakes dramas, and multi-layered narratives across different genres.
+        </p>
+        <div class="beyond-pills">
+          <span>Character Arcs</span>
+          <span>Genre Fiction</span>
+          <span>Engaging Plots</span>
+        </div>
+      </div>
+
+      <!-- 5. Anime -->
+      <div class="beyond-card glass-card">
+        <div class="beyond-card-top">
+          <span class="beyond-icon">🎌</span>
+          <span class="beyond-tag">Animation</span>
+        </div>
+        <h3 class="beyond-title">Anime</h3>
+        <p class="beyond-desc">
+          Drawn to breathtaking animation, imaginative fantasy worlds, existential themes, and unique visual storytelling that challenges creative thinking.
+        </p>
+        <div class="beyond-pills">
+          <span>Animation Art</span>
+          <span>World-Building</span>
+          <span>Rich Lore</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT SECTION ===================== -->
+  <section class="section contact-section" id="contact">
+    <div class="section-header reveal">
+      <span class="section-tag">// 07 · Inquiries</span>
+      <h2 class="section-title">Connect With <em>Me</em></h2>
+      <p class="section-subtitle">Feel free to explore my projects, follow my learning journey, or connect with me!</p>
+    </div>
+
+    <div class="contact-container reveal">
+      <div class="contact-intro glass-card">
+        <div class="contact-badge">
+          <span class="pulse-dot"></span>
+          <span>Open to Discussions &amp; Collaborations</span>
+        </div>
+
+        <p class="contact-text">
+          Whether you want to discuss Artificial Intelligence, collaborate on a hackathon project, talk about web development, or chat about gaming, fashion, or anime — my inbox is always open.
+        </p>
+
+        <div class="contact-links">
+          <!-- GitHub Link -->
+          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span class="contact-icon text-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </span>
+            <span>GitHub Profile</span>
+          </a>
+
+          <!-- LinkedIn Link -->
+          <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span class="contact-icon text-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </span>
+            <span>LinkedIn Profile</span>
+          </a>
+
+          <!-- Email Button -->
+          <a href="mailto:swanandkadam8061@gmail.com" class="contact-btn">
+            <span class="contact-icon text-accent">✉️</span>
+            <span>Send Email</span>
+          </a>
+
+          <!-- Copy Email Button -->
+          <button class="contact-btn copy-email-btn" id="copyEmailBtn" data-email="swanandkadam8061@gmail.com" type="button">
+            <span class="contact-icon" id="copyEmailIcon">📋</span>
+            <span id="copyEmailText">Copy Email Address</span>
+          </button>
+        </div>
+
+        <div class="contact-meta-note">
+          <span>Based in India · Responses usually within 24 hours</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">SK<span class="text-accent">.</span> Swanand Kadam</div>
+      <p class="footer-tagline">Student · Aspiring Software Developer · AI &amp; Web Enthusiast</p>
+      <div class="footer-social-row">
+        <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span class="footer-dot">•</span>
+        <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer-dot">•</span>
+        <a href="https://nishantekka2007-sys.github.io/voicekhata-hackday/" target="_blank" rel="noopener noreferrer">VoiceKhata</a>
+        <span class="footer-dot">•</span>
+        <a href="#hero">Back to Top ↑</a>
+      </div>
+      <p class="footer-copy">© 2025 Swanand Kadam. Minimalist, modern, and purposeful.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive" aria-hidden="true">
+    <span class="toast-icon">✓</span>
+    <span class="toast-msg" id="toastMsg">Email copied to clipboard!</span>
+  </div>
+
+  <!-- Three.js v0.168.0 Bundle with Native GLTFLoader & WebP Extension -->
+  <script src="js/three.bundle.js"></script>
+
+  <!-- Pre-loaded 3D Model Binary Data (Enables 100% offline & file:// protocol support with zero CORS issues) -->
+  <script src="js/character-model-data.js"></script>
+
+  <!-- Core Portfolio Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/character3d.js"></script>
+</body>
+</html>
