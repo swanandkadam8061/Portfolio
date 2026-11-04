@@ -5,7 +5,49 @@
    =================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Let the page show as soon as it has loaded; the 3D scene continues in the background.
+  const portfolioLoader = document.getElementById('portfolioLoader');
+  if (portfolioLoader) {
+    let loaderDismissed = false;
+    let hardWaitTimer;
+
+    const dismissLoader = () => {
+      if (loaderDismissed) return;
+      loaderDismissed = true;
+      clearTimeout(hardWaitTimer);
+      portfolioLoader.classList.add('is-leaving');
+      portfolioLoader.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('portfolio-loading');
+      setTimeout(() => portfolioLoader.remove(), 380);
+    };
+
+    const finishIntro = () => setTimeout(dismissLoader, 160);
+    window.addEventListener('load', finishIntro, { once: true });
+    if (document.readyState === 'complete') finishIntro();
+
+    // Keep slow fonts or other optional assets from extending the intro.
+    hardWaitTimer = setTimeout(dismissLoader, 1500);
+  }
+
   const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  const guideLinks = document.querySelectorAll('.guide-link');
+  if (isFinePointer) {
+    guideLinks.forEach((link) => {
+      const avatar = link.querySelector('.guide-avatar');
+      if (!avatar) return;
+
+      link.addEventListener('pointermove', (event) => {
+        const bounds = link.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+        avatar.style.transform = `translateZ(9px) rotateX(${-y * 18}deg) rotateY(${x * 22}deg)`;
+      }, { passive: true });
+
+      link.addEventListener('pointerleave', () => {
+        avatar.style.transform = '';
+      }, { passive: true });
+    });
+  }
 
   // ---------- 1. Interactive Ambient Glow Follower ----------
   const ambientGlow = document.getElementById('ambientGlow');

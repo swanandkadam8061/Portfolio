@@ -16,7 +16,25 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
 </head>
-<body>
+<body class="portfolio-loading">
+
+  <div class="portfolio-loader" id="portfolioLoader" role="status" aria-live="polite">
+    <div class="loader-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+    <p class="loader-caption">A portfolio in progress</p>
+    <div class="loader-track" aria-hidden="true"><span></span></div>
+    <span class="loader-state">Setting the scene</span>
+  </div>
+  <script>
+    // Last-resort guard if the main interaction script fails to initialize.
+    window.setTimeout(function () {
+      var loader = document.getElementById('portfolioLoader');
+      if (!loader || loader.classList.contains('is-leaving')) return;
+      loader.classList.add('is-leaving');
+      loader.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('portfolio-loading');
+      window.setTimeout(function () { loader.remove(); }, 380);
+    }, 2300);
+  </script>
 
   <!-- Top Scroll Progress Bar -->
   <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
@@ -173,6 +191,15 @@
 
         <!-- 3D WebGL Canvas Container -->
         <div id="characterCanvasContainer" title="Interactive 3D Character (Move cursor to direct gaze)"></div>
+        <div class="monitor-apple-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+            <defs>
+              <linearGradient id="appleSilver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".52" stop-color="#d6d6d9"/><stop offset="1" stop-color="#fafafa"/></linearGradient>
+              <filter id="appleGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".45" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <path fill="url(#appleSilver)" filter="url(#appleGlow)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35-4.92-5.06-4.19-12.77 1.4-13.06 1.36.07 2.3.91 3.01.98 1.05.03 2.14-.58 3.36-1.03 1.46-.5 2.55-.28 3.34 1.16-3.08 1.84-2.35 6.22.5 7.35-.57 1.5-1.3 2.97-2.23 4.6zM12.03 7.25c-.15-2.23 1.66-4.09 3.74-4.25.29 2.58-2.34 4.53-3.74 4.25z"/>
+          </svg>
+        </div>
 
         <!-- Fallback 2D Avatar if WebGL is unavailable -->
         <div id="heroFallbackAvatar" aria-hidden="true">
@@ -1012,6 +1039,71 @@
     </div>
   </footer>
 
+  <!-- Compact section guides -->
+  <nav class="guide-dock" aria-label="Portfolio section guides">
+    <span class="guide-dock-label">MEET YOUR GUIDES</span>
+    <a class="guide-link" href="#about" aria-label="Ari, your introduction guide — go to About" data-guide-message="Hi, I’m Ari. Let’s start with Swanand’s story.">
+      <span class="guide-avatar" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
+      <span class="guide-copy"><strong>Ari</strong><small>Introduction</small></span>
+      <span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="guide-link" href="#projects" aria-label="Noah, your project guide — go to Projects" data-guide-message="Noah here. Want to see what’s been built?">
+      <span class="guide-avatar guide-avatar-light" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
+      <span class="guide-copy"><strong>Noah</strong><small>Selected work</small></span>
+      <span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="guide-link" href="#contact" aria-label="Mika, your contact guide — go to Contact" data-guide-message="I’m Mika. Let’s make an introduction.">
+      <span class="guide-avatar guide-avatar-red" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
+      <span class="guide-copy"><strong>Mika</strong><small>Say hello</small></span>
+      <span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="guide-link" href="#skills" aria-label="Ravi, your skills guide — go to Skills" data-guide-message="Ravi here. Let’s explore the tools Swanand is learning.">
+      <span class="guide-avatar guide-avatar-blue" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
+      <span class="guide-copy"><strong>Ravi</strong><small>Skills</small></span>
+      <span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="guide-link" href="#journey" aria-label="Zara, your journey guide — go to Journey" data-guide-message="I’m Zara. Want to see how the journey began?">
+      <span class="guide-avatar guide-avatar-wine" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
+      <span class="guide-copy"><strong>Zara</strong><small>Journey</small></span>
+      <span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="guide-link" href="#beyond" aria-label="Leo, your interests guide — go to Beyond the Code" data-guide-message="Leo here. Let’s take a look beyond the code.">
+      <span class="guide-avatar guide-avatar-silver" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
+      <span class="guide-copy"><strong>Leo</strong><small>Interests</small></span>
+      <span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+  </nav>
+
+  <!-- Conversational 3D portfolio guide -->
+  <aside class="guide-assistant is-intro" id="guideAssistant" aria-label="Portfolio guide" aria-hidden="true">
+    <div class="guide-assistant-card">
+      <header class="guide-assistant-head" id="guideAssistantHandle">
+        <span class="guide-live-dot" aria-hidden="true"></span>
+        <div class="guide-assistant-title"><strong>Your portfolio guide</strong><small>Here to help you explore</small></div>
+        <button class="guide-control" id="guideMinimize" type="button" aria-label="Minimize guide" title="Minimize">−</button>
+        <button class="guide-control guide-close" id="guideDismiss" type="button" aria-label="Dismiss guide" title="Dismiss">×</button>
+      </header>
+      <div class="guide-assistant-content" id="guideAssistantContent">
+        <div class="guide-stage" id="guideStage" aria-label="Interactive 3D guide character. Drag to rotate." role="img" tabindex="0">
+          <canvas id="guideCanvas" aria-hidden="true"></canvas>
+          <span class="guide-stage-hint">DRAG TO LOOK AROUND</span>
+        </div>
+        <div class="guide-conversation" aria-live="polite" aria-atomic="true">
+          <span class="guide-speaker" id="guideSpeaker">ARI · YOUR GUIDE</span>
+          <p id="guideMessage">Hey! I’m Ari. Welcome to Swanand’s portfolio. Want me to show you around?</p>
+        </div>
+        <div class="guide-choices" id="guideChoices">
+          <button type="button" data-guide-action="projects">Show me your projects</button>
+          <button type="button" data-guide-action="about">Tell me about yourself</button>
+          <button type="button" data-guide-action="skills">Explore your skills</button>
+          <button type="button" data-guide-action="explore">Let’s explore!</button>
+        </div>
+        <a class="guide-destination" id="guideDestination" href="#projects" hidden>Take me there <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <button class="guide-reopen" id="guideReopen" type="button" aria-label="Open portfolio guide" title="Open guide"><span aria-hidden="true">✦</span><i></i></button>
+  </aside>
+
   <!-- Toast Notification Container -->
   <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive" aria-hidden="true">
     <span class="toast-icon">✓</span>
@@ -1027,5 +1119,6 @@
   <!-- Core Portfolio Scripts -->
   <script src="js/main.js"></script>
   <script src="js/character3d.js"></script>
+  <script src="js/guide-assistant.js"></script>
 </body>
 </html>

@@ -19,6 +19,9 @@
   let kineticSculpture = null;
   let isHovering = false;
   let animationsList = [];
+  let animationFrame = 0;
+  let targetRotation = { x: 0, y: 0 };
+  let mousePosition = { x: 0, y: 0 };
 
   const container = document.getElementById('characterCanvasContainer');
   const fallbackAvatar = document.getElementById('heroFallbackAvatar');
@@ -30,62 +33,6 @@
     if (modelStatus) {
       modelStatus.innerHTML = `<span class="status-indicator"></span>${text}`;
     }
-  }
-
-  // ---------- 1. Canvas Texture: Sleek Glowing Apple Logo ----------
-  function createAppleLogoTexture() {
-    const canvas = document.createElement('canvas');
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return null;
-
-    ctx.clearRect(0, 0, 512, 512);
-
-    // Subtle dark circular vignette behind logo for high contrast on any surface
-    const glowGrad = ctx.createRadialGradient(256, 256, 40, 256, 256, 220);
-    glowGrad.addColorStop(0, 'rgba(255, 255, 255, 0.28)');
-    glowGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.08)');
-    glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-    ctx.fillStyle = glowGrad;
-    ctx.beginPath();
-    ctx.arc(256, 256, 220, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Soft outer glow for the Apple logo
-    ctx.shadowColor = 'rgba(255, 255, 255, 0.95)';
-    ctx.shadowBlur = 26;
-
-    // Iconic Apple Logo vector path
-    const svgPath = 'M 155.1 79.5 c 8.8 -10.7 14.7 -25.5 13.1 -40.5 c -12.7 0.5 -28.1 8.5 -37.2 19.1 c -8 9.3 -15 24.4 -13.1 39.1 c 14.2 1.1 28.5 -7 37.2 -17.7 z M 168.2 88.5 c -20.6 -1.2 -38.2 11.8 -48.1 11.8 c -10 0 -24.4 -11.2 -40.3 -10.9 c -20.8 0.3 -40 12.1 -50.7 30.7 c -21.6 37.4 -5.5 92.7 15.5 123 c 10.3 14.8 22.5 31.2 38.6 30.6 c 15.5 -0.6 21.4 -10 40.1 -10 c 18.8 0 24.1 10 40.4 9.7 c 16.7 -0.3 27.2 -14.9 37.4 -29.8 c 11.8 -17.2 16.7 -33.9 17 -34.8 c -0.4 -0.2 -32.6 -12.5 -32.9 -49.7 c -0.3 -31.1 25.4 -46 26.6 -46.7 c -14.6 -21.4 -37.4 -23.8 -45.4 -24.3 z';
-
-    ctx.save();
-    ctx.translate(138, 70);
-    ctx.scale(1.18, 1.18);
-
-    // Brilliant silver/white metallic gradient
-    const grad = ctx.createLinearGradient(0, 0, 200, 250);
-    grad.addColorStop(0, '#ffffff');
-    grad.addColorStop(0.3, '#ffffff');
-    grad.addColorStop(0.7, '#e4e4e7');
-    grad.addColorStop(1, '#d1d5db');
-    ctx.fillStyle = grad;
-
-    if (typeof Path2D !== 'undefined') {
-      const path = new Path2D(svgPath);
-      ctx.fill(path);
-      ctx.fill(path); // Double-pass for crisp opacity
-    } else {
-      ctx.beginPath();
-      ctx.arc(100, 125, 60, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.anisotropy = 4;
-    texture.needsUpdate = true;
-    return texture;
   }
 
   // ---------- 2. Realistic Gaming Battlestation Accessories ----------
@@ -418,6 +365,7 @@
       console.warn('Three.js not found');
       if (fallbackAvatar) fallbackAvatar.style.display = 'flex';
       setStatus('3D Engine Offline');
+      document.dispatchEvent(new Event('portfolio:model-failed'));
       return;
     }
 
@@ -450,6 +398,7 @@
       console.warn('WebGL init failed:', err);
       if (fallbackAvatar) fallbackAvatar.style.display = 'flex';
       setStatus('WebGL Fallback');
+      document.dispatchEvent(new Event('portfolio:model-failed'));
       return;
     }
 
@@ -541,23 +490,8 @@
       monitorLid.position.set(-0.063, 9.04, 4.96);
       monitorLid.rotation.x = 0.09;
 
-      // Add Clearly Visible, Sleek Metallic Glowing Apple Logo on the back of the monitor lid
-      const appleTexture = createAppleLogoTexture();
-      if (appleTexture) {
-        const appleGeo = new THREE.PlaneGeometry(0.72, 0.72);
-        const appleMat = new THREE.MeshBasicMaterial({
-          map: appleTexture,
-          transparent: true,
-          opacity: 0.98,
-          side: THREE.DoubleSide,
-          depthWrite: false, // Prevents z-fighting on lid surface
-        });
-        const appleMesh = new THREE.Mesh(appleGeo, appleMat);
-        // Positioned flush on the back of the lid facing the camera
-        appleMesh.position.set(0, 2.05, 0.055);
-        appleMesh.rotation.x = -0.131;
-        monitorLid.add(appleMesh);
-      }
+      // The Apple mark is a lightweight, stage-aligned SVG overlay in index.html.
+      // Keep the monitor mesh scale and pose stable so the overlay remains aligned.
     }
 
     if (screenLight) {
@@ -656,6 +590,7 @@
     // Hide fallback avatar
     if (fallbackAvatar) fallbackAvatar.style.display = 'none';
     setStatus('FASHION EDITORIAL · LEVEL 99 // BATTLESTATION');
+    document.dispatchEvent(new Event('portfolio:model-ready'));
   }
 
   function loadModel() {
@@ -664,6 +599,7 @@
       console.warn('GLTFLoader not found');
       if (fallbackAvatar) fallbackAvatar.style.display = 'flex';
       setStatus('3D Avatar Ready');
+      document.dispatchEvent(new Event('portfolio:model-failed'));
       return;
     }
 
@@ -718,32 +654,19 @@
         console.warn('GLTFLoader load notice:', error);
         if (fallbackAvatar) fallbackAvatar.style.display = 'flex';
         setStatus('3D Avatar Ready');
+        document.dispatchEvent(new Event('portfolio:model-failed'));
       }
     );
   }
 
   function setupHeadTracking() {
-    let mouse = { x: 0, y: 0 };
-    let targetRotation = { x: 0, y: 0 };
-
     window.addEventListener('mousemove', (e) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mousePosition.y = -(e.clientY / window.innerHeight) * 2 + 1;
     }, { passive: true });
 
-    // Smooth head turning toward mouse
-    setInterval(() => {
-      if (headBone && characterMesh) {
-        const maxRotY = Math.PI * 0.22;
-        const maxRotX = Math.PI * 0.14;
-
-        targetRotation.y = mouse.x * maxRotY;
-        targetRotation.x = -mouse.y * maxRotX;
-
-        headBone.rotation.y += (targetRotation.y - headBone.rotation.y) * 0.08;
-        headBone.rotation.x += (targetRotation.x - headBone.rotation.x) * 0.08;
-      }
-    }, 1000 / 60);
+    // Head tracking is eased in the render loop to avoid a separate timer.
+    container.addEventListener('pointerleave', () => { mousePosition.x = 0; mousePosition.y = 0; }, { passive: true });
 
     // Hover effect on the 3D stage
     if (container.parentElement) {
@@ -771,12 +694,22 @@
   }
 
   function animate() {
-    requestAnimationFrame(animate);
-
+    if (document.hidden) {
+      animationFrame = 0;
+      return;
+    }
+    animationFrame = requestAnimationFrame(animate);
     const delta = clock ? clock.getDelta() : 0.016;
     const elapsed = clock ? clock.getElapsedTime() : 0;
 
     if (mixer) mixer.update(delta);
+    if (headBone && characterMesh) {
+      targetRotation.y = mousePosition.x * Math.PI * 0.2;
+      targetRotation.x = -mousePosition.y * Math.PI * 0.12;
+      const gazeEase = 1 - Math.exp(-delta * 8);
+      headBone.rotation.y += (targetRotation.y - headBone.rotation.y) * gazeEase;
+      headBone.rotation.x += (targetRotation.x - headBone.rotation.x) * gazeEase;
+    }
 
     // Ambient Gaming Lighting Breathing Animations
     if (mouseUnderglow) {
@@ -806,6 +739,12 @@
       renderer.render(scene, camera);
     }
   }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && animationFrame) cancelAnimationFrame(animationFrame);
+    else if (!document.hidden && renderer && !animationFrame) animate();
+    if (document.hidden) animationFrame = 0;
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => setTimeout(initThreeScene, 100));
