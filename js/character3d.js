@@ -589,7 +589,7 @@
 
     // Hide fallback avatar
     if (fallbackAvatar) fallbackAvatar.style.display = 'none';
-    setStatus('FASHION EDITORIAL · LEVEL 99 // BATTLESTATION');
+    setStatus('Interactive 3D workspace');
     document.dispatchEvent(new Event('portfolio:model-ready'));
   }
 

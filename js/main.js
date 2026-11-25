@@ -163,10 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
       navToggle.classList.toggle('active', isOpen);
       navToggle.setAttribute('aria-expanded', isOpen);
       mobileMenu.setAttribute('aria-hidden', !isOpen);
+      mobileMenu.inert = !isOpen;
       document.body.style.overflow = isOpen ? 'hidden' : '';
     };
 
     navToggle.addEventListener('click', () => toggleMenu());
+    window.matchMedia('(min-width: 1101px)').addEventListener('change', (event) => {
+      if (event.matches && mobileMenu.classList.contains('open')) toggleMenu(false);
+    });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => toggleMenu(false));
@@ -175,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         toggleMenu(false);
+        navToggle.focus();
       }
     });
   }
@@ -193,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       },
       {
-        threshold: 0.12,
+        threshold: 0,
         rootMargin: '0px 0px -40px 0px',
       }
     );
@@ -230,54 +235,23 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateActiveNav, { passive: true });
   updateActiveNav();
 
-  // ---------- 7. Smooth Anchor Link Scrolling with Offset ----------
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId === '') return;
+  // Section links use native fragment navigation and the CSS scroll offset.
+  const filterButtons = document.querySelectorAll('#projectFilters .filter-btn');
+  const projects = document.querySelectorAll('#projects [data-category]');
 
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-      }
-    });
-  });
-
-  // ---------- 8. Interactive Project Filters ----------
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('#projectsGrid .project-card');
-
-  if (filterButtons.length && projectCards.length) {
-    filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach((b) => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-
-        const filterValue = btn.getAttribute('data-filter');
-
-        projectCards.forEach((card) => {
-          const category = card.getAttribute('data-category');
-          if (filterValue === 'all' || category === filterValue) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
-        });
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      filterButtons.forEach((option) => {
+        const selected = option === button;
+        option.classList.toggle('active', selected);
+        option.setAttribute('aria-pressed', String(selected));
+      });
+      const filter = button.dataset.filter;
+      projects.forEach((project) => {
+        project.hidden = filter !== 'all' && project.dataset.category !== filter;
       });
     });
-  }
+  });
 
   // ---------- 9. Journey Timeline Scroll Marker Animation ----------
   const journeySection = document.getElementById('journey');
@@ -449,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---------- 12. 3D Perspective Card Tilt & Spotlight Follower ----------
-  const tiltCards = document.querySelectorAll('.project-card, .beyond-card, .what-card, .about-attributes-card, .discipline-callout');
+  const tiltCards = document.querySelectorAll('.project-card, .beyond-card, .what-card, .discipline-callout');
   if (isFinePointer) {
     tiltCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
@@ -474,27 +448,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- 13. Developer Attributes Matrix Animate on Viewport ----------
-  const attrCard = document.querySelector('.about-attributes-card');
-  const attrFills = document.querySelectorAll('.attr-bar-fill');
-  if (attrCard && attrFills.length && 'IntersectionObserver' in window) {
-    const attrObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            attrFills.forEach((fill) => {
-              const targetWidth = fill.style.width;
-              fill.style.width = '0%';
-              setTimeout(() => {
-                fill.style.width = targetWidth;
-              }, 120);
-            });
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
-    attrObserver.observe(attrCard);
-  }
 });

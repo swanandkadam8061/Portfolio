@@ -4,25 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Swanand Kadam — Portfolio</title>
-  <meta name="description" content="Portfolio of Swanand Kadam — Student, aspiring software developer, and tech enthusiast passionate about Artificial Intelligence, Web Development, and building innovative digital experiences." />
+  <meta name="description" content="Swanand Kadam’s computer science portfolio, featuring S&amp;AI open-source contributions, a voice ledger for shopkeepers, and browser-based AI projects." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
 
   <!-- Google Fonts: Syne & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Syne:wght@500;600;700;800&amp;display=swap" rel="stylesheet" />
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
+  <noscript><style>.portfolio-loader,.project-filters,.nav-toggle{display:none!important}body.portfolio-loading{overflow:auto}.reveal,.reveal-stagger > *{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="portfolio-loading">
 
   <div class="portfolio-loader" id="portfolioLoader" role="status" aria-live="polite">
     <div class="loader-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
-    <p class="loader-caption">A portfolio in progress</p>
+    <p class="loader-caption">Swanand Kadam</p>
     <div class="loader-track" aria-hidden="true"><span></span></div>
-    <span class="loader-state">Setting the scene</span>
+    <span class="loader-state">Loading portfolio</span>
   </div>
   <script>
     // Last-resort guard if the main interaction script fails to initialize.
@@ -35,6 +36,8 @@
       window.setTimeout(function () { loader.remove(); }, 380);
     }, 2300);
   </script>
+
+
 
   <!-- Top Scroll Progress Bar -->
   <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
@@ -51,12 +54,11 @@
     </a>
 
     <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#contributions">S&amp;AI</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#journey">Journey</a></li>
-      <li><a href="#beyond">Interests</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
@@ -84,7 +86,7 @@
         </svg>
       </a>
 
-      <button class="nav-toggle" aria-label="Toggle navigation menu" id="navToggle" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Toggle navigation menu" id="navToggle" aria-controls="mobileMenu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -93,31 +95,33 @@
   </nav>
 
   <!-- Mobile Drawer Menu -->
-  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true" inert>
     <div class="mobile-menu-header">
       <span class="nav-logo-badge">SK<span class="text-accent">.</span></span>
       <span>Swanand Kadam</span>
     </div>
-    <a href="#hero">Home</a>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
+    <a href="#contributions">S&amp;AI</a>
     <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
     <a href="#journey">Journey</a>
     <a href="#beyond">Interests</a>
-    <a href="#contact">Contact</a>
     <div class="mobile-menu-socials">
       <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
     </div>
   </div>
 
+  <main>
   <!-- ===================== HERO SECTION ===================== -->
   <section class="hero" id="hero">
     <!-- Left Column: Narrative & CTAs -->
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        <span>COLLECTION 2025 // EDITORIAL LOOKBOOK</span>
+        <span>COMPUTER SCIENCE · INDIA</span>
       </div>
 
       <h1 class="hero-name">
@@ -126,19 +130,49 @@
       </h1>
 
       <p class="hero-subtitle">
-        Student | Aspiring Software Developer | AI &amp; Web Development Enthusiast
+        B.Tech student &amp; aspiring software developer
       </p>
 
       <p class="hero-desc">
-        I enjoy exploring new technologies, solving programming challenges, and building innovative digital experiences.
+        I build tools that let people work with language models, from reviewing a spoken shop transaction to exploring how a model scores a sentence.
       </p>
+
+      <nav class="portrait-guides" aria-label="Portfolio guides">
+        <h2>Choose your guide</h2>
+        <div class="portrait-grid">
+          <a class="portrait-card" href="#about">
+            <span class="guide-doll" data-doll="ari" aria-hidden="true"><img src="assets/guides/ari.png" alt="" width="180" height="230"></span>
+            <span><small>Ari</small><strong>About me</strong></span>
+          </a>
+          <a class="portrait-card" href="#projects">
+            <span class="guide-doll" data-doll="noah" aria-hidden="true"><img src="assets/guides/noah.png" alt="" width="180" height="230"></span>
+            <span><small>Noah</small><strong>Projects</strong></span>
+          </a>
+          <a class="portrait-card" href="#contact">
+            <span class="guide-doll" data-doll="mika" aria-hidden="true"><img src="assets/guides/mika.png" alt="" width="180" height="230"></span>
+            <span><small>Mika</small><strong>Contact</strong></span>
+          </a>
+          <a class="portrait-card" href="#skills">
+            <span class="guide-doll" data-doll="ravi" aria-hidden="true"><img src="assets/guides/ravi.png" alt="" width="180" height="230"></span>
+            <span><small>Ravi</small><strong>Skills</strong></span>
+          </a>
+          <a class="portrait-card" href="#journey">
+            <span class="guide-doll" data-doll="zara" aria-hidden="true"><img src="assets/guides/zara.png" alt="" width="180" height="230"></span>
+            <span><small>Zara</small><strong>Journey</strong></span>
+          </a>
+          <a class="portrait-card" href="#beyond">
+            <span class="guide-doll" data-doll="leo" aria-hidden="true"><img src="assets/guides/leo.png" alt="" width="180" height="230"></span>
+            <span><small>Leo</small><strong>Interests</strong></span>
+          </a>
+        </div>
+      </nav>
 
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">
           <span>Explore My Projects →</span>
         </a>
-        <a href="#contact" class="btn btn-secondary">
-          <span>Get in Touch</span>
+        <a href="#contributions" class="btn btn-secondary">
+          <span>S&amp;AI contributions ↓</span>
         </a>
       </div>
 
@@ -153,26 +187,6 @@
         </a>
       </div>
 
-      <!-- Developer, Fashion & Fitness Telemetry -->
-      <div class="hero-telemetry">
-        <div class="telemetry-item">
-          <span class="telemetry-dot dot-red"></span>
-          <span class="telemetry-label">BUILD</span>
-          <span class="telemetry-val">Full-Stack · AI</span>
-        </div>
-        <div class="telemetry-sep">/</div>
-        <div class="telemetry-item">
-          <span class="telemetry-dot dot-purple"></span>
-          <span class="telemetry-label">STYLE</span>
-          <span class="telemetry-val">Minimal High-Fashion</span>
-        </div>
-        <div class="telemetry-sep">/</div>
-        <div class="telemetry-item">
-          <span class="telemetry-dot dot-green"></span>
-          <span class="telemetry-label">GYM</span>
-          <span class="telemetry-val">6x/Wk Discipline</span>
-        </div>
-      </div>
     </div>
 
     <!-- Right Column: 3D Character Battlestation & Fashion Scene -->
@@ -207,7 +221,7 @@
         </div>
 
         <!-- Model Status Badge -->
-        <span class="model-status-tag" id="modelStatusTag"><span class="status-indicator"></span>FASHION EDITORIAL · LEVEL 99 // BATTLESTATION</span>
+        <span class="model-status-tag" id="modelStatusTag"><span class="status-indicator"></span>Interactive 3D workspace</span>
       </div>
     </div>
   </section>
@@ -215,122 +229,321 @@
   <!-- ===================== ABOUT SECTION ===================== -->
   <section class="section about-section" id="about">
     <div class="section-header reveal">
-      <span class="section-tag">// 01 · Identity</span>
       <h2 class="section-title">About <em>Me</em></h2>
-      <p class="section-subtitle">A glimpse into my background, passion for software, and hands-on learning mindset.</p>
+    </div>
+    <div class="about-card glass-card about-profile reveal">
+      <div class="about-text">
+        <p>Hey! I'm a student who enjoys exploring technology, learning new things, and figuring out how stuff works. I'm interested in software development, Artificial Intelligence, and web development. I like trying out new tools, experimenting with ideas, and building things that help me learn something along the way. I'm still growing my skills, but I enjoy every part of the process, whether it's solving a coding problem or working on something completely new.</p>
+        <p>Apart from tech, I'm into sports, fashion, gaming, anime, movies, and series. I believe there's always something new to learn, something different to explore, and an idea worth bringing to life.</p>
+        <p><strong>Learning as I go. Creating as I learn.</strong></p>
+      </div>
+      <div class="about-more">
+        <a class="evidence-link" href="#journey">My technical journey ↗</a>
+        <a class="evidence-link" href="#beyond">Outside of coding ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section skills-section" id="skills">
+    <div class="section-header reveal">
+      <h2 class="section-title">Technical <em>skills</em></h2>
+      <p class="section-subtitle">Select a skill to see where I used it in code.</p>
+    </div>
+    <div class="skills-grid reveal reveal-stagger">
+      <article class="skill-category glass-card">
+        <h3 class="skill-cat-title">Languages</h3>
+        <p class="skill-cat-note">Implementation examples</p>
+        <div class="skill-tags">
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81/files">Python ↗</a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/studio.js">JavaScript ↗</a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html">HTML &amp; CSS ↗</a>
+        </div>
+      </article>
+      <article class="skill-category glass-card">
+        <h3 class="skill-cat-title">Models &amp; evaluation</h3>
+        <p class="skill-cat-note">Working with speech and text</p>
+        <div class="skill-tags">
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/16/files">Whisper ↗</a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html">Transformers.js ↗</a>
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85/files">Classification metrics ↗</a>
+        </div>
+      </article>
+      <article class="skill-category glass-card">
+        <h3 class="skill-cat-title">Application engineering</h3>
+        <p class="skill-cat-note">Serving, storing and testing data</p>
+        <div class="skill-tags">
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/server.mjs">Node.js ↗</a>
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files">FastAPI ↗</a>
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files">SQLite integration ↗</a>
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83/files">Python unittest ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="contributions">
+    <div class="section-header reveal">
+      <h2 class="section-title">S&amp;AI <em>open-source contributions</em></h2>
+      <p class="section-subtitle">I submitted ten Python labs to <a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners">S-AI-Projects/AI-For-Beginners</a> as <strong>swanandkadam8061</strong>. Each pull request includes a runnable example, tests and lesson notes.</p>
+    </div>
+    <ol class="lab-list">
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T051</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81">PR #81 ↗</a></div>
+        <h3>Selecting a genetic algorithm’s elite</h3>
+        <p>I sorted candidates by fitness and broke ties by ID. That makes selection repeatable even when two candidates have the same score.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T052</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/82">PR #82 ↗</a></div>
+        <h3>Cosine similarity at the boundaries</h3>
+        <p>I checked vector dimensions and returned an explicit undefined result for a zero vector, so callers can distinguish it from a valid similarity of zero.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T053</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83">PR #83 ↗</a></div>
+        <h3>Ordering a dependency plan</h3>
+        <p>I implemented topological sorting and checked for cycles and missing dependencies. The planner can catch an impossible schedule before a task starts.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T054</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/84">PR #84 ↗</a></div>
+        <h3>Tracing an agent’s routing decision</h3>
+        <p>I added intent rules, a fallback handler and a record of each decision. The trace shows which rule took priority when a request matched more than one.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T055</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85">PR #85 ↗</a></div>
+        <h3>Evaluating a binary classifier</h3>
+        <p>I computed a confusion matrix, precision and recall from fixed labels. Tests cover zero denominators so the result is predictable when a class has no examples.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T056</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/86">PR #86 ↗</a></div>
+        <h3>Separating calculation from presentation</h3>
+        <p>I split the cosine similarity calculation from its report formatter. A lesson can change how it presents a result without changing the underlying calculation.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T057</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/87">PR #87 ↗</a></div>
+        <h3>Working through an embedding comparison</h3>
+        <p>I returned the dot product and both vector norms alongside the final similarity. A learner can check each step by hand and see where a zero vector makes the result undefined.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T058</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/88">PR #88 ↗</a></div>
+        <h3>Following one perceptron update</h3>
+        <p>I implemented a prediction and weight update for a two-dimensional input. A test follows a misclassification through the update and checks the rule for a score of zero.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T059</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/89">PR #89 ↗</a></div>
+        <h3>Normalizing a batch of images</h3>
+        <p>I validated the batch dimensions and rescaled pixels from 0–255 to 0–1. Checking the output shape catches inputs that would otherwise lose their image structure.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T060</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/90">PR #90 ↗</a></div>
+        <h3>Filling missing values without leakage</h3>
+        <p>I fitted the replacement mean on training observations and reused it for validation. This keeps information from the validation set out of preprocessing.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section projects-section" id="projects">
+    <div class="section-header reveal">
+      <h2 class="section-title">Featured <em>Projects</em></h2>
+      <p class="section-subtitle">A hackday collaboration and three projects from my own repositories.</p>
     </div>
 
-    <div class="about-grid reveal">
-      <div class="about-card glass-card">
-        <div class="about-header-mini">
-          <div class="about-avatar text-accent">⚡</div>
-          <div class="about-identity">
-            <h3>Swanand Kadam</h3>
-            <span>Student &amp; Aspiring Software Developer</span>
+    <div class="project-filters reveal" id="projectFilters" role="group" aria-label="Filter featured projects">
+      <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All projects</button>
+      <button type="button" class="filter-btn" data-filter="team" aria-pressed="false">Team project</button>
+      <button type="button" class="filter-btn" data-filter="personal" aria-pressed="false">Personal projects</button>
+    </div>
+
+    <!-- VoiceKhata team project -->
+    <div class="voicekhata-spotlight glass-card reveal" data-category="team">
+      <div class="spotlight-badge-row">
+        <span class="spotlight-tag">
+          Team project · Hackday
+        </span>
+        <span class="spotlight-category">October 2026</span>
+      </div>
+
+      <div class="spotlight-content-grid">
+        <div class="spotlight-info">
+          <div class="spotlight-title-group">
+            <span class="spotlight-icon" aria-hidden="true">🎙️</span>
+            <div>
+              <h3 class="spotlight-title">VoiceKhata</h3>
+              <p class="spotlight-tagline">A voice ledger for neighbourhood shops</p>
+            </div>
+          </div>
+
+          <p class="spotlight-desc">
+            A shopkeeper can say who bought on credit, review the name and amount, then save the entry. The browser preview stores entries on the device. In the full application, the same interface sends confirmed transactions to a FastAPI service backed by SQLite.
+          </p>
+          <div class="spotlight-explorations">
+            <h4 class="explorations-title">My contributions</h4>
+            <ul class="work-list">
+              <li>I connected the review form to the signed-in ledger and kept failed server saves visible to the user. <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9">PR #9</a></li>
+              <li>I fixed Hindi parsing so a list of items stays on one bill. Spoken amounts and uncertain transaction types remain editable before saving. <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/14">PR #14</a> · <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/15">PR #15</a></li>
+              <li>I moved Whisper’s warm-up ahead of recording and added a retry that preserves manual corrections. <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/16">PR #16</a></li>
+            </ul>
+            <details class="work-history">
+              <summary>Earlier voice and ledger work</summary>
+              <ul class="work-list">
+                <li>I added a faster-whisper speech-to-text demo. <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/7">PR #7</a></li>
+                <li>I refined Hindi recording, added CSV backup and clarified when Google sign-in is available. <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/11">PR #11</a> superseded my earlier <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/10">PR #10</a>.</li>
+                <li>I repaired the Whisper loader and added a local shop portal with a device PIN. <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/12">PR #12</a> · <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/13">PR #13</a></li>
+              </ul>
+            </details>
+          </div>
+          <div class="spotlight-tech-stack">
+            <span class="sp-pill">JavaScript</span><span class="sp-pill">Whisper</span>
+            <span class="sp-pill">FastAPI</span><span class="sp-pill">SQLite</span>
+          </div>
+          <div class="spotlight-actions">
+            <a href="https://nishantekka2007-sys.github.io/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <span>Open browser demo ↗</span>
+            </a>
+            <a href="https://github.com/nishantekka2007-sys/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              <span>GitHub Repository</span>
+            </a>
           </div>
         </div>
-        <div class="about-text">
-          <p>
-            Hey, I'm <strong>Swanand Kadam</strong> 👋. I'm a student, aspiring software developer, and tech enthusiast passionate about Artificial Intelligence, Web Development, and building innovative digital experiences.
-          </p>
-          <p>
-            I enjoy exploring new technologies, solving programming challenges, and turning creative ideas into practical, real-world projects. I believe in learning by building, experimenting with new tools, and continuously improving my technical and creative skills.
-          </p>
-          <p>
-            I'm currently strengthening my programming fundamentals in Python and C while exploring the exciting possibilities of Generative AI, open-source AI tools like Google Gemma and Ollama, voice-based applications, and responsive web systems.
-          </p>
-        </div>
 
-        <!-- Mindset Callout -->
-        <div class="mindset-callout">
-          <div class="mindset-badge">🌱 My Mindset</div>
-          <p class="mindset-quote">
-            “I'm someone who loves staying curious, learning new things, and challenging myself to grow. I believe that every project, every bug fixed, and every problem solved is another step forward.”
-          </p>
-          <div class="mindset-motto">Currently learning. Constantly building. Always exploring.</div>
-        </div>
-
-        <!-- Gym & Code Philosophy Card -->
-        <div class="discipline-callout glass-card">
-          <div class="discipline-header">
-            <span class="discipline-badge">🏋️‍♂️ PHILOSOPHY &amp; DISCIPLINE</span>
-            <span class="discipline-tag">Progressive Overload</span>
-          </div>
-          <h4 class="discipline-title">Discipline &gt; Motivation</h4>
-          <p class="discipline-desc">
-            Progressive overload isn't just a weightlifting principle — it's the mental blueprint I bring to every line of code. Consistent, deliberate effort every single day transforms raw curiosity into high-performance, resilient software.
-          </p>
-          <div class="discipline-pill-row">
-            <span>6x/Wk Weight Training</span>
-            <span>Relentless Debugging</span>
-            <span>Protagonist Drive</span>
+        <div class="spotlight-preview-panel">
+          <div class="preview-mockup">
+            <div class="mockup-header">
+              <span class="mock-dot red"></span>
+              <span class="mock-dot"></span>
+              <span class="mock-dot"></span>
+              <span class="mock-url">nishantekka2007-sys.github.io/voicekhata-hackday</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-mic-pulse">
+                <span class="mockup-mic-icon">🎙️</span>
+              </div>
+              <div class="mockup-chat-bubble">
+                <span class="mock-speaker">Voice Command:</span>
+                <span class="mock-text">"Ramesh ko ₹450 ka doodh aur bread udhaar likho"</span>
+              </div>
+              <div class="mockup-card-result">
+                <div class="mock-row">
+                  <span class="mock-tag-kirana">Review draft</span>
+                  <span class="mock-amt">+₹450</span>
+                </div>
+                <div class="mock-details">Ramesh · Credit sale · Awaiting confirmation</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="about-side">
-        <div class="about-detail-card glass-card">
-          <span class="detail-icon text-accent">🎓</span>
-          <div>
-            <strong>Degree &amp; Education</strong>
-            B.Tech Computer Science (Student)
-          </div>
+    <div class="projects-grid" id="projectsGrid">
+      <article class="project-card glass-card" data-category="personal">
+        <p class="project-topic">Comparing language models</p>
+        <h3 class="project-title">Brain Trust</h3>
+        <p class="project-desc">Switching between chat tools makes it hard to compare answers to the same question. Brain Trust sends a shared conversation to models on Groq or OpenRouter and displays their responses together.</p>
+        <h4 class="project-role">My work</h4>
+        <p class="project-desc">I built the browser workspace and Node.js gateway, then added a way to paste or upload a personal key that lasts for the current tab.</p>
+        <div class="project-tech"><span>Node.js</span><span>JavaScript</span><span>Groq</span><span>OpenRouter</span></div>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/swanandkadam8061/Brain-Trust">Repository ↗</a>
+          <a class="evidence-link" href="https://github.com/swanandkadam8061/Brain-Trust/commit/465bda7bdf383af3ff38f7dc8a44858917b3e746">Workspace commit ↗</a> <a class="evidence-link" href="https://github.com/swanandkadam8061/Brain-Trust/commit/642067585b4ecf2a159b64462c5b2687cc3fb05b">Key handling ↗</a>
+        </div>
+      </article>
+      <article class="project-card glass-card" data-category="personal">
+        <p class="project-topic">Understanding model predictions</p>
+        <h3 class="project-title">Perplexity Explorer</h3>
+        <p class="project-desc">A sentence can have a high perplexity because of a single unexpected word. This single-page tool runs DistilGPT-2 in the browser and shows how each token contributes to the score.</p>
+        <h4 class="project-role">My work</h4>
+        <p class="project-desc">I implemented token scoring, the top eight next-token predictions and a hand-editable simulator for trying probabilities before downloading the model.</p>
+        <div class="project-tech"><span>HTML &amp; CSS</span><span>JavaScript</span><span>Transformers.js</span><span>DistilGPT-2</span></div>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/swanandkadam8061/Perplexity-Explorer">Repository ↗</a>
+          <a class="evidence-link" href="https://github.com/swanandkadam8061/Perplexity-Explorer/commit/4028d6f9035a902dcbb8454d11362bf4c67e4b75">Implementation commit ↗</a>
+        </div>
+      </article>
+      <article class="project-card glass-card" data-category="personal">
+        <p class="project-topic">Presenting engineering work</p>
+        <h3 class="project-title">Developer Portfolio</h3>
+        <p class="project-desc">This site brings my team projects, code and course submissions into one place. Static HTML keeps the project evidence readable, while JavaScript drives the filters and Three.js renders the interactive workspace.</p>
+        <h4 class="project-role">My work</h4>
+        <p class="project-desc">I connected the project pages, section navigation and character scene in a responsive, single-page portfolio.</p>
+        <div class="project-tech"><span>HTML &amp; CSS</span><span>JavaScript</span><span>Three.js</span></div>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/swanandkadam8061/Portfolio">Repository ↗</a>
+          <a class="evidence-link" href="https://github.com/swanandkadam8061/Portfolio/blob/main/js/character3d.js">Scene code ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="section-header reveal">
+      <h2 class="section-title">Education &amp; <em>achievements</em></h2>
+    </div>
+    <div class="education-grid">
+      <article class="glass-card education-card">
+        <p class="project-topic">Current studies</p>
+        <h3>B.Tech in Computer Science</h3>
+        <p>My coursework includes applied AI labs in Python, from ranking candidates in a genetic algorithm to evaluating a binary classifier.</p>
+        <a class="evidence-link" href="#contributions">Explore my coursework ↗</a>
+      </article>
+      <article class="glass-card education-card">
+        <p class="project-topic"><time datetime="2026-10-25T01:42:16+05:30">25 October 2026</time> · Hackday</p>
+        <h3>VoiceKhata team contribution</h3>
+        <p>My frontend integration for the team’s voice ledger was merged during the hackday project. It connects the shopkeeper’s review screen to their private ledger.</p>
+        <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9">View merged contribution ↗</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT SECTION ===================== -->
+  <section class="section contact-section" id="contact">
+    <div class="section-header reveal">
+      <h2 class="section-title">Connect With <em>Me</em></h2>
+      <p class="section-subtitle">For software development opportunities, hackathons and project collaborations.</p>
+    </div>
+
+    <div class="contact-container reveal">
+      <div class="contact-intro glass-card">
+        <div class="contact-badge">
+          <span class="pulse-dot"></span>
+          <span>Open to Discussions &amp; Collaborations</span>
         </div>
 
-        <div class="about-detail-card glass-card">
-          <span class="detail-icon text-accent">📍</span>
-          <div>
-            <strong>Location</strong>
-            India
-          </div>
+        <p class="contact-text">
+          You can email me directly or find my work under the same handle I use for S&amp;AI contributions.
+        </p>
+
+        <div class="contact-links">
+          <!-- GitHub Link -->
+          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span class="contact-icon text-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </span>
+            <span>GitHub · swanandkadam8061</span>
+          </a>
+
+          <!-- LinkedIn Link -->
+          <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span class="contact-icon text-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </span>
+            <span>LinkedIn Profile</span>
+          </a>
+
+          <!-- Email Button -->
+          <a href="mailto:swanandkadam8061@gmail.com" class="contact-btn">
+            <span class="contact-icon text-accent">✉️</span>
+            <span>swanandkadam8061@gmail.com</span>
+          </a>
+
+          <!-- Copy Email Button -->
+          <button class="contact-btn copy-email-btn" id="copyEmailBtn" data-email="swanandkadam8061@gmail.com" type="button">
+            <span class="contact-icon" id="copyEmailIcon">📋</span>
+            <span id="copyEmailText">Copy Email Address</span>
+          </button>
         </div>
 
-        <div class="about-detail-card glass-card">
-          <span class="detail-icon text-accent">💻</span>
-          <div>
-            <strong>Core Focus</strong>
-            Artificial Intelligence &amp; Web Engineering
-          </div>
-        </div>
-
-        <div class="about-detail-card glass-card">
-          <span class="detail-icon text-accent">🚀</span>
-          <div>
-            <strong>Featured Milestone</strong>
-            VoiceKhata (Hackday Project)
-          </div>
-        </div>
-
-        <div class="about-detail-card glass-card">
-          <span class="detail-icon text-accent">🎯</span>
-          <div>
-            <strong>Current Goal</strong>
-            Building impactful software &amp; Hackathons
-          </div>
-        </div>
-
-        <!-- Developer Attribute Matrix -->
-        <div class="about-attributes-card glass-card">
-          <div class="attributes-header">
-            <span class="attr-icon">⚡</span>
-            <strong>Attribute Matrix</strong>
-          </div>
-          <div class="attribute-row">
-            <div class="attr-meta"><span>STR · Resilience &amp; Weight Training</span><span>99%</span></div>
-            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 99%;"></div></div>
-          </div>
-          <div class="attribute-row">
-            <div class="attr-meta"><span>INT · CS Fundamentals &amp; AI</span><span>98%</span></div>
-            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 98%;"></div></div>
-          </div>
-          <div class="attribute-row">
-            <div class="attr-meta"><span>AGI · Modern UI &amp; Rapid Prototyping</span><span>96%</span></div>
-            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 96%;"></div></div>
-          </div>
-          <div class="attribute-row">
-            <div class="attr-meta"><span>STA · Deep Work &amp; Execution</span><span>100%</span></div>
-            <div class="attr-bar-track"><div class="attr-bar-fill" style="width: 100%;"></div></div>
-          </div>
+        <div class="contact-meta-note">
+          <span>Based in India</span>
         </div>
       </div>
     </div>
@@ -339,7 +552,6 @@
   <!-- ===================== EXPLORATION / FOCUS AREAS ===================== -->
   <section class="section what-section" id="exploration">
     <div class="section-header reveal">
-      <span class="section-tag">// 02 · Focus Areas</span>
       <h2 class="section-title">What I'm <em>Exploring</em></h2>
       <p class="section-subtitle">Core technical disciplines where I experiment, write code, and build solutions.</p>
     </div>
@@ -407,338 +619,8 @@
     </div>
   </section>
 
-  <!-- ===================== SKILLS SECTION ===================== -->
-  <section class="section skills-section" id="skills">
-    <div class="section-header reveal">
-      <span class="section-tag">// 03 · Arsenal</span>
-      <h2 class="section-title">Skills &amp; <em>Technologies</em></h2>
-      <p class="section-subtitle">Technologies and tools I practice and use to build projects.</p>
-    </div>
-
-    <div class="skills-grid reveal reveal-stagger">
-      <!-- 1. Programming -->
-      <div class="skill-category glass-card">
-        <h3 class="skill-cat-title">
-          <span class="text-accent">💻</span>
-          <span>Programming &amp; Logic</span>
-        </h3>
-        <p class="skill-cat-note">Core fundamentals, problem-solving, and algorithmic thinking.</p>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">C</span>
-          <span class="skill-tag">Logical Problem Solving</span>
-          <span class="skill-tag">Functions &amp; Recursion</span>
-          <span class="skill-tag">Loops &amp; Data Structures</span>
-        </div>
-      </div>
-
-      <!-- 2. Web Development -->
-      <div class="skill-category glass-card">
-        <h3 class="skill-cat-title">
-          <span class="text-accent">🌐</span>
-          <span>Web Development</span>
-        </h3>
-        <p class="skill-cat-note">Frontend structure, responsive layouts, and interactive styling.</p>
-        <div class="skill-tags">
-          <span class="skill-tag">HTML5</span>
-          <span class="skill-tag">CSS3</span>
-          <span class="skill-tag">Responsive Design</span>
-          <span class="skill-tag">Frontend Development</span>
-          <span class="skill-tag">CSS Flexbox &amp; Grid</span>
-        </div>
-      </div>
-
-      <!-- 3. Artificial Intelligence -->
-      <div class="skill-category glass-card">
-        <h3 class="skill-cat-title">
-          <span class="text-accent">🧠</span>
-          <span>Artificial Intelligence</span>
-        </h3>
-        <p class="skill-cat-note">Exploring cutting-edge open-source AI tooling and LLMs.</p>
-        <div class="skill-tags">
-          <span class="skill-tag learning">Generative AI</span>
-          <span class="skill-tag learning">Google Gemma</span>
-          <span class="skill-tag learning">Ollama</span>
-          <span class="skill-tag learning">Open-Source AI Tools</span>
-          <span class="skill-tag learning">Prompt Engineering</span>
-        </div>
-      </div>
-
-      <!-- 4. AI Applications -->
-      <div class="skill-category glass-card">
-        <h3 class="skill-cat-title">
-          <span class="text-accent">🎙️</span>
-          <span>AI Applications</span>
-        </h3>
-        <p class="skill-cat-note">Practical voice systems and intelligent web interactions.</p>
-        <div class="skill-tags">
-          <span class="skill-tag learning">Voice-Based Interfaces</span>
-          <span class="skill-tag learning">Speech Recognition</span>
-          <span class="skill-tag learning">Hindi &amp; Hinglish NLP</span>
-          <span class="skill-tag learning">AI-Powered Web Apps</span>
-          <span class="skill-tag learning">VoiceKhata Engine</span>
-        </div>
-      </div>
-
-      <!-- 5. Developer Tools -->
-      <div class="skill-category glass-card">
-        <h3 class="skill-cat-title">
-          <span class="text-accent">🛠️</span>
-          <span>Developer Tools</span>
-        </h3>
-        <p class="skill-cat-note">Tools for efficient workflow, version control, and collaboration.</p>
-        <div class="skill-tags">
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">GitHub</span>
-          <span class="skill-tag">VS Code</span>
-          <span class="skill-tag">Linux Terminal</span>
-          <span class="skill-tag">Command-Line Tools</span>
-        </div>
-      </div>
-
-      <!-- 6. Cybersecurity Fundamentals -->
-      <div class="skill-category glass-card">
-        <h3 class="skill-cat-title">
-          <span class="text-accent">🛡️</span>
-          <span>Cybersecurity &amp; Systems</span>
-        </h3>
-        <p class="skill-cat-note">System architecture, network basics, and hands-on labs.</p>
-        <div class="skill-tags">
-          <span class="skill-tag">Linux Fundamentals</span>
-          <span class="skill-tag">Computer Networking</span>
-          <span class="skill-tag">SSH Remote Access</span>
-          <span class="skill-tag">Hands-on Security Labs</span>
-          <span class="skill-tag">System Basics</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FEATURED PROJECTS SECTION ===================== -->
-  <section class="section projects-section" id="projects">
-    <div class="section-header reveal">
-      <span class="section-tag">// 04 · Selected Works</span>
-      <h2 class="section-title">Featured <em>Projects</em></h2>
-      <p class="section-subtitle">Real-world applications, open-source collaboration, and technical experiments.</p>
-    </div>
-
-    <!-- VOICEKHATA HERO SPOTLIGHT CARD -->
-    <div class="voicekhata-spotlight glass-card reveal">
-      <div class="spotlight-badge-row">
-        <span class="spotlight-tag">
-          Featured Project — Hackday
-        </span>
-        <span class="spotlight-category">AI-Powered Voice Ledger</span>
-      </div>
-
-      <div class="spotlight-content-grid">
-        <div class="spotlight-info">
-          <div class="spotlight-title-group">
-            <span class="spotlight-icon">🎙️</span>
-            <div>
-              <h3 class="spotlight-title">VoiceKhata</h3>
-              <p class="spotlight-tagline">AI-Powered, Voice-First Digital Ledger for Local Kirana &amp; Vendors</p>
-            </div>
-          </div>
-
-          <p class="spotlight-desc">
-            One of my flagship projects, <strong>VoiceKhata</strong> is an AI-powered, voice-first digital ledger created for small shop owners, local vendors, and kirana businesses. The core idea is making digital bookkeeping simpler and accessible through voice commands in local languages (Hindi &amp; Hinglish).
-          </p>
-
-          <div class="spotlight-explorations">
-            <h4 class="explorations-title">Key Areas Explored &amp; Built:</h4>
-            <ul class="explorations-list">
-              <li><span>✦</span> AI-powered transaction processing &amp; ledger calculation</li>
-              <li><span>✦</span> Voice-based user interaction with intuitive design</li>
-              <li><span>✦</span> Hindi and Hinglish speech recognition workflows</li>
-              <li><span>✦</span> Open-source AI tools and language model integration</li>
-              <li><span>✦</span> Web application development and responsive interface</li>
-              <li><span>✦</span> GitHub team collaboration, version control, and live deployment</li>
-            </ul>
-          </div>
-
-          <div class="spotlight-tech-stack">
-            <span class="sp-pill">Speech Recognition</span>
-            <span class="sp-pill">Hindi &amp; Hinglish NLP</span>
-            <span class="sp-pill">Google Gemma</span>
-            <span class="sp-pill">Open Source AI</span>
-            <span class="sp-pill">Web Frontend</span>
-            <span class="sp-pill">GitHub Pages</span>
-          </div>
-
-          <div class="spotlight-actions">
-            <a href="https://nishantekka2007-sys.github.io/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-              <span>View Live Project ↗</span>
-            </a>
-            <a href="https://github.com/nishantekka2007-sys/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-              <span>GitHub Repository</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="spotlight-preview-panel">
-          <div class="preview-mockup">
-            <div class="mockup-header">
-              <span class="mock-dot red"></span>
-              <span class="mock-dot"></span>
-              <span class="mock-dot"></span>
-              <span class="mock-url">nishantekka2007-sys.github.io/voicekhata-hackday</span>
-            </div>
-            <div class="mockup-body">
-              <div class="mockup-mic-pulse">
-                <span class="mockup-mic-icon">🎙️</span>
-              </div>
-              <div class="mockup-chat-bubble">
-                <span class="mock-speaker">Voice Command:</span>
-                <span class="mock-text">"Ramesh ko ₹450 ka doodh aur bread udhaar likho"</span>
-              </div>
-              <div class="mockup-card-result">
-                <div class="mock-row">
-                  <span class="mock-tag-kirana">Kirana Entry Logged</span>
-                  <span class="mock-amt">+₹450</span>
-                </div>
-                <div class="mock-details">Customer: Ramesh · Type: Credit · Status: Verified ✓</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECT FILTER TABS -->
-    <div class="project-filters reveal" id="projectFilters" role="tablist">
-      <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects (5)</button>
-      <button class="filter-btn" data-filter="ai" role="tab" aria-selected="false">AI &amp; Voice</button>
-      <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web Development</button>
-      <button class="filter-btn" data-filter="python" role="tab" aria-selected="false">Python &amp; Tools</button>
-    </div>
-
-    <!-- PRESERVED PROJECTS GRID -->
-    <div class="projects-grid reveal reveal-stagger" id="projectsGrid">
-      <!-- Project 1: VoiceKhata (Grid Representation) -->
-      <div class="project-card glass-card" data-category="ai">
-        <div class="project-header">
-          <div class="project-icon">🎙️</div>
-          <span class="project-status status-featured">
-            <span class="pulse-dot"></span>
-            Featured AI
-          </span>
-        </div>
-        <h3 class="project-title">VoiceKhata — Voice Digital Ledger</h3>
-        <p class="project-desc">
-          AI-powered, voice-first digital ledger for kirana vendors and small shop owners. Converts Hindi/Hinglish speech commands into automated bookkeeping entries.
-        </p>
-        <div class="project-tech">
-          <span>AI / NLP</span>
-          <span>Speech Recognition</span>
-          <span>Google Gemma</span>
-          <span>Web App</span>
-        </div>
-        <div class="project-links">
-          <a href="https://nishantekka2007-sys.github.io/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo ↗</a>
-          <a href="https://github.com/nishantekka2007-sys/voicekhata-hackday/" target="_blank" rel="noopener noreferrer" class="project-link ghost">Repository ↗</a>
-        </div>
-      </div>
-
-      <!-- Project 2: Personal Portfolio Website -->
-      <div class="project-card glass-card" data-category="web">
-        <div class="project-header">
-          <div class="project-icon">🌐</div>
-          <span class="project-status">
-            Completed
-          </span>
-        </div>
-        <h3 class="project-title">Personal Developer Portfolio</h3>
-        <p class="project-desc">
-          A minimalist dark developer space engineered with monochromatic aesthetics, Three.js 3D character integration, responsive grid architecture, and fluid interactions.
-        </p>
-        <div class="project-tech">
-          <span>HTML5</span>
-          <span>CSS3</span>
-          <span>JavaScript</span>
-          <span>Three.js 3D</span>
-        </div>
-        <div class="project-links">
-          <a href="#hero" class="project-link">Back to Top ↑</a>
-          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">GitHub ↗</a>
-        </div>
-      </div>
-
-      <!-- Project 3: Python CLI Calculator & Problem Solver -->
-      <div class="project-card glass-card" data-category="python">
-        <div class="project-header">
-          <div class="project-icon">🧮</div>
-          <span class="project-status">
-            Completed
-          </span>
-        </div>
-        <h3 class="project-title">Python CLI Calculator &amp; Problem Solver</h3>
-        <p class="project-desc">
-          A terminal utility built to master Python syntax, control flow, functions, loops, recursion, and input validation with clean error recovery and edge case handling.
-        </p>
-        <div class="project-tech">
-          <span>Python</span>
-          <span>CLI</span>
-          <span>Problem Solving</span>
-          <span>Algorithms</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">Repository ↗</a>
-        </div>
-      </div>
-
-      <!-- Project 4: Anime Watchlist Tracker -->
-      <div class="project-card glass-card" data-category="web">
-        <div class="project-header">
-          <div class="project-icon">🎴</div>
-          <span class="project-status">
-            In Progress
-          </span>
-        </div>
-        <h3 class="project-title">Anime Watchlist &amp; Media Tracker</h3>
-        <p class="project-desc">
-          A personal media management tracker for cataloging, scoring, and filtering ongoing anime series with responsive card layouts and planned persistent client-side storage.
-        </p>
-        <div class="project-tech">
-          <span>HTML5</span>
-          <span>CSS3</span>
-          <span>JavaScript</span>
-          <span>LocalStorage</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">In Progress ↗</a>
-        </div>
-      </div>
-
-      <!-- Project 5: Minimal Fashion Editorial -->
-      <div class="project-card glass-card" data-category="web">
-        <div class="project-header">
-          <div class="project-icon">🛍️</div>
-          <span class="project-status">
-            In Progress
-          </span>
-        </div>
-        <h3 class="project-title">Minimal Fashion &amp; Streetwear Editorial</h3>
-        <p class="project-desc">
-          A curated digital editorial layout exploring asymmetric CSS Grid systems, typography rhythm, and mood-board visual styling for modern menswear and techwear aesthetics.
-        </p>
-        <div class="project-tech">
-          <span>CSS Grid</span>
-          <span>Typography Rhythm</span>
-          <span>Minimal Design</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="project-link ghost">Preview ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== LEARNING JOURNEY (Timeline) ===================== -->
   <section class="section journey-section" id="journey">
     <div class="section-header reveal">
-      <span class="section-tag">// 05 · Evolution</span>
       <h2 class="section-title">My Technical <em>Journey</em></h2>
       <p class="section-subtitle">
         I enjoy working across different areas of technology, from writing Python programs to building web interfaces and experimenting with AI-powered applications.
@@ -808,7 +690,7 @@
           </div>
           <h3 class="timeline-title">VoiceKhata — AI-Powered Voice Ledger</h3>
           <p class="timeline-desc">
-            Co-engineered VoiceKhata during a hackday: an AI-driven, voice-first digital ledger for local kirana stores. Integrated speech recognition in Hindi/Hinglish, leveraged open-source models, and deployed a live, real-world application.
+            I worked with the VoiceKhata team on a ledger for neighbourhood shops. I integrated the browser interface with the backend and improved the way Hindi voice entries are transcribed and reviewed.
           </p>
           <div class="timeline-tags">
             <span>Hackday Project</span>
@@ -847,7 +729,6 @@
   <!-- ===================== BEYOND THE CODE SECTION ===================== -->
   <section class="section beyond-section" id="beyond">
     <div class="section-header reveal">
-      <span class="section-tag">// 06 · Dimensions</span>
       <h2 class="section-title">Beyond the <em>Code</em></h2>
       <p class="section-subtitle">
         Technology is just one part of who I am. Outside of coding, I enjoy exploring different interests and creative experiences that inspire my perspectives.
@@ -965,61 +846,7 @@
     </div>
   </section>
 
-  <!-- ===================== CONTACT SECTION ===================== -->
-  <section class="section contact-section" id="contact">
-    <div class="section-header reveal">
-      <span class="section-tag">// 07 · Inquiries</span>
-      <h2 class="section-title">Connect With <em>Me</em></h2>
-      <p class="section-subtitle">Feel free to explore my projects, follow my learning journey, or connect with me!</p>
-    </div>
-
-    <div class="contact-container reveal">
-      <div class="contact-intro glass-card">
-        <div class="contact-badge">
-          <span class="pulse-dot"></span>
-          <span>Open to Discussions &amp; Collaborations</span>
-        </div>
-
-        <p class="contact-text">
-          Whether you want to discuss Artificial Intelligence, collaborate on a hackathon project, talk about web development, or chat about gaming, fashion, or anime — my inbox is always open.
-        </p>
-
-        <div class="contact-links">
-          <!-- GitHub Link -->
-          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="contact-btn">
-            <span class="contact-icon text-accent">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            </span>
-            <span>GitHub Profile</span>
-          </a>
-
-          <!-- LinkedIn Link -->
-          <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="contact-btn">
-            <span class="contact-icon text-accent">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </span>
-            <span>LinkedIn Profile</span>
-          </a>
-
-          <!-- Email Button -->
-          <a href="mailto:swanandkadam8061@gmail.com" class="contact-btn">
-            <span class="contact-icon text-accent">✉️</span>
-            <span>Send Email</span>
-          </a>
-
-          <!-- Copy Email Button -->
-          <button class="contact-btn copy-email-btn" id="copyEmailBtn" data-email="swanandkadam8061@gmail.com" type="button">
-            <span class="contact-icon" id="copyEmailIcon">📋</span>
-            <span id="copyEmailText">Copy Email Address</span>
-          </button>
-        </div>
-
-        <div class="contact-meta-note">
-          <span>Based in India · Responses usually within 24 hours</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
@@ -1035,74 +862,15 @@
         <span class="footer-dot">•</span>
         <a href="#hero">Back to Top ↑</a>
       </div>
-      <p class="footer-copy">© 2025 Swanand Kadam. Minimalist, modern, and purposeful.</p>
+
+
+      <p class="footer-copy">© 2026 Swanand Kadam</p>
     </div>
   </footer>
 
-  <!-- Compact section guides -->
-  <nav class="guide-dock" aria-label="Portfolio section guides">
-    <span class="guide-dock-label">MEET YOUR GUIDES</span>
-    <a class="guide-link" href="#about" aria-label="Ari, your introduction guide — go to About" data-guide-message="Hi, I’m Ari. Let’s start with Swanand’s story.">
-      <span class="guide-avatar" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
-      <span class="guide-copy"><strong>Ari</strong><small>Introduction</small></span>
-      <span class="guide-arrow" aria-hidden="true">↗</span>
-    </a>
-    <a class="guide-link" href="#projects" aria-label="Noah, your project guide — go to Projects" data-guide-message="Noah here. Want to see what’s been built?">
-      <span class="guide-avatar guide-avatar-light" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
-      <span class="guide-copy"><strong>Noah</strong><small>Selected work</small></span>
-      <span class="guide-arrow" aria-hidden="true">↗</span>
-    </a>
-    <a class="guide-link" href="#contact" aria-label="Mika, your contact guide — go to Contact" data-guide-message="I’m Mika. Let’s make an introduction.">
-      <span class="guide-avatar guide-avatar-red" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
-      <span class="guide-copy"><strong>Mika</strong><small>Say hello</small></span>
-      <span class="guide-arrow" aria-hidden="true">↗</span>
-    </a>
-    <a class="guide-link" href="#skills" aria-label="Ravi, your skills guide — go to Skills" data-guide-message="Ravi here. Let’s explore the tools Swanand is learning.">
-      <span class="guide-avatar guide-avatar-blue" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
-      <span class="guide-copy"><strong>Ravi</strong><small>Skills</small></span>
-      <span class="guide-arrow" aria-hidden="true">↗</span>
-    </a>
-    <a class="guide-link" href="#journey" aria-label="Zara, your journey guide — go to Journey" data-guide-message="I’m Zara. Want to see how the journey began?">
-      <span class="guide-avatar guide-avatar-wine" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
-      <span class="guide-copy"><strong>Zara</strong><small>Journey</small></span>
-      <span class="guide-arrow" aria-hidden="true">↗</span>
-    </a>
-    <a class="guide-link" href="#beyond" aria-label="Leo, your interests guide — go to Beyond the Code" data-guide-message="Leo here. Let’s take a look beyond the code.">
-      <span class="guide-avatar guide-avatar-silver" aria-hidden="true"><span class="guide-arm guide-arm-left"></span><span class="guide-arm guide-arm-right"></span><span class="guide-head"></span><span class="guide-body"></span><span class="guide-tie"></span></span>
-      <span class="guide-copy"><strong>Leo</strong><small>Interests</small></span>
-      <span class="guide-arrow" aria-hidden="true">↗</span>
-    </a>
-  </nav>
-
-  <!-- Conversational 3D portfolio guide -->
-  <aside class="guide-assistant is-intro" id="guideAssistant" aria-label="Portfolio guide" aria-hidden="true">
-    <div class="guide-assistant-card">
-      <header class="guide-assistant-head" id="guideAssistantHandle">
-        <span class="guide-live-dot" aria-hidden="true"></span>
-        <div class="guide-assistant-title"><strong>Your portfolio guide</strong><small>Here to help you explore</small></div>
-        <button class="guide-control" id="guideMinimize" type="button" aria-label="Minimize guide" title="Minimize">−</button>
-        <button class="guide-control guide-close" id="guideDismiss" type="button" aria-label="Dismiss guide" title="Dismiss">×</button>
-      </header>
-      <div class="guide-assistant-content" id="guideAssistantContent">
-        <div class="guide-stage" id="guideStage" aria-label="Interactive 3D guide character. Drag to rotate." role="img" tabindex="0">
-          <canvas id="guideCanvas" aria-hidden="true"></canvas>
-          <span class="guide-stage-hint">DRAG TO LOOK AROUND</span>
-        </div>
-        <div class="guide-conversation" aria-live="polite" aria-atomic="true">
-          <span class="guide-speaker" id="guideSpeaker">ARI · YOUR GUIDE</span>
-          <p id="guideMessage">Hey! I’m Ari. Welcome to Swanand’s portfolio. Want me to show you around?</p>
-        </div>
-        <div class="guide-choices" id="guideChoices">
-          <button type="button" data-guide-action="projects">Show me your projects</button>
-          <button type="button" data-guide-action="about">Tell me about yourself</button>
-          <button type="button" data-guide-action="skills">Explore your skills</button>
-          <button type="button" data-guide-action="explore">Let’s explore!</button>
-        </div>
-        <a class="guide-destination" id="guideDestination" href="#projects" hidden>Take me there <span aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-    <button class="guide-reopen" id="guideReopen" type="button" aria-label="Open portfolio guide" title="Open guide"><span aria-hidden="true">✦</span><i></i></button>
-  </aside>
+  <details class="guide-picker" hidden>
+    <summary>Guides</summary>
+  </details>
 
   <!-- Toast Notification Container -->
   <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive" aria-hidden="true">
@@ -1120,5 +888,6 @@
   <script src="js/main.js"></script>
   <script src="js/character3d.js"></script>
   <script src="js/guide-assistant.js"></script>
+  <script src="js/guide-dolls.js"></script>
 </body>
 </html>
