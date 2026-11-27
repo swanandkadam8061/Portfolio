@@ -22,6 +22,8 @@
   let animationFrame = 0;
   let inView = true;
   let monitorMesh = null;
+  let locker = null;
+  const drift = { x: 0, y: 0 };
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const appleMark = document.querySelector('.monitor-apple-mark');
   let targetRotation = { x: 0, y: 0 };
@@ -187,9 +189,9 @@
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePositions[i] = (Math.random() - 0.5) * 14;
-      particlePositions[i + 1] = 8.5 + Math.random() * 8;
-      particlePositions[i + 2] = -2.5 + (Math.random() - 0.5) * 6;
+      particlePositions[i] = (Math.random() - 0.5) * 8;
+      particlePositions[i + 1] = 9.2 + Math.random() * 5.6;
+      particlePositions[i + 2] = -1.2 + Math.random() * 3;
     }
     particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
@@ -356,7 +358,7 @@
     innerCube.rotation.set(0.78, 0.78, 0.78);
     kineticSculpture.add(innerCube);
 
-    kineticSculpture.position.set(3.25, 14.1, -1.8);
+    kineticSculpture.position.set(0.05, 15.5, -0.7);
     kineticSculpture.scale.setScalar(0.62);
     fashionGroup.add(kineticSculpture);
 
@@ -391,8 +393,11 @@
         antialias: true,
         powerPreference: 'high-performance',
       });
+      const roomy = window.matchMedia('(min-width: 700px)').matches;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = roomy;            // soft shadows on larger screens only
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.18;
       renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -453,6 +458,13 @@
     createGamingBattlestation(scene);
     createFashionElements(scene);
 
+    // The locker shell, door, shelf gear and stickers (js/locker.js)
+    if (window.PortfolioLocker) {
+      locker = window.PortfolioLocker.build(scene, renderer);
+      updateCameraPosition();
+      setupLockerInteraction();
+    }
+
     // 6. Load Model (Supports Base64 offline memory load + network fallback)
     loadModel();
 
@@ -478,14 +490,71 @@
 
   function updateCameraPosition() {
     if (!camera) return;
-    // keep at least 7.8 scene units visible across, whatever the stage shape
-    const distance = 20.8;
-    const forWidth = 2 * Math.atan(7.8 / (2 * distance * camera.aspect)) * 180 / Math.PI;
-    camera.fov = Math.max(21, forWidth);
-    camera.position.set(0, 15.7, 22.4);
-    camera.lookAt(0, 11.55, 2.2);
+    const view = locker ? locker.frame(camera.aspect) : { centre: 0, width: 7.8, height: 8.5 };
+    const distance = 22.4;
+    const degrees = (span) => 2 * Math.atan(span / (2 * distance)) * 180 / Math.PI;
+    camera.fov = Math.max(degrees(view.height), degrees(view.width / camera.aspect));
+    // a gentle parallax: the viewpoint leans with the pointer
+    camera.position.set(view.centre * 0.55 + drift.x * 0.85, 14.9 + drift.y * 0.4, 25.2);
+    camera.lookAt(view.centre, 11.72, 2.6);
     camera.updateProjectionMatrix();
     camera.updateMatrixWorld();
+  }
+
+  // Tap or click an object in the locker to open the part of the page it stands for
+  function setupLockerInteraction() {
+    const tip = document.getElementById('lockerTip');
+    let down = null;
+
+    function find(event) {
+      const box = container.getBoundingClientRect();
+      const x = (event.clientX - box.left) / box.width * 2 - 1;
+      const y = -((event.clientY - box.top) / box.height) * 2 + 1;
+      let found = locker.pick(x, y, camera);
+      if (!found && monitorMesh) {
+        const ray = new THREE.Raycaster();
+        ray.setFromCamera(new THREE.Vector2(x, y), camera);
+        if (ray.intersectObject(monitorMesh, true).length) found = monitorMesh;
+      }
+      return { found, box };
+    }
+    function show(event) {
+      const { found, box } = find(event);
+      locker.hover(found === monitorMesh ? null : found);
+      container.style.cursor = found ? 'pointer' : 'grab';
+      if (tip) {
+        tip.classList.toggle('show', Boolean(found));
+        if (found) {
+          tip.textContent = found.userData.label;
+          const half = tip.offsetWidth / 2;
+          tip.style.left = `${container.offsetLeft + Math.min(Math.max(event.clientX - box.left, half), box.width - half)}px`;
+          tip.style.top = `${container.offsetTop + event.clientY - box.top}px`;
+        }
+      }
+      if (reduceMotion) { locker.update(1); renderer.render(scene, camera); }
+    }
+
+    container.addEventListener('pointermove', (e) => { if (e.pointerType !== 'touch') show(e); }, { passive: true });
+    container.addEventListener('pointerleave', () => { locker.hover(null); if (tip) tip.classList.remove('show'); });
+    container.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY }; });
+    container.addEventListener('click', (e) => {
+      if (down && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 10) return;
+      const { found } = find(e);
+      if (!found) return;
+      if (tip) tip.classList.remove('show');
+      document.dispatchEvent(new CustomEvent('portfolio:open', { detail: { id: found.userData.target } }));
+    });
+
+    const lampButton = document.getElementById('lockerLampBtn');
+    if (lampButton) {
+      lampButton.hidden = false;
+      lampButton.addEventListener('click', () => {
+        locker.setLamp(!locker.lampOn);
+        lampButton.setAttribute('aria-pressed', String(locker.lampOn));
+        lampButton.querySelector('span').textContent = locker.lampOn ? 'Locker light on' : 'Locker light off';
+        renderer.render(scene, camera);
+      });
+    }
   }
 
   // Keep the lid mark pinned to the monitor at every size
@@ -538,6 +607,12 @@
     }
 
     monitorMesh = monitorLid || null;
+
+    // The desk is trimmed to sit inside the locker
+    ['Plane002', 'Plane003'].forEach((name) => {
+      const part = characterMesh.getObjectByName(name);
+      if (part) part.scale.x *= 0.835;
+    });
 
     // Dark desk and chair so the face is the brightest thing on the stage
     [['Plane002', 0x151518], ['Plane003', 0x101012], ['Cube002', 0x131315], ['Plane', 0x1a1a1d]].forEach(([name, color]) => {
@@ -634,11 +709,17 @@
     scene.add(characterMesh);
     if (mixer) mixer.update(0.4);
     placeAppleMark();
-    if (reduceMotion) renderer.render(scene, camera);
+    // The monitor on the desk opens the projects
+    if (locker && monitorMesh) {
+      monitorMesh.userData = { label: 'Laptop: featured projects', target: 'projects' };
+    }
+    container.classList.add('model-live');
+    if (locker) locker.open();
+    renderer.render(scene, camera);
 
     // Hide fallback avatar
     if (fallbackAvatar) fallbackAvatar.style.display = 'none';
-    setStatus('Interactive 3D workspace');
+    setStatus(window.matchMedia('(pointer: coarse)').matches ? 'Tap an object to explore' : 'Click an object to explore');
     document.dispatchEvent(new Event('portfolio:model-ready'));
   }
 
@@ -767,6 +848,16 @@
     const elapsed = clock ? clock.getElapsedTime() : 0;
 
     if (mixer && !reduceMotion) mixer.update(delta);
+    if (locker) {
+      locker.update(delta);
+      if (!reduceMotion) {
+        const lean = 1 - Math.exp(-delta * 2.6);
+        drift.x += (mousePosition.x - drift.x) * lean;
+        drift.y += (mousePosition.y - drift.y) * lean;
+        updateCameraPosition();
+        placeAppleMark();
+      }
+    }
     if (headBone && characterMesh && !reduceMotion) {
       targetRotation.y = mousePosition.x * Math.PI * 0.2;
       targetRotation.x = -mousePosition.y * Math.PI * 0.12;
@@ -786,8 +877,8 @@
       const positions = cyberParticles.geometry.attributes.position.array;
       for (let i = 1; i < positions.length; i += 3) {
         positions[i] += 0.007;
-        if (positions[i] > 16.5) {
-          positions[i] = 7.5;
+        if (positions[i] > 14.8) {
+          positions[i] = 9.2;
         }
       }
       cyberParticles.geometry.attributes.position.needsUpdate = true;
@@ -802,6 +893,12 @@
     if (renderer && scene && camera) {
       renderer.render(scene, camera);
     }
+  }
+
+  if (reduceMotion) {
+    window.setInterval(() => {
+      if (locker && locker.dirty && renderer) { locker.dirty = false; renderer.render(scene, camera); }
+    }, 600);
   }
 
   document.addEventListener('visibilitychange', () => {

@@ -15,6 +15,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/board.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <noscript><style>.words .w{color:inherit!important}.portfolio-loader,.project-filters,.nav-toggle{display:none!important}body.portfolio-loading{overflow:auto}.reveal,.reveal-stagger > *{opacity:1;transform:none}</style></noscript>
 </head>
@@ -125,6 +126,7 @@
         <span>Computer science · India</span>
       </div>
 
+      <p class="hero-hello">Hello, I'm</p>
       <h1 class="hero-name">
         <span class="name-line-1">Swanand</span> <span class="name-line-2">Kadam<span class="text-accent">.</span></span>
       </h1>
@@ -163,19 +165,10 @@
     <!-- Right Column: 3D Character Battlestation & Fashion Scene -->
     <div class="hero-visual">
       <div class="hero-3d-stage">
-        <!-- Futuristic Gaming HUD Corner Brackets -->
-        <div class="hud-frame" aria-hidden="true">
-          <span class="hud-bracket tl"></span>
-          <span class="hud-bracket tr"></span>
-          <span class="hud-bracket bl"></span>
-          <span class="hud-bracket br"></span>
-        </div>
-
-        <!-- Soft Dark-Red Circular Backdrop -->
-        <div class="hero-red-backdrop" aria-hidden="true"></div>
-
         <!-- 3D WebGL Canvas Container -->
-        <div id="characterCanvasContainer" title="Interactive 3D Character (Move cursor to direct gaze)"></div>
+        <div id="characterCanvasContainer" title="3D locker with my desk character. Move the pointer to guide the gaze; select an object to open its section."></div>
+        <span class="locker-tip" id="lockerTip" aria-hidden="true"></span>
+        <button type="button" class="locker-lamp" id="lockerLampBtn" aria-pressed="true" hidden><i aria-hidden="true"></i><span>Locker light on</span></button>
         <div class="monitor-apple-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" role="presentation" focusable="false">
             <defs>
@@ -193,6 +186,16 @@
 
         <!-- Model Status Badge -->
         <span class="model-status-tag" id="modelStatusTag"><span class="status-indicator"></span>Interactive 3D workspace</span>
+      </div>
+      <div class="locker-bar">
+        <p class="locker-bar-title">In my locker</p>
+        <ul class="locker-chips">
+          <li><a href="#projects" data-open="projects">Laptop <span>projects</span></a></li>
+          <li><a href="#skills" data-open="skills">Door stickers <span>skills</span></a></li>
+          <li><a href="#journey" data-open="journey">Books <span>journey</span></a></li>
+          <li><a href="#about" data-open="about">Notes <span>about</span></a></li>
+          <li><a href="#beyond" data-open="beyond">Gear <span>interests</span></a></li>
+        </ul>
       </div>
     </div>
 
@@ -230,73 +233,98 @@
 
   <!-- ===================== ABOUT SECTION ===================== -->
   <section class="section about-section" id="about">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>who's behind the screen</p>
       <h2 class="section-title">About <em>me</em></h2>
     </div>
-    <div class="about-card glass-card about-profile reveal">
-      <div class="about-text">
-        <p>Hey! I'm a student who enjoys exploring technology, learning new things, and figuring out how stuff works. I'm interested in software development, Artificial Intelligence, and web development. I like trying out new tools, experimenting with ideas, and building things that help me learn something along the way. I'm still growing my skills, but I enjoy every part of the process, whether it's solving a coding problem or working on something completely new.</p>
-        <p>Apart from tech, I'm into sports, fashion, gaming, anime, movies, and series. I believe there's always something new to learn, something different to explore, and an idea worth bringing to life.</p>
-              </div>
-      <p class="about-statement words" data-words>Learning as I go. Creating as I learn.</p>
-      <div class="about-more">
-        <a class="evidence-link" href="#journey">My technical journey ↗</a>
-        <a class="evidence-link" href="#beyond">Outside of coding ↗</a>
+    <div class="about-board">
+      <figure class="id-badge" data-drop>
+        <span class="lanyard" aria-hidden="true"></span>
+        <div class="id-card">
+          <img src="assets/avatar.webp" alt="My 3D desk character" width="480" height="480" loading="lazy">
+          <figcaption>
+            <strong>Swanand Kadam</strong>
+            <span>B.Tech student &amp; aspiring software developer</span>
+            <span class="id-meta">Computer science · India</span>
+          </figcaption>
+          <span class="id-barcode" aria-hidden="true"></span>
+        </div>
+      </figure>
+      <div class="about-card about-profile paper" data-drop>
+        <span class="tape" aria-hidden="true"></span>
+        <div class="about-text">
+          <p>Hey! I'm a student who enjoys exploring technology, learning new things, and figuring out how stuff works. I'm interested in software development, Artificial Intelligence, and web development. I like trying out new tools, experimenting with ideas, and building things that help me learn something along the way. I'm still growing my skills, but I enjoy every part of the process, whether it's solving a coding problem or working on something completely new.</p>
+          <p>Apart from tech, I'm into sports, fashion, gaming, anime, movies, and series. I believe there's always something new to learn, something different to explore, and an idea worth bringing to life.</p>
+        </div>
+        <div class="about-more">
+          <a class="evidence-link" href="#journey">My technical journey ↗</a>
+          <a class="evidence-link" href="#beyond">Outside of coding ↗</a>
+        </div>
       </div>
+      <ul class="interest-stickers" aria-label="Things I'm into outside code">
+        <li><a href="#interest-sports" data-open="interest-sports">Sports</a></li>
+        <li><a href="#interest-fashion" data-open="interest-fashion">Fashion</a></li>
+        <li><a href="#interest-gaming" data-open="interest-gaming">Gaming</a></li>
+        <li><a href="#interest-anime" data-open="interest-anime">Anime</a></li>
+        <li><a href="#interest-movies" data-open="interest-movies">Movies &amp; series</a></li>
+      </ul>
     </div>
+    <p class="about-statement words" data-words>Learning as I go. Creating as I learn.</p>
   </section>
 
   <section class="section skills-section" id="skills">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>peel one to see the code</p>
       <h2 class="section-title">Technical <em>skills</em></h2>
       <p class="section-subtitle">Select a skill to see where I used it in code.</p>
     </div>
-    <div class="skills-grid reveal reveal-stagger">
-      <article class="skill-category glass-card">
+    <div class="skills-grid">
+      <article class="skill-category" data-drop>
         <h3 class="skill-cat-title">Languages</h3>
         <p class="skill-cat-note">Implementation examples</p>
         <div class="skill-tags">
-          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81/files"><span class="skill-name">Python</span><span class="skill-src">AI-For-Beginners, PR #81 ↗</span></a>
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/studio.js"><span class="skill-name">JavaScript</span><span class="skill-src">Brain-Trust, studio.js ↗</span></a>
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html"><span class="skill-name">HTML &amp; CSS</span><span class="skill-src">Perplexity-Explorer, index.html ↗</span></a>
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81/files"><span class="skill-mark" aria-hidden="true">Py</span><span class="skill-name">Python</span><span class="skill-src">AI-For-Beginners, PR #81 ↗</span></a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/studio.js"><span class="skill-mark" aria-hidden="true">JS</span><span class="skill-name">JavaScript</span><span class="skill-src">Brain-Trust, studio.js ↗</span></a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html"><span class="skill-mark" aria-hidden="true">&lt;/&gt;</span><span class="skill-name">HTML &amp; CSS</span><span class="skill-src">Perplexity-Explorer, index.html ↗</span></a>
         </div>
       </article>
-      <article class="skill-category glass-card">
+      <article class="skill-category" data-drop>
         <h3 class="skill-cat-title">Models &amp; evaluation</h3>
         <p class="skill-cat-note">Working with speech and text</p>
         <div class="skill-tags">
-          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/16/files"><span class="skill-name">Whisper</span><span class="skill-src">voicekhata-hackday, PR #16 ↗</span></a>
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html"><span class="skill-name">Transformers.js</span><span class="skill-src">Perplexity-Explorer, index.html ↗</span></a>
-          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85/files"><span class="skill-name">Classification metrics</span><span class="skill-src">AI-For-Beginners, PR #85 ↗</span></a>
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/16/files"><span class="skill-mark" aria-hidden="true">Wh</span><span class="skill-name">Whisper</span><span class="skill-src">voicekhata-hackday, PR #16 ↗</span></a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html"><span class="skill-mark" aria-hidden="true">Tf</span><span class="skill-name">Transformers.js</span><span class="skill-src">Perplexity-Explorer, index.html ↗</span></a>
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85/files"><span class="skill-mark" aria-hidden="true">P/R</span><span class="skill-name">Classification metrics</span><span class="skill-src">AI-For-Beginners, PR #85 ↗</span></a>
         </div>
       </article>
-      <article class="skill-category glass-card">
+      <article class="skill-category" data-drop>
         <h3 class="skill-cat-title">Application engineering</h3>
         <p class="skill-cat-note">Serving, storing and testing data</p>
         <div class="skill-tags">
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/server.mjs"><span class="skill-name">Node.js</span><span class="skill-src">Brain-Trust, server.mjs ↗</span></a>
-          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files"><span class="skill-name">FastAPI</span><span class="skill-src">voicekhata-hackday, PR #9 ↗</span></a>
-          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files"><span class="skill-name">SQLite integration</span><span class="skill-src">voicekhata-hackday, PR #9 ↗</span></a>
-          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83/files"><span class="skill-name">Python unittest</span><span class="skill-src">AI-For-Beginners, PR #83 ↗</span></a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/server.mjs"><span class="skill-mark" aria-hidden="true">{ }</span><span class="skill-name">Node.js</span><span class="skill-src">Brain-Trust, server.mjs ↗</span></a>
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files"><span class="skill-mark" aria-hidden="true">API</span><span class="skill-name">FastAPI</span><span class="skill-src">voicekhata-hackday, PR #9 ↗</span></a>
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files"><span class="skill-mark" aria-hidden="true">SQL</span><span class="skill-name">SQLite integration</span><span class="skill-src">voicekhata-hackday, PR #9 ↗</span></a>
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83/files"><span class="skill-mark" aria-hidden="true">✓</span><span class="skill-name">Python unittest</span><span class="skill-src">AI-For-Beginners, PR #83 ↗</span></a>
         </div>
       </article>
     </div>
   </section>
 
   <section class="section projects-section" id="projects">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>files from the locker</p>
       <h2 class="section-title">Featured <em>projects</em></h2>
       <p class="section-subtitle">A hackday collaboration and three projects from my own repositories.</p>
     </div>
 
-    <div class="project-filters reveal" id="projectFilters" role="group" aria-label="Filter featured projects">
+    <div class="project-filters" id="projectFilters" role="group" aria-label="Filter featured projects">
       <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All projects</button>
       <button type="button" class="filter-btn" data-filter="team" aria-pressed="false">Team project</button>
       <button type="button" class="filter-btn" data-filter="personal" aria-pressed="false">Personal projects</button>
     </div>
 
     <!-- VoiceKhata team project -->
-    <div class="voicekhata-spotlight glass-card reveal" data-category="team">
+    <div class="voicekhata-spotlight" data-category="team" data-drop>
       <div class="spotlight-badge-row">
         <span class="spotlight-tag">
           Team project · Hackday
@@ -305,7 +333,7 @@
       </div>
 
       <div class="spotlight-content-grid">
-        <div class="spotlight-info">
+        <div class="spotlight-info paper">
           <div class="spotlight-title-group">
             <div>
               <h3 class="spotlight-title">VoiceKhata</h3>
@@ -372,42 +400,55 @@
               </div>
             </div>
           </div>
+          <figure class="qr-card qr-demo"><img src="assets/qr/voicekhata.svg" alt="QR code for the VoiceKhata browser demo" width="164" height="164" loading="lazy"><figcaption>Scan for the demo</figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="projects-grid" id="projectsGrid">
-      <article class="project-card glass-card" data-category="personal">
+      <article class="project-card paper" data-category="personal" data-drop>
         <p class="project-topic">Comparing language models</p>
         <h3 class="project-title">Brain Trust</h3>
         <p class="project-desc">Switching between chat tools makes it hard to compare answers to the same question. Brain Trust sends a shared conversation to models on Groq or OpenRouter and displays their responses together.</p>
         <h4 class="project-role">My work</h4>
         <p class="project-desc">I built the browser workspace and Node.js gateway, then added a way to paste or upload a personal key that lasts for the current tab.</p>
         <div class="project-tech"><span>Node.js</span><span>JavaScript</span><span>Groq</span><span>OpenRouter</span></div>
+        <details class="qr-drawer">
+          <summary>QR code</summary>
+          <figure class="qr-card"><img src="assets/qr/brain-trust.svg" alt="QR code for the Brain Trust repository" width="164" height="164" loading="lazy"><figcaption>Scan for the repository</figcaption></figure>
+        </details>
         <div class="project-links">
           <a class="project-link" href="https://github.com/swanandkadam8061/Brain-Trust">Repository ↗</a>
           <a class="evidence-link" href="https://github.com/swanandkadam8061/Brain-Trust/commit/465bda7bdf383af3ff38f7dc8a44858917b3e746">Workspace commit ↗</a> <a class="evidence-link" href="https://github.com/swanandkadam8061/Brain-Trust/commit/642067585b4ecf2a159b64462c5b2687cc3fb05b">Key handling ↗</a>
         </div>
       </article>
-      <article class="project-card glass-card" data-category="personal">
+      <article class="project-card paper" data-category="personal" data-drop>
         <p class="project-topic">Understanding model predictions</p>
         <h3 class="project-title">Perplexity Explorer</h3>
         <p class="project-desc">A sentence can have a high perplexity because of a single unexpected word. This single-page tool runs DistilGPT-2 in the browser and shows how each token contributes to the score.</p>
         <h4 class="project-role">My work</h4>
         <p class="project-desc">I implemented token scoring, the top eight next-token predictions and a hand-editable simulator for trying probabilities before downloading the model.</p>
         <div class="project-tech"><span>HTML &amp; CSS</span><span>JavaScript</span><span>Transformers.js</span><span>DistilGPT-2</span></div>
+        <details class="qr-drawer">
+          <summary>QR code</summary>
+          <figure class="qr-card"><img src="assets/qr/perplexity.svg" alt="QR code for the Perplexity Explorer repository" width="164" height="164" loading="lazy"><figcaption>Scan for the repository</figcaption></figure>
+        </details>
         <div class="project-links">
           <a class="project-link" href="https://github.com/swanandkadam8061/Perplexity-Explorer">Repository ↗</a>
           <a class="evidence-link" href="https://github.com/swanandkadam8061/Perplexity-Explorer/commit/4028d6f9035a902dcbb8454d11362bf4c67e4b75">Implementation commit ↗</a>
         </div>
       </article>
-      <article class="project-card glass-card" data-category="personal">
+      <article class="project-card paper" data-category="personal" data-drop>
         <p class="project-topic">Presenting engineering work</p>
         <h3 class="project-title">Developer Portfolio</h3>
         <p class="project-desc">This site brings my team projects, code and course submissions into one place. Static HTML keeps the project evidence readable, while JavaScript drives the filters and Three.js renders the interactive workspace.</p>
         <h4 class="project-role">My work</h4>
         <p class="project-desc">I connected the project pages, section navigation and character scene in a responsive, single-page portfolio.</p>
         <div class="project-tech"><span>HTML &amp; CSS</span><span>JavaScript</span><span>Three.js</span></div>
+        <details class="qr-drawer">
+          <summary>QR code</summary>
+          <figure class="qr-card"><img src="assets/qr/portfolio.svg" alt="QR code for the Developer Portfolio repository" width="164" height="164" loading="lazy"><figcaption>Scan for the repository</figcaption></figure>
+        </details>
         <div class="project-links">
           <a class="project-link" href="https://github.com/swanandkadam8061/Portfolio">Repository ↗</a>
           <a class="evidence-link" href="https://github.com/swanandkadam8061/Portfolio/blob/main/js/character3d.js">Scene code ↗</a>
@@ -417,11 +458,12 @@
   </section>
 
   <section class="section" id="contributions">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>from my lab notebook</p>
       <h2 class="section-title">S&amp;AI <em>open-source contributions</em></h2>
       <p class="section-subtitle">I submitted ten Python labs to <a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners">S-AI-Projects/AI-For-Beginners</a> as <strong>swanandkadam8061</strong>. Each pull request includes a runnable example, tests and lesson notes.</p>
     </div>
-    <ol class="lab-list">
+    <ol class="lab-list paper">
       <li class="lab-entry">
         <div class="lab-meta"><span>R38-T051</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81">PR #81 ↗</a></div>
         <h3>Selecting a genetic algorithm’s elite</h3>
@@ -476,17 +518,18 @@
   </section>
 
   <section class="section" id="education">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>pinned up</p>
       <h2 class="section-title">Education &amp; <em>achievements</em></h2>
     </div>
     <div class="education-grid">
-      <article class="glass-card education-card">
+      <article class="education-card paper index-card" data-drop>
         <p class="project-topic">Current studies</p>
         <h3>B.Tech in Computer Science</h3>
         <p>My coursework includes applied AI labs in Python, from ranking candidates in a genetic algorithm to evaluating a binary classifier.</p>
         <a class="evidence-link" href="#contributions">Explore my coursework ↗</a>
       </article>
-      <article class="glass-card education-card">
+      <article class="education-card sticky sticky-red" data-drop>
         <p class="project-topic"><time datetime="2026-10-25T01:42:16+05:30">25 October 2026</time> · Hackday</p>
         <h3>VoiceKhata team contribution</h3>
         <p>My frontend integration for the team’s voice ledger was merged during the hackday project. It connects the shopkeeper’s review screen to their private ledger.</p>
@@ -497,14 +540,15 @@
 
   <!-- ===================== EXPLORATION / FOCUS AREAS ===================== -->
   <section class="section what-section" id="exploration">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>on my desk right now</p>
       <h2 class="section-title">What I’m <em>exploring</em></h2>
       <p class="section-subtitle">Core technical disciplines where I experiment, write code, and build solutions.</p>
     </div>
 
-    <div class="what-grid reveal reveal-stagger">
+    <div class="what-grid">
       <!-- 1. AI & Voice Applications -->
-      <div class="what-card glass-card">
+      <div class="what-card paper" data-drop>
         <div class="what-corner"></div>
         <div class="what-card-top">
           <span class="what-num">Intelligence</span>
@@ -523,7 +567,7 @@
       </div>
 
       <!-- 2. Web Development -->
-      <div class="what-card glass-card">
+      <div class="what-card sticky-red" data-drop>
         <div class="what-corner"></div>
         <div class="what-card-top">
           <span class="what-num">Interfaces</span>
@@ -542,7 +586,7 @@
       </div>
 
       <!-- 3. Programming & Developer Tools -->
-      <div class="what-card glass-card">
+      <div class="what-card sticky-dark" data-drop>
         <div class="what-corner"></div>
         <div class="what-card-top">
           <span class="what-num">Foundations</span>
@@ -563,14 +607,15 @@
   </section>
 
   <section class="section journey-section" id="journey">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>follow the red thread</p>
       <h2 class="section-title">My technical <em>journey</em></h2>
       <p class="section-subtitle">
         I enjoy working across different areas of technology, from writing Python programs to building web interfaces and experimenting with AI-powered applications.
       </p>
     </div>
 
-    <div class="timeline-container reveal">
+    <div class="timeline-container">
       <div class="timeline-track" id="timelineTrack">
         <div class="timeline-glow-marker" id="timelineMarker"></div>
       </div>
@@ -580,7 +625,7 @@
         <div class="timeline-node">
           <span class="node-dot"></span>
         </div>
-        <div class="timeline-content glass-card">
+        <div class="timeline-content paper" data-drop>
           <div class="timeline-meta">
             <span class="timeline-step">Milestone 1</span>
             <span class="timeline-time">Foundations</span>
@@ -603,7 +648,7 @@
         <div class="timeline-node">
           <span class="node-dot"></span>
         </div>
-        <div class="timeline-content glass-card">
+        <div class="timeline-content paper" data-drop>
           <div class="timeline-meta">
             <span class="timeline-step">Milestone 2</span>
             <span class="timeline-time">Interface Craft</span>
@@ -626,7 +671,7 @@
         <div class="timeline-node">
           <span class="node-dot"></span>
         </div>
-        <div class="timeline-content glass-card">
+        <div class="timeline-content paper" data-drop>
           <div class="timeline-meta">
             <span class="timeline-step">Milestone 3</span>
             <span class="timeline-time">AI &amp; Hackathon</span>
@@ -649,7 +694,7 @@
         <div class="timeline-node">
           <span class="node-dot"></span>
         </div>
-        <div class="timeline-content glass-card">
+        <div class="timeline-content paper" data-drop>
           <div class="timeline-meta">
             <span class="timeline-step">Milestone 4</span>
             <span class="timeline-time">Current Horizon</span>
@@ -671,16 +716,18 @@
 
   <!-- ===================== BEYOND THE CODE SECTION ===================== -->
   <section class="section beyond-section" id="beyond">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>more stuff in my locker</p>
       <h2 class="section-title">Beyond the <em>code</em></h2>
       <p class="section-subtitle">
         Technology is just one part of who I am. Outside of coding, I enjoy exploring different interests and creative experiences that inspire my perspectives.
       </p>
     </div>
 
-    <div class="beyond-grid reveal reveal-stagger">
+    <div class="beyond-grid">
       <!-- 1. Fitness & Weight Training -->
-      <div class="beyond-card glass-card" data-tilt>
+      <div class="beyond-card paper" id="interest-strength" data-tilt data-drop>
+        <div class="polaroid-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 32h36M14 22v20M8 26v12M50 22v20M56 26v12"/></svg></div>
         <div class="beyond-card-top">
           <span class="beyond-tag tag-crimson">Discipline</span>
         </div>
@@ -697,7 +744,8 @@
       </div>
 
       <!-- 2. Gaming & Battlestation -->
-      <div class="beyond-card glass-card" data-tilt>
+      <div class="beyond-card paper" id="interest-gaming" data-tilt data-drop>
+        <div class="polaroid-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22h28c9 0 14 24 6 24-5 0-7-8-12-8H24c-5 0-7 8-12 8-8 0-3-24 6-24ZM22 26v10M17 31h10"/><circle cx="42" cy="28" r="2"/><circle cx="47" cy="33" r="2"/></svg></div>
         <div class="beyond-card-top">
           <span class="beyond-tag tag-cyber">Battlestation</span>
         </div>
@@ -714,7 +762,8 @@
       </div>
 
       <!-- 3. Anime & Shonen Drive -->
-      <div class="beyond-card glass-card" data-tilt>
+      <div class="beyond-card paper" id="interest-anime" data-tilt data-drop>
+        <div class="polaroid-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="11"/><path d="M32 6v10M32 48v10M6 32h10M48 32h10M14 14l7 7M43 43l7 7M50 14l-7 7M21 43l-7 7"/></svg></div>
         <div class="beyond-card-top">
           <span class="beyond-tag tag-crimson">Solo Leveling</span>
         </div>
@@ -731,7 +780,8 @@
       </div>
 
       <!-- 4. Fashion & Streetwear -->
-      <div class="beyond-card glass-card" data-tilt>
+      <div class="beyond-card paper" id="interest-fashion" data-tilt data-drop>
+        <div class="polaroid-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M32 24v-3c5-1 7-5 5-8s-8-3-10 2M32 24 8 42c-3 3-1 7 3 7h42c4 0 6-4 3-7L32 24Z"/></svg></div>
         <div class="beyond-card-top">
           <span class="beyond-tag">Aesthetic</span>
         </div>
@@ -748,7 +798,8 @@
       </div>
 
       <!-- 5. Cinematic Art & Directing -->
-      <div class="beyond-card glass-card" data-tilt>
+      <div class="beyond-card paper" id="interest-movies" data-tilt data-drop>
+        <div class="polaroid-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 26h44v26H10zM10 26 8 17l43-8 2 9-43 8ZM19 15l7 7M31 13l7 7M43 11l7 7"/></svg></div>
         <div class="beyond-card-top">
           <span class="beyond-tag">Visionary</span>
         </div>
@@ -765,7 +816,8 @@
       </div>
 
       <!-- 6. Sports & Teamwork -->
-      <div class="beyond-card glass-card" data-tilt>
+      <div class="beyond-card paper" id="interest-sports" data-tilt data-drop>
+        <div class="polaroid-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m38 8 8 8-4 4 3 3-25 28c-3 3-10-4-7-7l28-25 3 3M42 12l9-6 5 5-6 9"/><circle cx="49" cy="47" r="7"/><path d="M45 42c4 3 5 7 4 11"/></svg></div>
         <div class="beyond-card-top">
           <span class="beyond-tag">Active</span>
         </div>
@@ -785,13 +837,15 @@
 
   <!-- ===================== CONTACT SECTION ===================== -->
   <section class="section contact-section" id="contact">
-    <div class="section-header reveal">
+    <div class="section-header">
+      <p class="scribble" data-float>leave me a note</p>
       <h2 class="section-title">Connect with <em>me</em></h2>
       <p class="section-subtitle">For software development opportunities, hackathons and project collaborations.</p>
     </div>
 
-    <div class="contact-container reveal">
-      <div class="contact-intro glass-card">
+    <div class="contact-container">
+      <div class="contact-intro paper notebook" data-drop>
+        <p class="notebook-title" aria-hidden="true">Contact<span>*</span></p>
         <div class="contact-badge">
           <span class="pulse-dot"></span>
           <span>Open to Discussions &amp; Collaborations</span>
@@ -835,6 +889,11 @@
           <span>Based in India</span>
         </div>
       </div>
+      <div class="scan-board" data-drop>
+        <p class="scribble" aria-hidden="true">scan it</p>
+        <figure class="qr-card"><img src="assets/qr/github.svg" alt="QR code for my GitHub profile" width="164" height="164" loading="lazy"><figcaption>GitHub</figcaption></figure>
+        <figure class="qr-card"><img src="assets/qr/linkedin.svg" alt="QR code for my LinkedIn profile" width="164" height="164" loading="lazy"><figcaption>LinkedIn</figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -852,7 +911,7 @@
         <span class="footer-dot">•</span>
         <a href="https://nishantekka2007-sys.github.io/voicekhata-hackday/" target="_blank" rel="noopener noreferrer">VoiceKhata</a>
         <span class="footer-dot">•</span>
-        <a href="#hero">Back to top ↑</a>
+        <a href="#hero" class="keycap">Back to top ↑</a>
       </div>
 
 
@@ -878,8 +937,10 @@
 
   <!-- Core Portfolio Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/locker.js"></script>
   <script src="js/character3d.js"></script>
   <script src="js/guide-assistant.js"></script>
   <script src="js/guide-dolls.js"></script>
+  <script src="js/board.js"></script>
 </body>
 </html>
