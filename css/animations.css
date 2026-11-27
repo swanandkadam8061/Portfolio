@@ -1,138 +1,39 @@
 /* ===================================================
-   css/animations.css — Swanand Kadam Portfolio
-   Smooth, Minimalist, 60fps & Reduced-Motion Compliant
-   Monochromatic Theme with Crimson Red Accents
+   Motion. Three layers only:
+   1. one hero entrance on load
+   2. two moments: the About statement lights up, the journey line fills
+   3. hover / press feedback
+   Content is complete without script and with reduced motion.
    =================================================== */
 
-/* ---------- Status Pulse Dot ---------- */
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  70% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-}
+@keyframes load-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-.pulse-dot::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background-color: var(--accent-red);
-  opacity: 0.45;
-  animation: pulse-ring 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+/* 1. Hero entrance. Starts when the loader lifts. The name opens up along Mona Sans' width axis. */
+@keyframes name-in {
+  from { opacity: 0; transform: translateY(28px); font-stretch: 78%; }
+  to   { opacity: 1; transform: none; font-stretch: 118%; }
 }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes stage-in { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
 
-/* ---------- Viewport Scroll Reveal ---------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+body:not(.portfolio-loading) .hero-name > span { animation: name-in 1s var(--ease-enter) backwards; }
+body:not(.portfolio-loading) .hero-name > .name-line-2 { animation-delay: .09s; }
+body:not(.portfolio-loading) .hero-badge { animation: rise .6s var(--ease-enter) backwards; }
+body:not(.portfolio-loading) :is(.hero-subtitle, .hero-desc) { animation: rise .7s .28s var(--ease-enter) backwards; }
+body:not(.portfolio-loading) :is(.hero-cta, .hero-social-row) { animation: rise .7s .38s var(--ease-enter) backwards; }
+body:not(.portfolio-loading) .hero-visual { animation: stage-in 1.1s .15s var(--ease-enter) backwards; }
+body:not(.portfolio-loading) .hero > .portrait-guides { animation: rise .7s .5s var(--ease-enter) backwards; }
+
+/* 3. Hover and press */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover, .filter-btn:hover, .contact-btn:hover, .nav-social-icon:hover, .sfx-toggle-btn:hover { transform: translateY(-1px); }
+  .portrait-card:hover, .skill-tag:hover { transform: translateY(-2px); }
 }
+.btn:active, .filter-btn:active, .contact-btn:active, .nav-social-icon:active, .sfx-toggle-btn:active, .portrait-card:active, .skill-tag:active { transform: translateY(1px) scale(.985); }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Staggered Child Reveal for Grids */
-.reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(1) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.04s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(2) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.10s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(3) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.16s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(4) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.22s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(5) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.28s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(6) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.34s;
-}
-
-/* ---------- Hero Entrance Animation ---------- */
-@keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-content {
-  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.hero-visual {
-  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
-}
-
-/* ---------- Accessibility: Prefers Reduced Motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .reveal,
-  .reveal-stagger > * {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .hero-content,
-  .hero-visual {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .custom-cursor,
-  .cursor-dot {
-    display: none !important;
-  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+  .words .w { color: var(--ink); }
+  .portrait-card:hover, .skill-tag:hover, .btn:hover { transform: none; }
 }

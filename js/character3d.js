@@ -20,6 +20,10 @@
   let isHovering = false;
   let animationsList = [];
   let animationFrame = 0;
+  let inView = true;
+  let monitorMesh = null;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const appleMark = document.querySelector('.monitor-apple-mark');
   let targetRotation = { x: 0, y: 0 };
   let mousePosition = { x: 0, y: 0 };
 
@@ -177,7 +181,6 @@
       slat.position.set(i * 0.72, 13.0, -3.8);
       wallGroup.add(slat);
     }
-    battlestationGroup.add(wallGroup);
 
     // E. Floating Cyber Dust / Embers Particle System
     const particleCount = 55;
@@ -353,7 +356,8 @@
     innerCube.rotation.set(0.78, 0.78, 0.78);
     kineticSculpture.add(innerCube);
 
-    kineticSculpture.position.set(4.4, 14.2, -1.8);
+    kineticSculpture.position.set(3.25, 14.1, -1.8);
+    kineticSculpture.scale.setScalar(0.62);
     fashionGroup.add(kineticSculpture);
 
     targetScene.add(fashionGroup);
@@ -391,7 +395,7 @@
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.18;
-      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
 
       container.appendChild(renderer.domElement);
     } catch (err) {
@@ -430,8 +434,8 @@
     redPoint.position.set(-6, 12, -4);
     scene.add(redPoint);
 
-    // Dual-tone Cyber Indigo/Violet Backlight (editorial studio contrast)
-    cyberBacklight = new THREE.PointLight(0x6366f1, 2.0, 22);
+    // Neutral white backlight: the palette is black, white and red only
+    cyberBacklight = new THREE.PointLight(0xffffff, 2.0, 22);
     cyberBacklight.position.set(4.5, 13.2, -3.5);
     scene.add(cyberBacklight);
 
@@ -456,7 +460,17 @@
     setupHeadTracking();
 
     // 8. Responsive Resize
-    window.addEventListener('resize', onWindowResize, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(onWindowResize).observe(container);
+    else window.addEventListener('resize', onWindowResize, { passive: true });
+
+    // Stop drawing while the stage is off screen
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView && !animationFrame) { clock.getDelta(); animate(); }
+        else if (!inView && animationFrame) { cancelAnimationFrame(animationFrame); animationFrame = 0; }
+      }).observe(container);
+    }
 
     // 9. Animation Loop
     animate();
@@ -464,26 +478,44 @@
 
   function updateCameraPosition() {
     if (!camera) return;
-    if (window.innerWidth < 768) {
-      camera.fov = 22;
-      camera.position.set(0, 13.1, 23.5);
-      camera.lookAt(0, 11.1, 2.2);
-    } else {
-      camera.fov = 21;
-      camera.position.set(0, 13.05, 21.8);
-      camera.lookAt(0, 11.2, 2.2);
-    }
+    // keep at least 7.8 scene units visible across, whatever the stage shape
+    const distance = 20.8;
+    const forWidth = 2 * Math.atan(7.8 / (2 * distance * camera.aspect)) * 180 / Math.PI;
+    camera.fov = Math.max(21, forWidth);
+    camera.position.set(0, 15.7, 22.4);
+    camera.lookAt(0, 11.55, 2.2);
     camera.updateProjectionMatrix();
+    camera.updateMatrixWorld();
+  }
+
+  // Keep the lid mark pinned to the monitor at every size
+  function placeAppleMark() {
+    if (!appleMark || !monitorMesh) return;
+    monitorMesh.updateWorldMatrix(true, true);
+    // the dark back panel of the lid, not the whole group (which includes the foot)
+    let panel = monitorMesh;
+    monitorMesh.traverse((part) => { if (part.isMesh && part.material.name === 'Material.028') panel = part; });
+    const box = new THREE.Box3().setFromObject(panel);
+    const centre = box.getCenter(new THREE.Vector3());
+    centre.project(camera);
+    const stage = appleMark.parentElement;
+    appleMark.style.left = `${container.offsetLeft + (centre.x + 1) / 2 * container.clientWidth}px`;
+    appleMark.style.top = `${container.offsetTop + (1 - centre.y) / 2 * container.clientHeight}px`;
+    const size = Math.max(14, Math.min(30, stage.clientHeight * 0.035));
+    appleMark.style.width = appleMark.style.height = `${size}px`;
+    appleMark.style.margin = `${-size / 2}px 0 0 ${-size / 2}px`;
+    appleMark.classList.add('placed');
   }
 
   function onModelLoaded(gltf) {
     characterMesh = gltf.scene;
 
     // 1. Proportional Monitor Resizing — Monitor made slightly smaller (0.63x) so face is the prominent focal point
-    const monitorLid = characterMesh.getObjectByName('Plane.004');
+    const monitorLid = characterMesh.getObjectByName('Plane004') || characterMesh.getObjectByName('Plane.004');
     const screenLight = characterMesh.getObjectByName('screenlight');
     const monitorStand = characterMesh.getObjectByName('Plane');
-    const monitorScale = 0.63;
+    // Small and low enough that the face stays clear above the lid
+    const monitorScale = 0.47;
 
     if (monitorLid) {
       monitorLid.scale.set(monitorScale, monitorScale, monitorScale);
@@ -504,6 +536,20 @@
     if (monitorStand) {
       monitorStand.scale.set(1.10, 1.10, 1.10);
     }
+
+    monitorMesh = monitorLid || null;
+
+    // Dark desk and chair so the face is the brightest thing on the stage
+    [['Plane002', 0x151518], ['Plane003', 0x101012], ['Cube002', 0x131315], ['Plane', 0x1a1a1d]].forEach(([name, color]) => {
+      const part = characterMesh.getObjectByName(name);
+      if (part && part.isMesh) {
+        part.material = part.material.clone();
+        part.material.color.setHex(color);
+        part.material.map = null;
+        part.material.roughness = 0.75;
+        part.material.metalness = 0.15;
+      }
+    });
 
     // 3. Materials Styling & Clean Dark Aesthetic
     characterMesh.traverse((child) => {
@@ -586,6 +632,9 @@
     }
 
     scene.add(characterMesh);
+    if (mixer) mixer.update(0.4);
+    placeAppleMark();
+    if (reduceMotion) renderer.render(scene, camera);
 
     // Hide fallback avatar
     if (fallbackAvatar) fallbackAvatar.style.display = 'none';
@@ -631,6 +680,17 @@
       } catch (e) {
         console.warn('Base64 parse exception, trying fetch:', e);
       }
+    }
+
+    // Opened straight from disk: fetch is blocked, so pull in the embedded copy on demand
+    if (window.location.protocol === 'file:' && !window.__modelDataRequested) {
+      window.__modelDataRequested = true;
+      const script = document.createElement('script');
+      script.src = 'js/character-model-data.js';
+      script.onload = loadModel;
+      script.onerror = () => loadViaFetch(loader);
+      document.body.appendChild(script);
+      return;
     }
 
     // Method B: Standard URL fetch
@@ -688,22 +748,26 @@
     if (!renderer || !camera || !container) return;
     const width = container.clientWidth;
     const height = container.clientHeight;
+    if (!width || !height) return;
     camera.aspect = width / height;
     updateCameraPosition();
     renderer.setSize(width, height);
+    placeAppleMark();
+    renderer.render(scene, camera);
   }
 
   function animate() {
-    if (document.hidden) {
+    if (document.hidden || !inView) {
       animationFrame = 0;
       return;
     }
-    animationFrame = requestAnimationFrame(animate);
+    // reduced motion: one still frame per call, no loop
+    animationFrame = reduceMotion ? 0 : requestAnimationFrame(animate);
     const delta = clock ? clock.getDelta() : 0.016;
     const elapsed = clock ? clock.getElapsedTime() : 0;
 
-    if (mixer) mixer.update(delta);
-    if (headBone && characterMesh) {
+    if (mixer && !reduceMotion) mixer.update(delta);
+    if (headBone && characterMesh && !reduceMotion) {
       targetRotation.y = mousePosition.x * Math.PI * 0.2;
       targetRotation.x = -mousePosition.y * Math.PI * 0.12;
       const gazeEase = 1 - Math.exp(-delta * 8);

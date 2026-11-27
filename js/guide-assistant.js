@@ -29,3 +29,13 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('click', (event) => {
   if (picker.open && !picker.contains(event.target)) picker.open = false;
 });
+
+// On small screens, step out of the way while reading downwards.
+let lastY = window.scrollY;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (Math.abs(y - lastY) < 6) return;
+  const atEnd = y + window.innerHeight >= document.documentElement.scrollHeight - 2;
+  picker.classList.toggle('tucked', y > lastY && !atEnd && !picker.open);
+  lastY = y;
+}, { passive: true });

@@ -30,55 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-  const guideLinks = document.querySelectorAll('.guide-link');
-  if (isFinePointer) {
-    guideLinks.forEach((link) => {
-      const avatar = link.querySelector('.guide-avatar');
-      if (!avatar) return;
-
-      link.addEventListener('pointermove', (event) => {
-        const bounds = link.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-        avatar.style.transform = `translateZ(9px) rotateX(${-y * 18}deg) rotateY(${x * 22}deg)`;
-      }, { passive: true });
-
-      link.addEventListener('pointerleave', () => {
-        avatar.style.transform = '';
-      }, { passive: true });
-    });
-  }
-
-  // ---------- 1. Interactive Ambient Glow Follower ----------
-  const ambientGlow = document.getElementById('ambientGlow');
-
-  if (ambientGlow && isFinePointer) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    }, { passive: true });
-
-    const animateGlow = () => {
-      currentX += (mouseX - currentX) * 0.07;
-      currentY += (mouseY - currentY) * 0.07;
-
-      ambientGlow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
-      requestAnimationFrame(animateGlow);
-    };
-
-    animateGlow();
-  }
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- 2. Custom Magnetic Cursor Follower ----------
   const customCursor = document.getElementById('customCursor');
   const cursorDot = document.getElementById('cursorDot');
 
-  if (customCursor && cursorDot && isFinePointer) {
+  if (customCursor && cursorDot && isFinePointer && !reduceMotion) {
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let cursorX = mouseX;
@@ -116,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hover effect on interactive elements
     const hoverTargets = document.querySelectorAll(
-      'a, button, .project-card, .what-card, .beyond-card, .skill-tag, .float-card, .filter-btn'
+      'a, button, summary'
     );
 
     hoverTargets.forEach((target) => {
@@ -165,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenu.setAttribute('aria-hidden', !isOpen);
       mobileMenu.inert = !isOpen;
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      document.querySelector('main').inert = isOpen;
+      navbar.classList.toggle('menu-open', isOpen);
     };
 
     navToggle.addEventListener('click', () => toggleMenu());
@@ -184,51 +144,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- 5. Viewport Scroll Reveal Observer ----------
-  const revealElements = document.querySelectorAll('.reveal');
+  // ---------- 5. Moment: the About statement lights up word by word ----------
+  const statement = document.querySelector('[data-words]');
+  if (statement && !reduceMotion) {
+    const words = statement.textContent.trim().split(/\s+/);
+    statement.textContent = '';
+    const spans = words.map((word, i) => {
+      const span = document.createElement('span');
+      span.className = 'w';
+      span.textContent = word;
+      statement.append(span, i < words.length - 1 ? ' ' : '');
+      return span;
+    });
+    const light = () => {
+      const top = statement.getBoundingClientRect().top;
+      const progress = (window.innerHeight * 0.92 - top) / (window.innerHeight * 0.42);
+      const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+      spans.forEach((span, i) => span.classList.toggle('lit', atEnd || progress * spans.length > i));
+    };
+    window.addEventListener('scroll', light, { passive: true });
+    window.addEventListener('resize', light, { passive: true });
+    light();
+  }
 
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0,
-        rootMargin: '0px 0px -40px 0px',
-      }
-    );
-
-    revealElements.forEach((el) => revealObserver.observe(el));
-  } else {
-    revealElements.forEach((el) => el.classList.add('visible'));
+  // ---------- VoiceKhata preview: layers follow the pointer ----------
+  const depth = document.querySelector('[data-depth]');
+  if (depth && isFinePointer && !reduceMotion) {
+    const stage = depth.parentElement;
+    stage.addEventListener('pointermove', (e) => {
+      const box = stage.getBoundingClientRect();
+      depth.style.setProperty('--rx', `${((e.clientY - box.top) / box.height - 0.5) * -14}deg`);
+      depth.style.setProperty('--ry', `${((e.clientX - box.left) / box.width - 0.5) * 22}deg`);
+    }, { passive: true });
+    stage.addEventListener('pointerleave', () => {
+      depth.style.removeProperty('--rx');
+      depth.style.removeProperty('--ry');
+    });
   }
 
   // ---------- 6. Active Nav Spy on Scroll ----------
-  const sections = document.querySelectorAll('section[id]');
+  const sections = document.querySelectorAll('main > section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
   const updateActiveNav = () => {
     let currentId = '';
-    const scrollPos = window.scrollY + 160;
-
+    const line = window.innerHeight * 0.35;
     sections.forEach((section) => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      if (scrollPos >= top && scrollPos < top + height) {
-        currentId = section.getAttribute('id');
-      }
+      if (section.getBoundingClientRect().top <= line) currentId = section.id;
     });
+    const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    if (atEnd && sections.length) currentId = sections[sections.length - 1].id;
 
     navLinks.forEach((link) => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentId}`) {
-        link.classList.add('active');
-      }
+      const on = link.getAttribute('href') === `#${currentId}`;
+      link.classList.toggle('active', on);
+      if (on) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
     });
   };
 
@@ -253,27 +224,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ---------- 9. Journey Timeline Scroll Marker Animation ----------
-  const journeySection = document.getElementById('journey');
+  // ---------- 9. Moment: journey line fills as you read ----------
   const timelineTrack = document.getElementById('timelineTrack');
   const timelineMarker = document.getElementById('timelineMarker');
 
-  if (journeySection && timelineTrack && timelineMarker) {
+  if (timelineTrack && timelineMarker) {
     const updateTimelineMarker = () => {
-      const rect = journeySection.getBoundingClientRect();
-      const trackHeight = timelineTrack.offsetHeight;
-      const windowHeight = window.innerHeight;
-
-      if (rect.top <= windowHeight * 0.6 && rect.bottom >= windowHeight * 0.4) {
-        const progress = Math.min(
-          Math.max((windowHeight * 0.6 - rect.top) / rect.height, 0),
-          1
-        );
-        timelineMarker.style.top = `${progress * (trackHeight - 10)}px`;
-      }
+      const rect = timelineTrack.getBoundingClientRect();
+      const progress = Math.min(Math.max((window.innerHeight * 0.65 - rect.top) / rect.height, 0), 1);
+      timelineTrack.style.setProperty('--progress', progress.toFixed(4));
+      timelineMarker.style.top = `${progress * (rect.height - 10)}px`;
     };
 
     window.addEventListener('scroll', updateTimelineMarker, { passive: true });
+    window.addEventListener('resize', updateTimelineMarker, { passive: true });
     updateTimelineMarker();
   }
 
@@ -315,17 +279,18 @@ document.addEventListener('DOMContentLoaded', () => {
           document.body.appendChild(textArea);
           textArea.focus();
           textArea.select();
-          document.execCommand('copy');
+          const copied = document.execCommand('copy');
           textArea.remove();
+          if (!copied) throw new Error('copy failed');
         }
 
-        if (copyEmailText) copyEmailText.textContent = 'Email Copied!';
+        if (copyEmailText) copyEmailText.textContent = 'Email copied';
         if (copyEmailIcon) copyEmailIcon.textContent = '✓';
         showToast(`Copied ${emailToCopy} to clipboard!`);
 
         setTimeout(() => {
-          if (copyEmailText) copyEmailText.textContent = 'Copy Email Address';
-          if (copyEmailIcon) copyEmailIcon.textContent = '📋';
+          if (copyEmailText) copyEmailText.textContent = 'Copy email address';
+          if (copyEmailIcon) copyEmailIcon.textContent = '⧉';
         }, 2500);
       } catch (err) {
         showToast(`Email: ${emailToCopy}`);
@@ -336,7 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- 11. Battlestation Web Audio Sound Effects ----------
   const sfxToggleBtn = document.getElementById('sfxToggleBtn');
   let audioCtx = null;
-  let sfxEnabled = localStorage.getItem('swanand_sfx') === 'true';
+  let sfxEnabled = false;
+  try { sfxEnabled = localStorage.getItem('swanand_sfx') === 'true'; } catch (e) {}
 
   const getAudioContext = () => {
     if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
@@ -389,42 +355,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const updateSfxBtnState = () => {
     if (!sfxToggleBtn) return;
-    if (sfxEnabled) {
-      sfxToggleBtn.classList.add('active');
-      sfxToggleBtn.innerHTML = '<span class="sfx-icon">🔊</span> <span class="sfx-text">SFX ON</span>';
-      sfxToggleBtn.setAttribute('aria-pressed', 'true');
-    } else {
-      sfxToggleBtn.classList.remove('active');
-      sfxToggleBtn.innerHTML = '<span class="sfx-icon">🔇</span> <span class="sfx-text">SFX</span>';
-      sfxToggleBtn.setAttribute('aria-pressed', 'false');
-    }
+    sfxToggleBtn.classList.toggle('active', sfxEnabled);
+    sfxToggleBtn.setAttribute('aria-pressed', String(sfxEnabled));
+    const label = sfxToggleBtn.querySelector('.sfx-text');
+    if (label) label.textContent = sfxEnabled ? 'SFX on' : 'SFX';
   };
 
   if (sfxToggleBtn) {
     updateSfxBtnState();
     sfxToggleBtn.addEventListener('click', () => {
       sfxEnabled = !sfxEnabled;
-      localStorage.setItem('swanand_sfx', sfxEnabled);
+      try { localStorage.setItem('swanand_sfx', sfxEnabled); } catch (e) {}
       updateSfxBtnState();
       if (sfxEnabled) {
         playSynthesizedSound('toggle');
-        showToast('Battlestation Sound FX Enabled');
+        showToast('Sound effects on');
       } else {
-        showToast('Sound FX Muted');
+        showToast('Sound effects off');
       }
     });
   }
 
   // Attach sound triggers to interactive targets
-  const interactiveElements = document.querySelectorAll('a, button, .filter-btn, .project-card, .beyond-card');
+  const interactiveElements = document.querySelectorAll('a, button, .project-card, .beyond-card');
   interactiveElements.forEach((el) => {
     el.addEventListener('mouseenter', () => playSynthesizedSound('hover'), { passive: true });
     el.addEventListener('click', () => playSynthesizedSound('click'), { passive: true });
   });
 
   // ---------- 12. 3D Perspective Card Tilt & Spotlight Follower ----------
-  const tiltCards = document.querySelectorAll('.project-card, .beyond-card, .what-card, .discipline-callout');
-  if (isFinePointer) {
+  const tiltCards = document.querySelectorAll('.project-card, .beyond-card, .what-card');
+  if (isFinePointer && !reduceMotion) {
     tiltCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -434,10 +395,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -4.5;
-        const rotateY = ((x - centerX) / centerX) * 4.5;
+        const rotateX = ((y - centerY) / centerY) * -2.5;
+        const rotateY = ((x - centerX) / centerX) * 2.5;
 
-        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
         card.style.setProperty('--spotlight-x', `${x}px`);
         card.style.setProperty('--spotlight-y', `${y}px`);
       });
