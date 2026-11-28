@@ -10,8 +10,7 @@
   100% { transform: scale(2.2);  opacity: 0;   }
 }
 
-.pulse-dot::after,
-.status-live-dot::after {
+.pulse-dot::after {
   content: '';
   position: absolute;
   inset: -3px;

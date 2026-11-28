@@ -320,8 +320,6 @@ em {
   height: 6px;
   border-radius: 50%;
   background-color: #10b981;
-  box-shadow: 0 0 8px #10b981;
-  animation: pulse-ring 2s infinite;
 }
 
 /* Battlestation Sound Effects Toggle Button */
@@ -857,9 +855,7 @@ em {
   height: 6px;
   border-radius: 50%;
   background-color: #10b981;
-  box-shadow: 0 0 8px #10b981;
   display: inline-block;
-  animation: pulse-ring 2s infinite;
 }
 
 /* ============================================
@@ -954,7 +950,7 @@ em {
 }
 
 .about-text strong {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 /* Mindset Callout */
@@ -1660,7 +1656,7 @@ em {
 }
 
 .project-status {
-  font-size: 0.7rem;
+  font-size: .75rem;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius-pill);
   font-weight: 600;
@@ -1800,7 +1796,7 @@ a.skill-tag { cursor: pointer; text-decoration: none; color: #ddd; }
 .work-list li + li { margin-top: .6rem; }
 .work-list li::marker { color: #da777c; }
 .work-history { margin-top: .85rem; font-size: .92rem; }
-.work-history summary { cursor: pointer; color: #e4b2b4; }
+.work-history summary { cursor: pointer; color: var(--text-primary); }
 .work-history .work-list { margin-top: .6rem; }
 .project-topic { margin-bottom: .65rem; }
 .project-role { margin-bottom: .35rem; font-size: .86rem; }
@@ -3342,7 +3338,7 @@ body.portfolio-loading { overflow: hidden; }
 
 .contribution-task-id {
   font-family: var(--font-body);
-  font-size: 0.68rem;
+  font-size: .75rem;
   letter-spacing: 0.08em;
   color: var(--text-dim);
   font-weight: 500;
@@ -3468,7 +3464,7 @@ body.portfolio-loading { overflow: hidden; }
 .project-status {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.65rem;
+  font-size: .75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3533,7 +3529,7 @@ body.portfolio-loading { overflow: hidden; }
 
 .project-stack span {
   font-family: var(--font-body);
-  font-size: 0.68rem;
+  font-size: .75rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -4046,18 +4042,6 @@ body.portfolio-loading { overflow: hidden; }
   color: var(--text-secondary);
   cursor: pointer;
   transition: var(--transition-fast);
-}
-
-/* ---------- Misc: scroll-progress, cursor, skip ---------- */
-.scroll-progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  width: 0%;
-  background: var(--accent-red);
-  z-index: 9999;
-  transition: width 0.1s linear;
 }
 
 .custom-cursor {
@@ -5193,3 +5177,13 @@ a.skill-tag:hover {
 .custom-cursor {
   border-color: rgba(18, 18, 18, 0.35);
 }
+
+.skill-example-note, .pr-list {
+  color: var(--text-secondary);
+  font-size: .9rem;
+  line-height: 1.65;
+}
+.skill-example-note { margin-bottom: .85rem; }
+.pr-list { padding-inline-start: 1.15rem; }
+.pr-list li + li { margin-top: .45rem; }
+.project-detail-block h4 { margin-top: .65rem; }

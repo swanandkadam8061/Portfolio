@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-11-28T11:07:48.022Z",
+        "reason": "Portfolio design review: this self-hosted editorial face is part of the existing visual identity requested for preservation."
+      },
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-28T11:07:48.034Z",
+        "reason": "Portfolio design review: preserve the existing companion typeface on this portfolio."
+      }
+    ]
+  }
+}

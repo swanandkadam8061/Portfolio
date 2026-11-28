@@ -15,10 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-    // Progress bar
     if (progressBar && docHeight > 0) {
-      const progress = (scrollTop / docHeight) * 100;
-      progressBar.style.width = `${progress}%`;
+      progressBar.style.width = `${(scrollTop / docHeight) * 100}%`;
     }
 
     // Navbar scrolled class

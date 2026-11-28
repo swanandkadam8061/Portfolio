@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
       summary: 'A voice-powered credit ledger for neighbourhood shopkeepers — speak transactions, review parsed items, and store entries offline or via FastAPI + SQLite.',
       problem: 'Small shopkeepers and local vendors often lack the time or typing speed to maintain digital financial records, making manual ledgers slow and error-prone.',
       solution: 'VoiceKhata transcribes spoken credit (Udhar) and debit entries, extracts amounts and customer names, and logs transactions in the browser or to a FastAPI + SQLite backend.',
-      contribution: 'Built the speech-to-ledger pipeline, voice command parser, transaction state machine, and responsive UI in a hackathon team.',
+      contribution: 'I connected the review form to the authenticated ledger, fixed Hindi amount and customer parsing, and added transcription retries that preserve manual corrections.',
       stack: ['HTML5', 'CSS3', 'Vanilla JS', 'Web Speech API', 'localStorage', 'FastAPI'],
       links: [
         { label: 'Live Demo ↗', href: 'https://nishantekka2007-sys.github.io/voicekhata-hackday/', primary: true },
-        { label: 'GitHub ↗', href: 'https://github.com/swanandkadam8061', primary: false }
+        { label: 'GitHub ↗', href: 'https://github.com/nishantekka2007-sys/voicekhata-hackday', primary: false }
       ]
     },
     braintrust: {
@@ -64,11 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
     sai: {
       eyebrow: 'Open Source · S&AI Program',
       title: 'S&AI AI-For-Beginners Contributions',
-      summary: 'Open-source pull requests to S-AI-Projects/AI-For-Beginners covering Python notebook setup, environment scaffolding, and beginner-friendly documentation.',
-      problem: 'Beginner AI curricula need clear environment setup and well-documented notebooks so first-year students can run lessons without friction.',
-      solution: 'Forked the official repository, added structured notebook setups and documentation improvements, and submitted pull requests for maintainer review.',
-      contribution: 'Authored PRs for SAI-01 (notebook setup) and SAI-02 (README & inline documentation enhancements).',
-      stack: ['Python', 'Jupyter Notebooks', 'Markdown', 'Git & GitHub'],
+      summary: 'Ten tested Python labs for the AI-For-Beginners curriculum.',
+      problem: 'Students need small examples that show what happens when an algorithm encounters ambiguous or invalid input.',
+      solution: 'Each lab pairs a runnable example with tests and lesson notes.',
+      contribution: 'I submitted tasks R38-T051 through R38-T060, covering topics from deterministic elite selection to training-only imputation.',
+      stack: ['Python', 'unittest', 'Markdown'],
       links: [
         { label: 'View My PRs ↗', href: 'https://github.com/S-AI-Projects/AI-For-Beginners/pulls?q=is%3Apr+author%3Aswanandkadam8061', primary: true },
         { label: 'Repository ↗', href: 'https://github.com/S-AI-Projects/AI-For-Beginners', primary: false }
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       num: '02', pill: 'Learn',
       title: 'Python, JavaScript & Web Craft',
-      desc: 'Mastered Python, Vanilla JavaScript, HTML5/CSS3, Git workflows, and responsive UI architecture without relying on heavy frameworks.',
+      desc: 'Practised Python, Vanilla JavaScript, HTML5/CSS3, Git workflows, and responsive UI architecture without relying on heavy frameworks.',
       tags: ['Python', 'JavaScript', 'HTML5 / CSS3', 'Git']
     },
     {
@@ -223,14 +223,14 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       num: '04', pill: 'Compete',
       title: 'VoiceKhata Hackathon MVP',
-      desc: 'Collaborated in a hackathon team to ship VoiceKhata — a voice-powered credit ledger for local shopkeepers using the Web Speech API.',
+      desc: 'Collaborated in a hackathon team to ship VoiceKhata — a voice-powered credit ledger for local shopkeepers with editable Hindi transcripts and a FastAPI ledger.',
       tags: ['Web Speech API', 'Hackday', 'FastAPI', 'SQLite']
     },
     {
       num: '05', pill: 'Open Source',
       title: 'S&AI AI-For-Beginners Contributions',
-      desc: 'Contributed pull requests to S-AI-Projects/AI-For-Beginners covering beginner AI Python notebooks and curriculum documentation.',
-      tags: ['Open Source', 'Jupyter', 'S&AI Program']
+      desc: 'Contributed pull requests to S-AI-Projects/AI-For-Beginners covering ten runnable Python labs with regression tests and lesson notes.',
+      tags: ['Open Source', 'unittest', 'S&AI Program']
     },
     {
       num: '06', pill: 'Next',
