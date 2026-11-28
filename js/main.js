@@ -5,125 +5,7 @@
    =================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Let the page show as soon as it has loaded; the 3D scene continues in the background.
-  const portfolioLoader = document.getElementById('portfolioLoader');
-  if (portfolioLoader) {
-    let loaderDismissed = false;
-    let hardWaitTimer;
-
-    const dismissLoader = () => {
-      if (loaderDismissed) return;
-      loaderDismissed = true;
-      clearTimeout(hardWaitTimer);
-      portfolioLoader.classList.add('is-leaving');
-      portfolioLoader.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('portfolio-loading');
-      setTimeout(() => portfolioLoader.remove(), 380);
-    };
-
-    const finishIntro = () => setTimeout(dismissLoader, 160);
-    window.addEventListener('load', finishIntro, { once: true });
-    if (document.readyState === 'complete') finishIntro();
-
-    // Keep slow fonts or other optional assets from extending the intro.
-    hardWaitTimer = setTimeout(dismissLoader, 1500);
-  }
-
-  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-  const guideLinks = document.querySelectorAll('.guide-link');
-  if (isFinePointer) {
-    guideLinks.forEach((link) => {
-      const avatar = link.querySelector('.guide-avatar');
-      if (!avatar) return;
-
-      link.addEventListener('pointermove', (event) => {
-        const bounds = link.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-        avatar.style.transform = `translateZ(9px) rotateX(${-y * 18}deg) rotateY(${x * 22}deg)`;
-      }, { passive: true });
-
-      link.addEventListener('pointerleave', () => {
-        avatar.style.transform = '';
-      }, { passive: true });
-    });
-  }
-
-  // ---------- 1. Interactive Ambient Glow Follower ----------
-  const ambientGlow = document.getElementById('ambientGlow');
-
-  if (ambientGlow && isFinePointer) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    }, { passive: true });
-
-    const animateGlow = () => {
-      currentX += (mouseX - currentX) * 0.07;
-      currentY += (mouseY - currentY) * 0.07;
-
-      ambientGlow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
-      requestAnimationFrame(animateGlow);
-    };
-
-    animateGlow();
-  }
-
-  // ---------- 2. Custom Magnetic Cursor Follower ----------
-  const customCursor = document.getElementById('customCursor');
-  const cursorDot = document.getElementById('cursorDot');
-
-  if (customCursor && cursorDot && isFinePointer) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let cursorX = mouseX;
-    let cursorY = mouseY;
-    let isVisible = false;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      if (!isVisible) {
-        customCursor.style.opacity = '1';
-        cursorDot.style.opacity = '1';
-        isVisible = true;
-      }
-
-      // Cursor dot moves instantly
-      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-    }, { passive: true });
-
-    // Smooth lerp for outer cursor ring
-    const renderCursor = () => {
-      cursorX += (mouseX - cursorX) * 0.16;
-      cursorY += (mouseY - cursorY) * 0.16;
-      customCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-      requestAnimationFrame(renderCursor);
-    };
-    renderCursor();
-
-    document.addEventListener('mouseleave', () => {
-      customCursor.style.opacity = '0';
-      cursorDot.style.opacity = '0';
-      isVisible = false;
-    });
-
-    // Hover effect on interactive elements
-    const hoverTargets = document.querySelectorAll(
-      'a, button, .project-card, .what-card, .beyond-card, .skill-tag, .float-card, .filter-btn'
-    );
-
-    hoverTargets.forEach((target) => {
-      target.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
-      target.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
-    });
-  }
+  const isFinePointer = matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches;
 
   // ---------- 3. Scroll Progress Bar & Navbar Scroll State ----------
   const progressBar = document.getElementById('scrollProgressBar');
@@ -165,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenu.setAttribute('aria-hidden', !isOpen);
       mobileMenu.inert = !isOpen;
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      for (const region of document.querySelectorAll('main, footer, .guide-picker')) region.inert = isOpen;
+      if (isOpen) mobileMenu.querySelector('a').focus();
     };
 
     navToggle.addEventListener('click', () => toggleMenu());
@@ -173,7 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => toggleMenu(false));
+      link.addEventListener('click', () => {
+        toggleMenu(false);
+        if (link.hash) {
+          const section = document.querySelector(link.hash);
+          section.tabIndex = -1;
+          section.focus({preventScroll: true});
+        }
+      });
     });
 
     window.addEventListener('keydown', (e) => {
@@ -315,8 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
           document.body.appendChild(textArea);
           textArea.focus();
           textArea.select();
-          document.execCommand('copy');
+          const copied = document.execCommand('copy');
           textArea.remove();
+          if (!copied) throw new Error('Clipboard unavailable');
         }
 
         if (copyEmailText) copyEmailText.textContent = 'Email Copied!';
@@ -325,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
           if (copyEmailText) copyEmailText.textContent = 'Copy Email Address';
-          if (copyEmailIcon) copyEmailIcon.textContent = '📋';
+          if (copyEmailIcon) copyEmailIcon.textContent = '⧉';
         }, 2500);
       } catch (err) {
         showToast(`Email: ${emailToCopy}`);
@@ -391,11 +283,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!sfxToggleBtn) return;
     if (sfxEnabled) {
       sfxToggleBtn.classList.add('active');
-      sfxToggleBtn.innerHTML = '<span class="sfx-icon">🔊</span> <span class="sfx-text">SFX ON</span>';
+      sfxToggleBtn.innerHTML = 'Sound on';
       sfxToggleBtn.setAttribute('aria-pressed', 'true');
     } else {
       sfxToggleBtn.classList.remove('active');
-      sfxToggleBtn.innerHTML = '<span class="sfx-icon">🔇</span> <span class="sfx-text">SFX</span>';
+      sfxToggleBtn.innerHTML = 'Sound off';
       sfxToggleBtn.setAttribute('aria-pressed', 'false');
     }
   };

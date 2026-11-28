@@ -13,6 +13,8 @@ new IntersectionObserver(([entry]) => {
 shortcuts.addEventListener('click', (event) => {
   const link = event.target.closest('a');
   if (!link) return;
+  event.preventDefault();
+  location.hash = link.hash;
   picker.open = false;
   const section = document.querySelector(link.hash);
   section.tabIndex = -1;

@@ -7,70 +7,42 @@
   <meta name="description" content="Swanand Kadam’s computer science portfolio, featuring S&amp;AI open-source contributions, a voice ledger for shopkeepers, and browser-based AI projects." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
 
-  <!-- Google Fonts: Syne & Space Grotesk -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Syne:wght@500;600;700;800&amp;display=swap" rel="stylesheet" />
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
-  <noscript><style>.portfolio-loader,.project-filters,.nav-toggle{display:none!important}body.portfolio-loading{overflow:auto}.reveal,.reveal-stagger > *{opacity:1;transform:none}</style></noscript>
+  <link rel="stylesheet" href="css/workspace.css" />
+  <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+  <noscript><style>
+    .project-filters, .nav-toggle, #sfxToggleBtn, #aiFloatingTrigger, #copyEmailBtn, #modelStatusTag { display: none }
+    #heroFallbackAvatar { display: flex }
+    .reveal, .reveal-stagger > * { opacity: 1; transform: none }
+  </style></noscript>
 </head>
-<body class="portfolio-loading">
-
-  <div class="portfolio-loader" id="portfolioLoader" role="status" aria-live="polite">
-    <div class="loader-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
-    <p class="loader-caption">Swanand Kadam</p>
-    <div class="loader-track" aria-hidden="true"><span></span></div>
-    <span class="loader-state">Loading portfolio</span>
-  </div>
-  <script>
-    // Last-resort guard if the main interaction script fails to initialize.
-    window.setTimeout(function () {
-      var loader = document.getElementById('portfolioLoader');
-      if (!loader || loader.classList.contains('is-leaving')) return;
-      loader.classList.add('is-leaving');
-      loader.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('portfolio-loading');
-      window.setTimeout(function () { loader.remove(); }, 380);
-    }, 2300);
-  </script>
-
-
-
+<body>
+  <a class="skip-link" href="#projects">Skip to projects</a>
   <!-- Top Scroll Progress Bar -->
   <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
-
-  <!-- Custom Cursor Follower -->
-  <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
-  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
   <!-- ===================== NAVIGATION ===================== -->
   <nav class="navbar" id="navbar">
     <a href="#hero" class="nav-brand" aria-label="Swanand Kadam Home">
       <span class="nav-logo-badge">SK<span class="text-accent">.</span></span>
-      <span class="nav-name">Swanand Kadam</span>
+      <span class="nav-name">Personal workspace</span>
     </a>
 
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contributions">S&amp;AI</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li><li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li><li><a href="#journey">Journey</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
     <div class="nav-socials">
       <div class="nav-status-pill" title="Currently open to software engineering opportunities">
         <span class="status-live-dot"></span>
-        <span>OPEN TO WORK</span>
+        <span>Open to work</span>
       </div>
 
       <button id="sfxToggleBtn" class="sfx-toggle-btn" aria-label="Toggle Battlestation Sound Effects" title="Toggle Interactive Sound Effects">
-        <span class="sfx-icon">🔇</span>
-        <span class="sfx-text">SFX</span>
+        Sound off
       </button>
 
       <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="GitHub Profile" title="GitHub">
@@ -102,10 +74,11 @@
     </div>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
-    <a href="#contributions">S&amp;AI</a>
+    <a href="#contributions">Open source</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
+    <a href="#exploration">Explorations</a>
     <a href="#journey">Journey</a>
     <a href="#beyond">Interests</a>
     <div class="mobile-menu-socials">
@@ -116,29 +89,29 @@
 
   <main>
   <!-- ===================== HERO SECTION ===================== -->
-  <section class="hero" id="hero">
-    <!-- Left Column: Narrative & CTAs -->
+  <section class="hero" id="hero" aria-labelledby="heroName">
     <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        <span>COMPUTER SCIENCE · INDIA</span>
+      <h1 class="hero-name" id="heroName"><span>Swanand</span> <em>Kadam<span class="name-period">.</span></em></h1>
+      <p class="hero-subtitle">Computer science student <span aria-hidden="true">/</span> India</p>
+      <p class="hero-desc">I’m an aspiring software developer building tools for working with language models, from a shopkeeper’s voice ledger to a word-by-word look at how a model reads.</p>
+      <div class="hero-cta"><a class="btn btn-primary" href="#projects">Explore projects <span aria-hidden="true">↘</span></a>
+        <a class="text-link" href="#about">About me <span aria-hidden="true">→</span></a></div>
+    </div>
+    <figure class="hero-visual">
+      <div class="locker">
+        <div class="locker-header"><i class="screw" aria-hidden="true"></i><span>SK / Personal locker</span><i class="vents" aria-hidden="true"></i></div>
+        <div class="hero-3d-stage">
+          <div id="characterCanvasContainer" role="img" aria-label="Swanand’s doll at his keyboard inside a studio locker"></div>
+          <div class="locker-stickers" aria-hidden="true"><span class="code-sticker">&lt;/&gt;</span><span class="oss-sticker">OPEN<br>SOURCE</span></div>
+          <div id="heroFallbackAvatar"><span>3D view unavailable</span></div>
+        </div>
+        <figcaption class="locker-footer"><span id="modelStatusTag" role="status">Loading workspace…</span><button type="button" id="turnWorkspace" disabled aria-pressed="false" title="Change camera angle">Turn view <span aria-hidden="true">↻</span></button></figcaption>
       </div>
-
-      <h1 class="hero-name">
-        <span class="name-line-1">Swanand</span>
-        <span class="name-line-2"><span class="text-accent">Kadam</span></span>
-      </h1>
-
-      <p class="hero-subtitle">
-        B.Tech student &amp; aspiring software developer
-      </p>
-
-      <p class="hero-desc">
-        I build tools that let people work with language models, from reviewing a spoken shop transaction to exploring how a model scores a sentence.
-      </p>
-
-      <nav class="portrait-guides" aria-label="Portfolio guides">
-        <h2>Choose your guide</h2>
+      <div class="locker-note" aria-hidden="true">Learning as I go<span>.</span></div>
+    </figure>
+  </section>
+  <div class="guide-shelf">      <nav class="portrait-guides" aria-label="Portfolio guides">
+        <h2>Workspace guides</h2>
         <div class="portrait-grid">
           <a class="portrait-card" href="#about">
             <span class="guide-doll" data-doll="ari" aria-hidden="true"><img src="assets/guides/ari.png" alt="" width="180" height="230"></span>
@@ -165,184 +138,12 @@
             <span><small>Leo</small><strong>Interests</strong></span>
           </a>
         </div>
-      </nav>
+      </nav></div>
 
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">
-          <span>Explore My Projects →</span>
-        </a>
-        <a href="#contributions" class="btn btn-secondary">
-          <span>S&amp;AI contributions ↓</span>
-        </a>
-      </div>
-
-      <div class="hero-social-row">
-        <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="hero-social-btn" aria-label="GitHub Profile">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-          <span>GitHub</span>
-        </a>
-        <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="hero-social-btn" aria-label="LinkedIn Profile">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-          <span>LinkedIn</span>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Right Column: 3D Character Battlestation & Fashion Scene -->
-    <div class="hero-visual">
-      <div class="hero-3d-stage">
-        <!-- Futuristic Gaming HUD Corner Brackets -->
-        <div class="hud-frame" aria-hidden="true">
-          <span class="hud-bracket tl"></span>
-          <span class="hud-bracket tr"></span>
-          <span class="hud-bracket bl"></span>
-          <span class="hud-bracket br"></span>
-        </div>
-
-        <!-- Soft Dark-Red Circular Backdrop -->
-        <div class="hero-red-backdrop" aria-hidden="true"></div>
-
-        <!-- 3D WebGL Canvas Container -->
-        <div id="characterCanvasContainer" title="Interactive 3D Character (Move cursor to direct gaze)"></div>
-        <div class="monitor-apple-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-            <defs>
-              <linearGradient id="appleSilver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".52" stop-color="#d6d6d9"/><stop offset="1" stop-color="#fafafa"/></linearGradient>
-              <filter id="appleGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".45" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
-            <path fill="url(#appleSilver)" filter="url(#appleGlow)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35-4.92-5.06-4.19-12.77 1.4-13.06 1.36.07 2.3.91 3.01.98 1.05.03 2.14-.58 3.36-1.03 1.46-.5 2.55-.28 3.34 1.16-3.08 1.84-2.35 6.22.5 7.35-.57 1.5-1.3 2.97-2.23 4.6zM12.03 7.25c-.15-2.23 1.66-4.09 3.74-4.25.29 2.58-2.34 4.53-3.74 4.25z"/>
-          </svg>
-        </div>
-
-        <!-- Fallback 2D Avatar if WebGL is unavailable -->
-        <div id="heroFallbackAvatar" aria-hidden="true">
-          <span>👨‍💻</span>
-        </div>
-
-        <!-- Model Status Badge -->
-        <span class="model-status-tag" id="modelStatusTag"><span class="status-indicator"></span>Interactive 3D workspace</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== ABOUT SECTION ===================== -->
-  <section class="section about-section" id="about">
-    <div class="section-header reveal">
-      <h2 class="section-title">About <em>Me</em></h2>
-    </div>
-    <div class="about-card glass-card about-profile reveal">
-      <div class="about-text">
-        <p>Hey! I'm a student who enjoys exploring technology, learning new things, and figuring out how stuff works. I'm interested in software development, Artificial Intelligence, and web development. I like trying out new tools, experimenting with ideas, and building things that help me learn something along the way. I'm still growing my skills, but I enjoy every part of the process, whether it's solving a coding problem or working on something completely new.</p>
-        <p>Apart from tech, I'm into sports, fashion, gaming, anime, movies, and series. I believe there's always something new to learn, something different to explore, and an idea worth bringing to life.</p>
-        <p><strong>Learning as I go. Creating as I learn.</strong></p>
-      </div>
-      <div class="about-more">
-        <a class="evidence-link" href="#journey">My technical journey ↗</a>
-        <a class="evidence-link" href="#beyond">Outside of coding ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section skills-section" id="skills">
-    <div class="section-header reveal">
-      <h2 class="section-title">Technical <em>skills</em></h2>
-      <p class="section-subtitle">Select a skill to see where I used it in code.</p>
-    </div>
-    <div class="skills-grid reveal reveal-stagger">
-      <article class="skill-category glass-card">
-        <h3 class="skill-cat-title">Languages</h3>
-        <p class="skill-cat-note">Implementation examples</p>
-        <div class="skill-tags">
-          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81/files">Python ↗</a>
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/studio.js">JavaScript ↗</a>
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html">HTML &amp; CSS ↗</a>
-        </div>
-      </article>
-      <article class="skill-category glass-card">
-        <h3 class="skill-cat-title">Models &amp; evaluation</h3>
-        <p class="skill-cat-note">Working with speech and text</p>
-        <div class="skill-tags">
-          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/16/files">Whisper ↗</a>
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html">Transformers.js ↗</a>
-          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85/files">Classification metrics ↗</a>
-        </div>
-      </article>
-      <article class="skill-category glass-card">
-        <h3 class="skill-cat-title">Application engineering</h3>
-        <p class="skill-cat-note">Serving, storing and testing data</p>
-        <div class="skill-tags">
-          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/server.mjs">Node.js ↗</a>
-          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files">FastAPI ↗</a>
-          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files">SQLite integration ↗</a>
-          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83/files">Python unittest ↗</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" id="contributions">
-    <div class="section-header reveal">
-      <h2 class="section-title">S&amp;AI <em>open-source contributions</em></h2>
-      <p class="section-subtitle">I submitted ten Python labs to <a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners">S-AI-Projects/AI-For-Beginners</a> as <strong>swanandkadam8061</strong>. Each pull request includes a runnable example, tests and lesson notes.</p>
-    </div>
-    <ol class="lab-list">
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T051</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81">PR #81 ↗</a></div>
-        <h3>Selecting a genetic algorithm’s elite</h3>
-        <p>I sorted candidates by fitness and broke ties by ID. That makes selection repeatable even when two candidates have the same score.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T052</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/82">PR #82 ↗</a></div>
-        <h3>Cosine similarity at the boundaries</h3>
-        <p>I checked vector dimensions and returned an explicit undefined result for a zero vector, so callers can distinguish it from a valid similarity of zero.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T053</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83">PR #83 ↗</a></div>
-        <h3>Ordering a dependency plan</h3>
-        <p>I implemented topological sorting and checked for cycles and missing dependencies. The planner can catch an impossible schedule before a task starts.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T054</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/84">PR #84 ↗</a></div>
-        <h3>Tracing an agent’s routing decision</h3>
-        <p>I added intent rules, a fallback handler and a record of each decision. The trace shows which rule took priority when a request matched more than one.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T055</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85">PR #85 ↗</a></div>
-        <h3>Evaluating a binary classifier</h3>
-        <p>I computed a confusion matrix, precision and recall from fixed labels. Tests cover zero denominators so the result is predictable when a class has no examples.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T056</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/86">PR #86 ↗</a></div>
-        <h3>Separating calculation from presentation</h3>
-        <p>I split the cosine similarity calculation from its report formatter. A lesson can change how it presents a result without changing the underlying calculation.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T057</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/87">PR #87 ↗</a></div>
-        <h3>Working through an embedding comparison</h3>
-        <p>I returned the dot product and both vector norms alongside the final similarity. A learner can check each step by hand and see where a zero vector makes the result undefined.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T058</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/88">PR #88 ↗</a></div>
-        <h3>Following one perceptron update</h3>
-        <p>I implemented a prediction and weight update for a two-dimensional input. A test follows a misclassification through the update and checks the rule for a score of zero.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T059</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/89">PR #89 ↗</a></div>
-        <h3>Normalizing a batch of images</h3>
-        <p>I validated the batch dimensions and rescaled pixels from 0–255 to 0–1. Checking the output shape catches inputs that would otherwise lose their image structure.</p>
-      </li>
-      <li class="lab-entry">
-        <div class="lab-meta"><span>R38-T060</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/90">PR #90 ↗</a></div>
-        <h3>Filling missing values without leakage</h3>
-        <p>I fitted the replacement mean on training observations and reused it for validation. This keeps information from the validation set out of preprocessing.</p>
-      </li>
-    </ol>
-  </section>
 
   <section class="section projects-section" id="projects">
     <div class="section-header reveal">
-      <h2 class="section-title">Featured <em>Projects</em></h2>
+      <h2 class="section-title">Selected <em>projects.</em></h2>
       <p class="section-subtitle">A hackday collaboration and three projects from my own repositories.</p>
     </div>
 
@@ -364,7 +165,7 @@
       <div class="spotlight-content-grid">
         <div class="spotlight-info">
           <div class="spotlight-title-group">
-            <span class="spotlight-icon" aria-hidden="true">🎙️</span>
+
             <div>
               <h3 class="spotlight-title">VoiceKhata</h3>
               <p class="spotlight-tagline">A voice ledger for neighbourhood shops</p>
@@ -415,7 +216,7 @@
             </div>
             <div class="mockup-body">
               <div class="mockup-mic-pulse">
-                <span class="mockup-mic-icon">🎙️</span>
+                <span class="sound-wave" aria-hidden="true"></span>
               </div>
               <div class="mockup-chat-bubble">
                 <span class="mock-speaker">Voice Command:</span>
@@ -474,6 +275,61 @@
     </div>
   </section>
 
+  <section class="section about-section" id="about">
+    <div class="section-header reveal">
+      <h2 class="section-title">About <em>me.</em></h2>
+    </div>
+    <div class="about-card glass-card about-profile reveal">
+      <div class="about-text">
+        <p>Hey! I'm a student who enjoys exploring technology, learning new things, and figuring out how stuff works. I'm interested in software development, Artificial Intelligence, and web development. I like trying out new tools, experimenting with ideas, and building things that help me learn something along the way. I'm still growing my skills, but I enjoy every part of the process, whether it's solving a coding problem or working on something completely new.</p>
+        <p>Apart from tech, I'm into sports, fashion, gaming, anime, movies, and series. I believe there's always something new to learn, something different to explore, and an idea worth bringing to life.</p>
+        <p><strong>Learning as I go. Creating as I learn.</strong></p>
+      </div>
+      <div class="about-more">
+        <button type="button" class="evidence-link" id="aiFloatingTrigger">Ask about my work ↗</button>
+        <a class="evidence-link" href="#journey">My technical journey ↗</a>
+        <a class="evidence-link" href="#beyond">Outside of coding ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section skills-section" id="skills">
+    <div class="section-header reveal">
+      <h2 class="section-title">My <em>toolkit.</em></h2>
+      <p class="section-subtitle">Select a skill to see where I used it in code.</p>
+    </div>
+    <div class="skills-grid reveal reveal-stagger">
+      <article class="skill-category glass-card">
+        <h3 class="skill-cat-title">Languages</h3>
+        <p class="skill-cat-note">Implementation examples</p>
+        <div class="skill-tags">
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81/files">Python ↗</a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/studio.js">JavaScript ↗</a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html">HTML &amp; CSS ↗</a>
+        </div>
+      </article>
+      <article class="skill-category glass-card">
+        <h3 class="skill-cat-title">Models &amp; evaluation</h3>
+        <p class="skill-cat-note">Working with speech and text</p>
+        <div class="skill-tags">
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/16/files">Whisper ↗</a>
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Perplexity-Explorer/blob/main/index.html">Transformers.js ↗</a>
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85/files">Classification metrics ↗</a>
+        </div>
+      </article>
+      <article class="skill-category glass-card">
+        <h3 class="skill-cat-title">Application engineering</h3>
+        <p class="skill-cat-note">Serving, storing and testing data</p>
+        <div class="skill-tags">
+          <a class="skill-tag" href="https://github.com/swanandkadam8061/Brain-Trust/blob/main/server.mjs">Node.js ↗</a>
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files">FastAPI ↗</a>
+          <a class="skill-tag" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9/files">SQLite integration ↗</a>
+          <a class="skill-tag" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83/files">Python unittest ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section class="section" id="education">
     <div class="section-header reveal">
       <h2 class="section-title">Education &amp; <em>achievements</em></h2>
@@ -491,131 +347,6 @@
         <p>My frontend integration for the team’s voice ledger was merged during the hackday project. It connects the shopkeeper’s review screen to their private ledger.</p>
         <a class="evidence-link" href="https://github.com/nishantekka2007-sys/voicekhata-hackday/pull/9">View merged contribution ↗</a>
       </article>
-    </div>
-  </section>
-
-  <!-- ===================== CONTACT SECTION ===================== -->
-  <section class="section contact-section" id="contact">
-    <div class="section-header reveal">
-      <h2 class="section-title">Connect With <em>Me</em></h2>
-      <p class="section-subtitle">For software development opportunities, hackathons and project collaborations.</p>
-    </div>
-
-    <div class="contact-container reveal">
-      <div class="contact-intro glass-card">
-        <div class="contact-badge">
-          <span class="pulse-dot"></span>
-          <span>Open to Discussions &amp; Collaborations</span>
-        </div>
-
-        <p class="contact-text">
-          You can email me directly or find my work under the same handle I use for S&amp;AI contributions.
-        </p>
-
-        <div class="contact-links">
-          <!-- GitHub Link -->
-          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="contact-btn">
-            <span class="contact-icon text-accent">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            </span>
-            <span>GitHub · swanandkadam8061</span>
-          </a>
-
-          <!-- LinkedIn Link -->
-          <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="contact-btn">
-            <span class="contact-icon text-accent">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </span>
-            <span>LinkedIn Profile</span>
-          </a>
-
-          <!-- Email Button -->
-          <a href="mailto:swanandkadam8061@gmail.com" class="contact-btn">
-            <span class="contact-icon text-accent">✉️</span>
-            <span>swanandkadam8061@gmail.com</span>
-          </a>
-
-          <!-- Copy Email Button -->
-          <button class="contact-btn copy-email-btn" id="copyEmailBtn" data-email="swanandkadam8061@gmail.com" type="button">
-            <span class="contact-icon" id="copyEmailIcon">📋</span>
-            <span id="copyEmailText">Copy Email Address</span>
-          </button>
-        </div>
-
-        <div class="contact-meta-note">
-          <span>Based in India</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== EXPLORATION / FOCUS AREAS ===================== -->
-  <section class="section what-section" id="exploration">
-    <div class="section-header reveal">
-      <h2 class="section-title">What I'm <em>Exploring</em></h2>
-      <p class="section-subtitle">Core technical disciplines where I experiment, write code, and build solutions.</p>
-    </div>
-
-    <div class="what-grid reveal reveal-stagger">
-      <!-- 1. AI & Voice Applications -->
-      <div class="what-card glass-card">
-        <div class="what-corner"></div>
-        <div class="what-card-top">
-          <span class="what-num">01 / INTELLIGENCE</span>
-          <span class="what-icon">🤖</span>
-        </div>
-        <h3 class="what-card-title">AI &amp; Voice Applications</h3>
-        <p class="what-card-desc">
-          Building intelligent interfaces using Generative AI, Google Gemma, Ollama, and open-source AI tools. Exploring voice-first interaction and speech recognition in Hindi &amp; Hinglish.
-        </p>
-        <div class="what-tags-wrap">
-          <span class="what-tag">Generative AI</span>
-          <span class="what-tag">Google Gemma</span>
-          <span class="what-tag">Ollama</span>
-          <span class="what-tag">Speech Recognition</span>
-          <span class="what-tag">Voice Interfaces</span>
-        </div>
-      </div>
-
-      <!-- 2. Web Development -->
-      <div class="what-card glass-card">
-        <div class="what-corner"></div>
-        <div class="what-card-top">
-          <span class="what-num">02 / INTERFACES</span>
-          <span class="what-icon">🌐</span>
-        </div>
-        <h3 class="what-card-title">Web Development &amp; UI Systems</h3>
-        <p class="what-card-desc">
-          Creating responsive, aesthetic, and accessible web experiences. Emphasizing clean structure, fluid CSS layouts, glassmorphism, and subtle micro-interactions that elevate usability.
-        </p>
-        <div class="what-tags-wrap">
-          <span class="what-tag">HTML5 &amp; CSS3</span>
-          <span class="what-tag">JavaScript</span>
-          <span class="what-tag">Responsive Layouts</span>
-          <span class="what-tag">Glassmorphism</span>
-          <span class="what-tag">Modern UI</span>
-        </div>
-      </div>
-
-      <!-- 3. Programming & Developer Tools -->
-      <div class="what-card glass-card">
-        <div class="what-corner"></div>
-        <div class="what-card-top">
-          <span class="what-num">03 / FOUNDATIONS</span>
-          <span class="what-icon">💻</span>
-        </div>
-        <h3 class="what-card-title">Programming &amp; Systems</h3>
-        <p class="what-card-desc">
-          Strengthening core programming logic through Python and C. Mastering loops, recursion, functions, terminal workflows, Git/GitHub version control, Linux environments, and SSH security labs.
-        </p>
-        <div class="what-tags-wrap">
-          <span class="what-tag">Python</span>
-          <span class="what-tag">C Language</span>
-          <span class="what-tag">Linux / Bash</span>
-          <span class="what-tag">Git &amp; GitHub</span>
-          <span class="what-tag">Networking &amp; SSH</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -726,7 +457,131 @@
     </div>
   </section>
 
-  <!-- ===================== BEYOND THE CODE SECTION ===================== -->
+  <section class="section" id="contributions">
+    <div class="section-header reveal">
+      <h2 class="section-title">Open-source <em>coursework.</em></h2>
+      <p class="section-subtitle">I submitted ten Python labs to <a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners">S-AI-Projects/AI-For-Beginners</a> as <strong>swanandkadam8061</strong>. Each pull request includes a runnable example, tests and lesson notes.</p>
+    </div>
+    <ol class="lab-list">
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T051</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/81">PR #81 ↗</a></div>
+        <h3>Selecting a genetic algorithm’s elite</h3>
+        <p>I sorted candidates by fitness and broke ties by ID. That makes selection repeatable even when two candidates have the same score.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T052</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/82">PR #82 ↗</a></div>
+        <h3>Cosine similarity at the boundaries</h3>
+        <p>I checked vector dimensions and returned an explicit undefined result for a zero vector, so callers can distinguish it from a valid similarity of zero.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T053</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/83">PR #83 ↗</a></div>
+        <h3>Ordering a dependency plan</h3>
+        <p>I implemented topological sorting and checked for cycles and missing dependencies. The planner can catch an impossible schedule before a task starts.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T054</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/84">PR #84 ↗</a></div>
+        <h3>Tracing an agent’s routing decision</h3>
+        <p>I added intent rules, a fallback handler and a record of each decision. The trace shows which rule took priority when a request matched more than one.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T055</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/85">PR #85 ↗</a></div>
+        <h3>Evaluating a binary classifier</h3>
+        <p>I computed a confusion matrix, precision and recall from fixed labels. Tests cover zero denominators so the result is predictable when a class has no examples.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T056</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/86">PR #86 ↗</a></div>
+        <h3>Separating calculation from presentation</h3>
+        <p>I split the cosine similarity calculation from its report formatter. A lesson can change how it presents a result without changing the underlying calculation.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T057</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/87">PR #87 ↗</a></div>
+        <h3>Working through an embedding comparison</h3>
+        <p>I returned the dot product and both vector norms alongside the final similarity. A learner can check each step by hand and see where a zero vector makes the result undefined.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T058</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/88">PR #88 ↗</a></div>
+        <h3>Following one perceptron update</h3>
+        <p>I implemented a prediction and weight update for a two-dimensional input. A test follows a misclassification through the update and checks the rule for a score of zero.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T059</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/89">PR #89 ↗</a></div>
+        <h3>Normalizing a batch of images</h3>
+        <p>I validated the batch dimensions and rescaled pixels from 0–255 to 0–1. Checking the output shape catches inputs that would otherwise lose their image structure.</p>
+      </li>
+      <li class="lab-entry">
+        <div class="lab-meta"><span>R38-T060</span><a class="evidence-link" href="https://github.com/S-AI-Projects/AI-For-Beginners/pull/90">PR #90 ↗</a></div>
+        <h3>Filling missing values without leakage</h3>
+        <p>I fitted the replacement mean on training observations and reused it for validation. This keeps information from the validation set out of preprocessing.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section what-section" id="exploration">
+    <div class="section-header reveal">
+      <h2 class="section-title">What I'm <em>Exploring</em></h2>
+      <p class="section-subtitle">Core technical disciplines where I experiment, write code, and build solutions.</p>
+    </div>
+
+    <div class="what-grid reveal reveal-stagger">
+      <!-- 1. AI & Voice Applications -->
+      <div class="what-card glass-card">
+        <div class="what-corner"></div>
+        <div class="what-card-top">
+          <span class="what-icon">🤖</span>
+        </div>
+        <h3 class="what-card-title">AI &amp; Voice Applications</h3>
+        <p class="what-card-desc">
+          Building intelligent interfaces using Generative AI, Google Gemma, Ollama, and open-source AI tools. Exploring voice-first interaction and speech recognition in Hindi &amp; Hinglish.
+        </p>
+        <div class="what-tags-wrap">
+          <span class="what-tag">Generative AI</span>
+          <span class="what-tag">Google Gemma</span>
+          <span class="what-tag">Ollama</span>
+          <span class="what-tag">Speech Recognition</span>
+          <span class="what-tag">Voice Interfaces</span>
+        </div>
+      </div>
+
+      <!-- 2. Web Development -->
+      <div class="what-card glass-card">
+        <div class="what-corner"></div>
+        <div class="what-card-top">
+          <span class="what-icon">🌐</span>
+        </div>
+        <h3 class="what-card-title">Web Development &amp; UI Systems</h3>
+        <p class="what-card-desc">
+          Creating responsive, aesthetic, and accessible web experiences. Emphasizing clean structure, fluid CSS layouts, glassmorphism, and subtle micro-interactions that elevate usability.
+        </p>
+        <div class="what-tags-wrap">
+          <span class="what-tag">HTML5 &amp; CSS3</span>
+          <span class="what-tag">JavaScript</span>
+          <span class="what-tag">Responsive Layouts</span>
+          <span class="what-tag">Glassmorphism</span>
+          <span class="what-tag">Modern UI</span>
+        </div>
+      </div>
+
+      <!-- 3. Programming & Developer Tools -->
+      <div class="what-card glass-card">
+        <div class="what-corner"></div>
+        <div class="what-card-top">
+          <span class="what-icon">💻</span>
+        </div>
+        <h3 class="what-card-title">Programming &amp; Systems</h3>
+        <p class="what-card-desc">
+          Strengthening core programming logic through Python and C. Mastering loops, recursion, functions, terminal workflows, Git/GitHub version control, Linux environments, and SSH security labs.
+        </p>
+        <div class="what-tags-wrap">
+          <span class="what-tag">Python</span>
+          <span class="what-tag">C Language</span>
+          <span class="what-tag">Linux / Bash</span>
+          <span class="what-tag">Git &amp; GitHub</span>
+          <span class="what-tag">Networking &amp; SSH</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section beyond-section" id="beyond">
     <div class="section-header reveal">
       <h2 class="section-title">Beyond the <em>Code</em></h2>
@@ -739,7 +594,7 @@
       <!-- 1. Fitness & Weight Training -->
       <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
-          <span class="beyond-icon">🏋️‍♂️</span>
+          <span class="beyond-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M3 8v8m3-11v14m12-14v14m3-11v8M6 12h12"/></svg></span>
           <span class="beyond-tag tag-crimson">Discipline</span>
         </div>
         <h3 class="beyond-title">Strength &amp; Weight Training</h3>
@@ -757,7 +612,7 @@
       <!-- 2. Gaming & Battlestation -->
       <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
-          <span class="beyond-icon">🎮</span>
+          <span class="beyond-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M7 7h10c3 0 4 3 5 10 0 3-3 3-5 0l-2-2H9l-2 2c-2 3-5 3-5 0 1-7 2-10 5-10Z"/><path d="M6 11h4m-2-2v4m7-2h.1m3 2h.1"/></svg></span>
           <span class="beyond-tag tag-cyber">Battlestation</span>
         </div>
         <h3 class="beyond-title">Gaming &amp; Strategy</h3>
@@ -775,7 +630,7 @@
       <!-- 3. Anime & Shonen Drive -->
       <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
-          <span class="beyond-icon">⚔️</span>
+          <span class="beyond-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="m5 2 4 2 9 12-2 2L5 6ZM3 18l4-4m9 1 4 5m0-3-4 4M19 3l1 3-7 9-2-2zM3 21l4-5"/></svg></span>
           <span class="beyond-tag tag-crimson">Solo Leveling</span>
         </div>
         <h3 class="beyond-title">Anime &amp; Shonen Philosophy</h3>
@@ -793,7 +648,7 @@
       <!-- 4. Fashion & Streetwear -->
       <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
-          <span class="beyond-icon">👕</span>
+          <span class="beyond-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="m8 3-6 4 3 5 3-2v11h8V10l3 2 3-5-6-4c0 3-8 3-8 0Z"/></svg></span>
           <span class="beyond-tag">Aesthetic</span>
         </div>
         <h3 class="beyond-title">Fashion &amp; Aesthetics</h3>
@@ -811,7 +666,7 @@
       <!-- 5. Cinematic Art & Directing -->
       <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
-          <span class="beyond-icon">🎬</span>
+          <span class="beyond-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="m2 9 19-5-1-3L1 6zM2 10h20v11H2zM6 5l3 3m3-5 3 3m-5 7 5 2-5 3z"/></svg></span>
           <span class="beyond-tag">Visionary</span>
         </div>
         <h3 class="beyond-title">Cinematic Art &amp; Movies</h3>
@@ -829,7 +684,7 @@
       <!-- 6. Sports & Teamwork -->
       <div class="beyond-card glass-card" data-tilt>
         <div class="beyond-card-top">
-          <span class="beyond-icon">🏏</span>
+          <span class="beyond-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5 6c5 0 10 4 13 12M7 5c5 1 10 5 12 11"/></svg></span>
           <span class="beyond-tag">Active</span>
         </div>
         <h3 class="beyond-title">Sports &amp; Team Spirit</h3>
@@ -841,6 +696,61 @@
           <span>Teamwork</span>
           <span>High Energy</span>
           <span>Clutch Execution</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section" id="contact">
+    <div class="section-header reveal">
+      <h2 class="section-title">Get in <em>touch.</em></h2>
+      <p class="section-subtitle">For software development opportunities, hackathons and project collaborations.</p>
+    </div>
+
+    <div class="contact-container reveal">
+      <div class="contact-intro glass-card">
+        <div class="contact-badge">
+          <span class="pulse-dot"></span>
+          <span>Open to Discussions &amp; Collaborations</span>
+        </div>
+
+        <p class="contact-text">
+          You can email me directly or find my work under the same handle I use for S&amp;AI contributions.
+        </p>
+
+        <div class="contact-links">
+          <!-- GitHub Link -->
+          <a href="https://github.com/swanandkadam8061" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span class="contact-icon text-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </span>
+            <span>GitHub · swanandkadam8061</span>
+          </a>
+
+          <!-- LinkedIn Link -->
+          <a href="https://www.linkedin.com/in/swanand-kadam-3455813a0/" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <span class="contact-icon text-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </span>
+            <span>LinkedIn Profile</span>
+          </a>
+
+          <!-- Email Button -->
+          <a href="mailto:swanandkadam8061@gmail.com" class="contact-btn">
+            <span class="contact-icon text-accent" aria-hidden="true">✉</span>
+            <span>swanandkadam8061@gmail.com</span>
+          </a>
+
+          <!-- Copy Email Button -->
+          <button class="contact-btn copy-email-btn" id="copyEmailBtn" data-email="swanandkadam8061@gmail.com" type="button">
+            <span class="contact-icon" aria-hidden="true" id="copyEmailIcon">⧉</span>
+            <span id="copyEmailText">Copy Email Address</span>
+          </button>
+        </div>
+
+        <a class="contact-qr" href="https://github.com/swanandkadam8061" aria-label="Open Swanand’s GitHub profile"><img width="112" height="112" loading="lazy" src="assets/github-qr.svg" alt="QR code for Swanand’s GitHub profile"><span>GitHub profile ↗</span></a>
+        <div class="contact-meta-note">
+          <span>Based in India</span>
         </div>
       </div>
     </div>
@@ -872,6 +782,19 @@
     <summary>Guides</summary>
   </details>
 
+  <dialog id="aiAssistantModal" class="assistant-sheet" aria-labelledby="assistantTitle">
+    <div class="assistant-header"><h2 id="assistantTitle">Portfolio guide</h2><button type="button" id="aiModalCloseBtn" aria-label="Close guide">×</button></div>
+    <p>Ask about my projects, skills, interests, or how to get in touch.</p>
+    <div id="aiChatMessages" role="log" aria-live="polite" aria-label="Conversation"></div>
+    <div class="assistant-prompts"><button class="ai-chip" data-prompt="Projects">Projects</button><button class="ai-chip" data-prompt="Skills">Skills</button><button class="ai-chip" data-prompt="Contact">Contact</button></div>
+    <label for="aiChatInput">Your question</label><div class="assistant-compose"><input id="aiChatInput" autocomplete="off"><button type="button" id="aiSendBtn">Send</button><button type="button" id="aiVoiceRecordBtn" hidden>Speak</button></div>
+    <details class="model-settings"><summary>Use a local model</summary>
+      <label for="aiEndpointInput">Ollama endpoint</label><input type="url" id="aiEndpointInput" placeholder="http://localhost:11434/api/generate">
+      <label for="aiModelNameInput">Model name</label><input id="aiModelNameInput" value="gemma">
+      <button type="button" id="aiSaveSettingsBtn">Save</button> <button type="button" id="aiResetSettingsBtn">Use portfolio answers</button>
+      <p id="aiSettingsStatus" role="status"></p>
+    </details>
+  </dialog>
   <!-- Toast Notification Container -->
   <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive" aria-hidden="true">
     <span class="toast-icon">✓</span>
@@ -882,10 +805,13 @@
   <script src="js/three.bundle.js"></script>
 
   <!-- Pre-loaded 3D Model Binary Data (Enables 100% offline & file:// protocol support with zero CORS issues) -->
-  <script src="js/character-model-data.js"></script>
+  <script>
+    if (location.protocol === 'file:') document.write('<script src="js/character-model-data.js"><\/script>');
+  </script>
 
   <!-- Core Portfolio Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/ai-assistant.js"></script>
   <script src="js/character3d.js"></script>
   <script src="js/guide-assistant.js"></script>
   <script src="js/guide-dolls.js"></script>

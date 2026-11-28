@@ -140,7 +140,8 @@
   function activate(card,angle){
     try {
       const stage=card.querySelector('.guide-doll');
-      stage.append(render(stage.dataset.doll,angle));
+      const canvas = render(stage.dataset.doll, angle);
+      if (canvas.parentElement !== stage) stage.append(canvas);
       current=card;
     } catch { /* The pre-rendered view also works without WebGL. */ }
   }

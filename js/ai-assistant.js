@@ -8,53 +8,17 @@
   'use strict';
 
   // Knowledge base about Swanand Kadam & Projects
-  const SWANAND_KNOWLEDGE = {
-    name: "Swanand Kadam",
-    role: "Student, Aspiring Software Developer, AI & Web Development Enthusiast",
-    education: "B.Tech Computer Science Student, India",
-    mindset: "I believe that every project, every bug fixed, and every problem solved is another step forward. Currently learning. Constantly building. Always exploring.",
-    coreSkills: [
-      "Programming: Python, C, Functions, Loops, Recursion, Number-based Problem Solving",
-      "Web Development: HTML5, CSS3, Responsive Design, Modern UI, CSS Grid & Flexbox",
-      "Artificial Intelligence: Generative AI, Google Gemma, Ollama, Open-Source LLMs, Prompting",
-      "AI Applications: Voice-based interfaces, Speech Recognition (English, Hindi, Hinglish)",
-      "Developer Tools: Git, GitHub, VS Code, Linux Terminal & Command-line tools",
-      "Cybersecurity Fundamentals: Linux system basics, Computer networking, SSH, Security labs"
-    ],
-    featuredProject: {
-      name: "VoiceKhata",
-      tagline: "AI-Powered, Voice-First Digital Ledger for Small Kirana & Local Vendors",
-      liveUrl: "https://nishantekka2007-sys.github.io/voicekhata-hackday/",
-      githubUrl: "https://github.com/nishantekka2007-sys/voicekhata-hackday/",
-      highlights: [
-        "Voice-first user interaction in local languages",
-        "Hindi and Hinglish speech recognition",
-        "Open-source AI tools and Google Gemma integration",
-        "Automated bookkeeping and transaction calculation",
-        "Built during Hackday and deployed live"
-      ]
-    },
-    projects: [
-      { name: "VoiceKhata", type: "AI Voice Ledger", status: "Live Hackday Project" },
-      { name: "Personal Developer Portfolio", type: "Web & UI Systems", status: "Live" },
-      { name: "Python CLI Calculator & Problem Solver", type: "Python CLI Utility", status: "Completed" },
-      { name: "Anime Watchlist & Media Tracker", type: "Web & Storage App", status: "Active Build" },
-      { name: "Minimal Fashion & Streetwear Editorial", type: "CSS Grid & Typography", status: "Active Build" }
-    ],
-    interests: [
-      "🏋️‍♂️ Gym & Weight Training (6x/week progressive overload, discipline over motivation)",
-      "🎮 Gaming & Strategy (Tactical competitive play, mechanical mastery, game engines)",
-      "⚔️ Anime & Shonen Drive (Solo Leveling, Hunter x Hunter, relentless growth)",
-      "👕 Streetwear & Visual Aesthetics (Dark monochrome fits, minimalist curation)",
-      "🎬 Movies & Directing (Cinematography, visual pacing, atmospheric world-building)",
-      "🏏 Sports & Team Spirit (Cricket, high energy, clutch competitive focus)"
-    ],
-    contact: {
-      github: "https://github.com/swanandkadam8061",
-      linkedin: "https://www.linkedin.com/in/swanand-kadam-3455813a0/",
-      email: "swanandkadam8061@gmail.com"
-    }
-  };
+  const topics = [
+    { words: /voicekhata|ledger|shopkeeper|speech/, section: 'projects', answer: 'VoiceKhata is a team project for neighbourhood shops. Swanand connected the review form to the signed-in ledger, fixed Hindi item parsing, and improved Whisper retries.' },
+    { words: /brain trust|groq|openrouter/, section: 'projects', answer: 'Brain Trust sends a shared conversation to multiple models. Swanand built its browser workspace and Node.js gateway.' },
+    { words: /perplexity|token|distilgpt/, section: 'projects', answer: 'Perplexity Explorer runs DistilGPT-2 in the browser to show how individual words affect a sentence’s score.' },
+    { words: /contact|email|reach|github|linkedin/, section: 'contact', answer: 'Email Swanand at swanandkadam8061@gmail.com. His contact card also links to GitHub and LinkedIn.' },
+    { words: /skill|python|tech|stack|language|ai tool/, section: 'skills', answer: 'Swanand uses Python, JavaScript, HTML and CSS. His toolkit links to examples of Whisper, Transformers.js, Node.js, FastAPI and SQLite in his work.' },
+    { words: /hobb|interest|gaming|sports|anime|fashion|movie|fitness/, section: 'beyond', answer: 'Outside of code, Swanand enjoys weight training, sports, gaming, anime, fashion, movies and series.' },
+    { words: /open.source|course|education|learn|journey/, section: 'contributions', answer: 'Swanand is studying computer science. His S&AI coursework includes Python labs on genetic algorithms, prediction metrics, embeddings and data preparation.' },
+    { words: /project|portfolio|work/, section: 'projects', answer: 'Selected projects include VoiceKhata, Brain Trust, Perplexity Explorer and this interactive portfolio. Each project lists Swanand’s contribution and links to the code.' },
+    { words: /who|about|swanand/, section: 'about', answer: 'Swanand Kadam is a computer science student in India and an aspiring software developer interested in AI, web development and open-source tools.' }
+  ];
 
   // State
   let recognition = null;
@@ -91,6 +55,7 @@
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       recognition = new SpeechRecognition();
+      if (voiceRecordBtn) voiceRecordBtn.hidden = false;
       recognition.continuous = false;
       recognition.interimResults = false;
       recognition.lang = 'en-IN'; // Supports Indian English / Hinglish nuances
@@ -108,7 +73,7 @@
       };
 
       recognition.onerror = (event) => {
-        console.warn('Speech recognition error:', event.error);
+        showSystemMessage('Microphone input is unavailable. Type your question below.');
         isListening = false;
         if (voiceRecordBtn) voiceRecordBtn.classList.remove('listening');
       };
@@ -122,86 +87,9 @@
 
   // Knowledge Engine reasoning
   function generateAIResponse(query) {
-    const q = query.toLowerCase().trim();
-
-    // 1. VoiceKhata questions
-    if (q.includes('voicekhata') || q.includes('ledger') || q.includes('kirana') || q.includes('voice')) {
-      return `🎙️ **VoiceKhata** is Swanand's flagship AI project! It's a voice-first digital ledger created for small shopkeepers, kirana stores, and local vendors.\n\n` +
-             `• **Key Innovation:** Handles voice commands in **Hindi and Hinglish**.\n` +
-             `• **AI Stack:** Open-source AI tools and **Google Gemma / Ollama** architectures for parsing.\n` +
-             `• **Features:** AI transaction logging, credit/debit calculation, and an intuitive UI.\n\n` +
-             `👉 You can test the **Live VoiceKhata Project** at: [Live Demo](https://nishantekka2007-sys.github.io/voicekhata-hackday/) or review the [GitHub Repo](https://github.com/nishantekka2007-sys/voicekhata-hackday/).`;
-    }
-
-    // 2. AI tools / Gemma / Ollama
-    if (q.includes('ai') || q.includes('gemma') || q.includes('ollama') || q.includes('generative')) {
-      return `🤖 **Swanand's AI Exploration:**\n\n` +
-             `Swanand actively works with **Generative AI**, **Google Gemma**, and **Ollama** for running local open-source models.\n` +
-             `He specializes in:\n` +
-             `• Voice-based interfaces & Multilingual speech recognition\n` +
-             `• Hindi & Hinglish natural language command extraction\n` +
-             `• Integrating lightweight LLMs into responsive web applications\n` +
-             `• Prompt engineering and offline AI model workflows.`;
-    }
-
-    // 3. Skills & Technologies
-    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language') || q.includes('python')) {
-      return `💻 **Technical Skills & Arsenal:**\n\n` +
-             `• **Programming:** Python, C, Logical problem-solving, functions, loops, and recursion\n` +
-             `• **Web Development:** HTML5, CSS3, Responsive Design, CSS Grid/Flexbox, Glassmorphism\n` +
-             `• **AI & Speech:** Google Gemma, Ollama, Open-Source LLMs, Voice interfaces\n` +
-             `• **Tools:** Git, GitHub, VS Code, Linux terminal, Bash\n` +
-             `• **Cybersecurity:** Linux fundamentals, Networking, SSH remote access, security labs.`;
-    }
-
-    // 4. Projects
-    if (q.includes('project') || q.includes('portfolio') || q.includes('calculator') || q.includes('work')) {
-      return `🚀 **Swanand's Core Projects:**\n\n` +
-             `1. **VoiceKhata:** AI-powered voice ledger for local kirana businesses (Live)\n` +
-             `2. **Personal Portfolio Website:** Modern glassmorphic dark developer hub with Three.js 3D model integration\n` +
-             `3. **Python CLI Calculator:** Terminal problem solver with robust validation and error recovery\n` +
-             `4. **Anime Watchlist Tracker:** Media tracking web app with LocalStorage state persistence\n` +
-             `5. **Minimal Fashion Editorial:** Asymmetric layout exploring typography and streetwear aesthetics.`;
-    }
-
-    // 5. Mindset / Journey
-    if (q.includes('mindset') || q.includes('journey') || q.includes('about') || q.includes('who are you') || q.includes('swanand')) {
-      return `⚡ **Hey, I'm Swanand Kadam!**\n\n` +
-             `I'm a B.Tech Computer Science student in India, aspiring developer, and tech enthusiast.\n\n` +
-             `🌱 **My Mindset:**\n` +
-             `*"I'm someone who loves staying curious, learning new things, and challenging myself to grow. I believe that every project, every bug fixed, and every problem solved is another step forward."*\n\n` +
-             `**Currently learning. Constantly building. Always exploring.**`;
-    }
-
-    // 6. Beyond the Code / Hobbies / Gym / Gaming / Anime
-    if (q.includes('hobby') || q.includes('beyond') || q.includes('gym') || q.includes('fitness') || q.includes('workout') || q.includes('gaming') || q.includes('sports') || q.includes('cricket') || q.includes('anime') || q.includes('fashion') || q.includes('movie')) {
-      return `🎯 **Beyond the Code:**\n\n` +
-             `Outside of technology and software development, Swanand is driven by:\n` +
-             `• 🏋️‍♂️ **Gym & Weight Training:** 6x/week progressive overload discipline. *"Discipline > Motivation"* — the mental blueprint he applies to software architecture.\n` +
-             `• 🎮 **Gaming & Strategy:** Tactical competitive gaming, high APM, game mechanics, and virtual engine tech.\n` +
-             `• ⚔️ **Anime & Shonen Drive:** Inspired by *Solo Leveling*, *Hunter x Hunter*, and relentless protagonist growth.\n` +
-             `• 👕 **Streetwear & Aesthetics:** Dark monochrome fits, clean silhouettes, and intentional minimalist curation.\n` +
-             `• 🎬 **Cinematic Art:** High-contrast cinematography and atmospheric world-building.\n` +
-             `• 🏏 **Sports:** Cricket, fast-paced teamwork, and clutch execution under pressure.`;
-    }
-
-    // 7. Contact / Socials
-    if (q.includes('contact') || q.includes('email') || q.includes('github') || q.includes('linkedin') || q.includes('hire') || q.includes('reach')) {
-      return `📬 **Get in Touch with Swanand:**\n\n` +
-             `• **Email:** [swanandkadam8061@gmail.com](mailto:swanandkadam8061@gmail.com)\n` +
-             `• **GitHub:** [github.com/swanandkadam8061](https://github.com/swanandkadam8061)\n` +
-             `• **LinkedIn:** [linkedin.com/in/swanand-kadam-3455813a0](https://www.linkedin.com/in/swanand-kadam-3455813a0/)\n\n` +
-             `Feel free to connect for collaborations, hackathons, or tech discussions!`;
-    }
-
-    // Default Fallback
-    return `✦ I'm **Swanand's AI Assistant** (trained on his project architecture, Google Gemma & VoiceKhata workflows).\n\n` +
-           `I can answer questions about:\n` +
-           `• **VoiceKhata** (voice-first digital ledger & speech recognition)\n` +
-           `• **Technical Skills** (Python, C, HTML/CSS, Gemma, Ollama, Linux)\n` +
-           `• **Projects & GitHub Repositories**\n` +
-           `• **My Technical Journey & Beyond the Code**\n\n` +
-           `Try asking: *"Tell me about VoiceKhata"* or *"What AI tools do you use?"*`;
+    return topics.find(topic => topic.words.test(query.toLowerCase())) || {
+      answer: 'Try asking about a project by name, my skills, interests, coursework or contact details.'
+    };
   }
 
   // VoiceKhata Speech-to-Ledger Parser Simulator
@@ -256,7 +144,7 @@
   }
 
   // Append message to chat UI
-  function appendMessage(sender, text, isMarkdown = true) {
+  function appendMessage(sender, text, sectionId = null) {
     if (!chatMessages) return;
 
     const msgDiv = document.createElement('div');
@@ -265,18 +153,19 @@
     const bubble = document.createElement('div');
     bubble.className = 'ai-bubble';
 
-    if (sender === 'bot') {
-      // Basic formatting for bold, links, bullets
-      let formatted = text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/\n/g, '<br/>');
-      bubble.innerHTML = formatted;
-    } else {
-      bubble.textContent = text;
+    bubble.textContent = text;
+    if (sender === 'bot' && sectionId) {
+      const section = document.getElementById(sectionId);
+      const link = document.createElement('a');
+      link.href = '#' + section.id;
+      link.textContent = section.querySelector('h2').textContent;
+      link.addEventListener('click', () => {
+        aiModal.close();
+        section.tabIndex = -1;
+        section.focus({preventScroll: true});
+      });
+      bubble.append(document.createElement('br'), link);
     }
-
     msgDiv.appendChild(bubble);
     chatMessages.appendChild(msgDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -304,57 +193,39 @@
     const customModel = localStorage.getItem('swanand_ai_model') || 'gemma';
 
     if (customEndpoint) {
-      appendMessage('bot', `<em>Connecting to custom endpoint (${customModel})...</em>`);
+      const pending = document.createElement('p');
+      pending.textContent = 'Waiting for the configured model…';
+      chatMessages.append(pending);
       try {
         const response = await fetch(customEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: customModel,
-            prompt: `Context about Swanand Kadam:\n${JSON.stringify(SWANAND_KNOWLEDGE)}\n\nUser Question: ${query}\nAnswer helpfully:`,
-            stream: false
-          })
+          signal: AbortSignal.timeout(10000),
+          body: JSON.stringify({ model: customModel, prompt: topics.map(topic => topic.answer).join(' ') + '\nQuestion: ' + query, stream: false })
         });
-
-        if (response.ok) {
-          const data = await response.json();
-          const reply = data.response || data.text || JSON.stringify(data);
-          // Remove loading message
-          chatMessages.lastChild.remove();
-          appendMessage('bot', reply);
-          return;
-        }
-      } catch (err) {
-        console.warn('Custom endpoint failed, using embedded knowledge engine:', err);
-        chatMessages.lastChild.remove();
+        if (!response.ok) throw new Error('Model request failed');
+        const payload = await response.json();
+        const answer = payload.response || payload.text;
+        if (typeof answer !== 'string' || !answer.trim()) throw new Error('Empty model response');
+        appendMessage('bot', answer);
+        return;
+      } catch {
+        showSystemMessage('The configured model is unavailable. Answering from the portfolio.');
+      } finally {
+        pending.remove();
       }
     }
-
-    // Default fast embedded knowledge response
-    setTimeout(() => {
-      const response = generateAIResponse(query);
-      appendMessage('bot', response);
-    }, 280);
+    const topic = generateAIResponse(query);
+    appendMessage('bot', topic.answer, topic.section);
   }
 
-  // Setup Event Listeners
   function setupEvents() {
-    // Modal toggle
-    if (aiToggleBtn && aiModal) {
-      aiToggleBtn.addEventListener('click', () => {
-        const isHidden = aiModal.classList.contains('open');
-        aiModal.classList.toggle('open', !isHidden);
-        aiModal.setAttribute('aria-hidden', String(isHidden));
-        if (!isHidden && chatInput) setTimeout(() => chatInput.focus(), 200);
-      });
-    }
-
-    if (aiCloseBtn && aiModal) {
-      aiCloseBtn.addEventListener('click', () => {
-        aiModal.classList.remove('open');
-        aiModal.setAttribute('aria-hidden', 'true');
-      });
-    }
+    aiToggleBtn.addEventListener('click', () => {
+      aiModal.showModal();
+      chatInput.focus();
+    });
+    aiCloseBtn.addEventListener('click', () => aiModal.close());
+    aiModal.addEventListener('close', () => { if (isListening) recognition.stop(); });
 
     // Send button & enter key
     if (sendBtn) {
@@ -424,7 +295,7 @@
       vkProcessBtn.addEventListener('click', () => {
         const text = vkInput.value.trim() || 'Ramesh ko ₹450 ka doodh aur bread udhaar likho';
         const parsed = parseVoiceKhataCommand(text);
-        vkResult.innerHTML = `<pre><code>${JSON.stringify(parsed, null, 2)}</code></pre>`;
+        vkResult.textContent = JSON.stringify(parsed, null, 2);
       });
     }
 
@@ -452,7 +323,7 @@
         if (endpoint) {
           localStorage.setItem('swanand_ai_endpoint', endpoint);
           localStorage.setItem('swanand_ai_model', model);
-          if (settingsStatus) settingsStatus.textContent = `Connected to ${model} at ${endpoint} ✓`;
+          if (settingsStatus) settingsStatus.textContent = `Saved model settings for ${model}.`;
         } else {
           localStorage.removeItem('swanand_ai_endpoint');
           if (settingsStatus) settingsStatus.textContent = 'Using embedded Swanand AI Knowledge Engine ✓';

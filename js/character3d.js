@@ -15,9 +15,11 @@
   let deskLedStrip = null;
   let mouseUnderglow = null;
   let deskPadEdge = null;
-  let cyberParticles = null;
   let kineticSculpture = null;
-  let isHovering = false;
+  const turnButton = document.getElementById('turnWorkspace');
+  const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+  let stageVisible = true;
+  let turned = false;
   let animationsList = [];
   let animationFrame = 0;
   let targetRotation = { x: 0, y: 0 };
@@ -164,39 +166,33 @@
       battlestationGroup.add(spkGroup);
     });
 
-    // D. Acoustic Studio Slat Wall Panels (Dark minimalist background)
-    const wallGroup = new THREE.Group();
-    const slatMat = new THREE.MeshStandardMaterial({
-      color: 0x0d0d0d,
-      roughness: 0.9,
-      metalness: 0.1,
-    });
-    for (let i = -5; i <= 5; i++) {
-      const slatGeo = new THREE.BoxGeometry(0.28, 8.5, 0.08);
-      const slat = new THREE.Mesh(slatGeo, slatMat);
-      slat.position.set(i * 0.72, 13.0, -3.8);
-      wallGroup.add(slat);
+    // Cabinet returns and a shelf give the desk a physical enclosure.
+    const steel = new THREE.MeshStandardMaterial({color: 0x55564d, roughness: .71, metalness: .22});
+    for (const x of [-6.8, 6.8]) {
+      const side = new THREE.Mesh(new THREE.BoxGeometry(.18, 11, 9.8), steel);
+      side.position.set(x, 11.7, -.5);
+      side.receiveShadow = true;
+      battlestationGroup.add(side);
     }
-    battlestationGroup.add(wallGroup);
+    const shelf = new THREE.Mesh(new THREE.BoxGeometry(13.7, .2, 10), steel);
+    shelf.position.set(0, 6.1, .1);
+    shelf.receiveShadow = true;
+    battlestationGroup.add(shelf);
 
-    // E. Floating Cyber Dust / Embers Particle System
-    const particleCount = 55;
-    const particleGeo = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePositions[i] = (Math.random() - 0.5) * 14;
-      particlePositions[i + 1] = 8.5 + Math.random() * 8;
-      particlePositions[i + 2] = -2.5 + (Math.random() - 0.5) * 6;
+    // A stitched cricket ball sits beside the keyboard.
+    const ball = new THREE.Group();
+    const leather = new THREE.MeshStandardMaterial({color: 0x9c3029, roughness: .52});
+    ball.add(new THREE.Mesh(new THREE.SphereGeometry(.31, 20, 14), leather));
+    const seam = new THREE.MeshStandardMaterial({color: 0xe0d3ad, roughness: .8});
+    for (const z of [-.025, .025]) {
+      const stitch = new THREE.Mesh(new THREE.TorusGeometry(.309, .008, 5, 40), seam);
+      stitch.position.z = z;
+      ball.add(stitch);
     }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-    const particleMat = new THREE.PointsMaterial({
-      color: 0xff3344,
-      size: 0.09,
-      transparent: true,
-      opacity: 0.45,
-    });
-    cyberParticles = new THREE.Points(particleGeo, particleMat);
-    battlestationGroup.add(cyberParticles);
+    ball.position.set(-2.9, 9.37, 4.0);
+    ball.rotation.y = .8;
+    ball.rotation.z = .3;
+    battlestationGroup.add(ball);
 
     targetScene.add(battlestationGroup);
   }
@@ -388,16 +384,17 @@
         powerPreference: 'high-performance',
       });
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.18;
-      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
       container.appendChild(renderer.domElement);
     } catch (err) {
       console.warn('WebGL init failed:', err);
       if (fallbackAvatar) fallbackAvatar.style.display = 'flex';
-      setStatus('WebGL Fallback');
+      setStatus('WebGL unavailable');
       document.dispatchEvent(new Event('portfolio:model-failed'));
       return;
     }
@@ -405,12 +402,17 @@
     clock = new THREE.Clock();
 
     // 4. Lighting — Cinematic Editorial Lighting (Face Key + Crimson Rim + Cyber Backlight)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.94);
+    const ambientLight = new THREE.AmbientLight(0xfff4df, 0.87);
     scene.add(ambientLight);
 
     const keyLight = new THREE.DirectionalLight(0xf8f8f8, 1.35);
     keyLight.position.set(-4, 15, 12);
-    scene.add(keyLight);
+    keyLight.target.position.set(0, 10, 1);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.set(1024, 1024);
+    Object.assign(keyLight.shadow.camera, { left: -8, right: 8, top: 8, bottom: -8 });
+    keyLight.shadow.normalBias = .035;
+    scene.add(keyLight, keyLight.target);
 
     const fillLight = new THREE.DirectionalLight(0xdddddd, 0.7);
     fillLight.position.set(5, 12, 10);
@@ -422,7 +424,7 @@
     scene.add(faceLight);
 
     // Crimson Red Rim Light (casting scarlet rim from behind)
-    redRimLight = new THREE.DirectionalLight(0xe50914, 3.4);
+    redRimLight = new THREE.DirectionalLight(0xef7259, 1.35);
     redRimLight.position.set(5, 14, -8);
     scene.add(redRimLight);
 
@@ -431,7 +433,7 @@
     scene.add(redPoint);
 
     // Dual-tone Cyber Indigo/Violet Backlight (editorial studio contrast)
-    cyberBacklight = new THREE.PointLight(0x6366f1, 2.0, 22);
+    cyberBacklight = new THREE.PointLight(0xffd4ad, 2.0, 22);
     cyberBacklight.position.set(4.5, 13.2, -3.5);
     scene.add(cyberBacklight);
 
@@ -464,15 +466,9 @@
 
   function updateCameraPosition() {
     if (!camera) return;
-    if (window.innerWidth < 768) {
-      camera.fov = 22;
-      camera.position.set(0, 13.1, 23.5);
-      camera.lookAt(0, 11.1, 2.2);
-    } else {
-      camera.fov = 21;
-      camera.position.set(0, 13.05, 21.8);
-      camera.lookAt(0, 11.2, 2.2);
-    }
+    camera.fov = 24;
+    camera.position.set(turned ? -7.6 : 6.3, 14.1, 21.7);
+    camera.lookAt(0, 11.25, 1.6);
     camera.updateProjectionMatrix();
   }
 
@@ -480,29 +476,14 @@
     characterMesh = gltf.scene;
 
     // 1. Proportional Monitor Resizing — Monitor made slightly smaller (0.63x) so face is the prominent focal point
-    const monitorLid = characterMesh.getObjectByName('Plane.004');
+    // GLTFLoader normalizes punctuation in node names.
+    const monitorLid = characterMesh.getObjectByName('Plane004');
     const screenLight = characterMesh.getObjectByName('screenlight');
-    const monitorStand = characterMesh.getObjectByName('Plane');
-    const monitorScale = 0.63;
-
-    if (monitorLid) {
-      monitorLid.scale.set(monitorScale, monitorScale, monitorScale);
-      monitorLid.position.set(-0.063, 9.04, 4.96);
-      monitorLid.rotation.x = 0.09;
-
-      // The Apple mark is a lightweight, stage-aligned SVG overlay in index.html.
-      // Keep the monitor mesh scale and pose stable so the overlay remains aligned.
-    }
-
-    if (screenLight) {
-      screenLight.scale.set(monitorScale, monitorScale, monitorScale);
-      screenLight.position.set(-0.053, 9.04, 4.96);
-      screenLight.rotation.x = 0.09;
-    }
-
-    // 2. Proportional monitor stand reduction (scale down from original 1.578 to 1.10)
-    if (monitorStand) {
-      monitorStand.scale.set(1.10, 1.10, 1.10);
+    for (const panel of [monitorLid, screenLight]) {
+      if (!panel) continue;
+      panel.scale.setScalar(.47);
+      panel.position.set(-2.05, 9.04, 4.58);
+      panel.rotation.y = .42;
     }
 
     // 3. Materials Styling & Clean Dark Aesthetic
@@ -585,11 +566,20 @@
       }
     }
 
+    if (mixer) mixer.setTime(.45);
     scene.add(characterMesh);
+    turnButton.disabled = false;
+    turnButton.addEventListener('click', () => {
+      turned = !turned;
+      turnButton.setAttribute('aria-pressed', String(turned));
+      if (motionPreference.matches) updateCameraPosition();
+      renderer.render(scene, camera);
+    });
+    renderer.render(scene, camera);
 
     // Hide fallback avatar
     if (fallbackAvatar) fallbackAvatar.style.display = 'none';
-    setStatus('Interactive 3D workspace');
+    setStatus('Live 3D workspace');
     document.dispatchEvent(new Event('portfolio:model-ready'));
   }
 
@@ -598,7 +588,7 @@
     if (!LoaderClass) {
       console.warn('GLTFLoader not found');
       if (fallbackAvatar) fallbackAvatar.style.display = 'flex';
-      setStatus('3D Avatar Ready');
+      setStatus('Model unavailable');
       document.dispatchEvent(new Event('portfolio:model-failed'));
       return;
     }
@@ -653,35 +643,23 @@
       (error) => {
         console.warn('GLTFLoader load notice:', error);
         if (fallbackAvatar) fallbackAvatar.style.display = 'flex';
-        setStatus('3D Avatar Ready');
+        setStatus('Model unavailable');
         document.dispatchEvent(new Event('portfolio:model-failed'));
       }
     );
   }
 
   function setupHeadTracking() {
-    window.addEventListener('mousemove', (e) => {
-      mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mousePosition.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    container.addEventListener('pointermove', (e) => {
+      if (motionPreference.matches) return;
+      const box = container.getBoundingClientRect();
+      mousePosition.x = ((e.clientX - box.left) / box.width) * 2 - 1;
+      mousePosition.y = -((e.clientY - box.top) / box.height) * 2 + 1;
     }, { passive: true });
 
     // Head tracking is eased in the render loop to avoid a separate timer.
     container.addEventListener('pointerleave', () => { mousePosition.x = 0; mousePosition.y = 0; }, { passive: true });
 
-    // Hover effect on the 3D stage
-    if (container.parentElement) {
-      container.parentElement.addEventListener('mouseenter', () => {
-        isHovering = true;
-        if (redRimLight) redRimLight.intensity = 4.2;
-        if (cyberBacklight) cyberBacklight.intensity = 2.5;
-      });
-
-      container.parentElement.addEventListener('mouseleave', () => {
-        isHovering = false;
-        if (redRimLight) redRimLight.intensity = 3.4;
-        if (cyberBacklight) cyberBacklight.intensity = 2.0;
-      });
-    }
   }
 
   function onWindowResize() {
@@ -691,17 +669,21 @@
     camera.aspect = width / height;
     updateCameraPosition();
     renderer.setSize(width, height);
+    renderer.render(scene, camera);
   }
 
   function animate() {
-    if (document.hidden) {
+    if (document.hidden || !stageVisible || motionPreference.matches) {
       animationFrame = 0;
       return;
     }
     animationFrame = requestAnimationFrame(animate);
-    const delta = clock ? clock.getDelta() : 0.016;
+    const delta = Math.min(clock.getDelta(), .05);
     const elapsed = clock ? clock.getElapsedTime() : 0;
 
+    const cameraGoal = turned ? -7.6 : 6.3;
+    camera.position.x += (cameraGoal - camera.position.x) * (1 - Math.exp(-delta * 9));
+    camera.lookAt(0, 11.25, 1.6);
     if (mixer) mixer.update(delta);
     if (headBone && characterMesh) {
       targetRotation.y = mousePosition.x * Math.PI * 0.2;
@@ -718,17 +700,6 @@
     if (deskPadEdge && deskPadEdge.material) {
       deskPadEdge.material.opacity = 0.65 + 0.25 * Math.sin(elapsed * 1.8);
     }
-    if (cyberParticles) {
-      const positions = cyberParticles.geometry.attributes.position.array;
-      for (let i = 1; i < positions.length; i += 3) {
-        positions[i] += 0.007;
-        if (positions[i] > 16.5) {
-          positions[i] = 7.5;
-        }
-      }
-      cyberParticles.geometry.attributes.position.needsUpdate = true;
-    }
-
     // Elegant rotation of kinetic luxury sculpture
     if (kineticSculpture) {
       kineticSculpture.rotation.y = elapsed * 0.35;
@@ -740,11 +711,22 @@
     }
   }
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && animationFrame) cancelAnimationFrame(animationFrame);
-    else if (!document.hidden && renderer && !animationFrame) animate();
-    if (document.hidden) animationFrame = 0;
-  });
+  function syncRendering() {
+    cancelAnimationFrame(animationFrame);
+    animationFrame = 0;
+    if (renderer && clock && !document.hidden && stageVisible) {
+      renderer.render(scene, camera);
+      if (!motionPreference.matches) animate();
+    }
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      stageVisible = entry.isIntersecting;
+      syncRendering();
+    }).observe(container);
+  }
+  document.addEventListener('visibilitychange', syncRendering);
+  motionPreference.addEventListener('change', syncRendering);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => setTimeout(initThreeScene, 100));
