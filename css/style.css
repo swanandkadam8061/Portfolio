@@ -5187,3 +5187,30 @@ a.skill-tag:hover {
 .pr-list { padding-inline-start: 1.15rem; }
 .pr-list li + li { margin-top: .45rem; }
 .project-detail-block h4 { margin-top: .65rem; }
+
+/* Academic records share a date rail. The current degree has its own surface. */
+.academic-path, .academic-achievement { max-width: 54rem; }
+.academic-path { list-style: none; margin: 2rem 0; padding: 0; }
+.academic-path li { position: relative; padding: 0 0 1.2rem 1.75rem; }
+.academic-path li::before {
+  content: ""; position: absolute; left: .25rem; top: 1.25rem; bottom: -1.25rem;
+  width: 1px; background: var(--glass-border);
+}
+.academic-path li:last-child::before { display: none; }
+.academic-path li::after {
+  content: ""; position: absolute; left: 0; top: 1.1rem; width: .55rem; height: .55rem;
+  border-radius: 50%; background: var(--text-secondary);
+}
+.academic-record { padding: .75rem 1rem; }
+.academic-record h3, .academic-achievement h3 { margin: .25rem 0; line-height: 1.25; }
+.academic-record p, .academic-achievement p { color: var(--text-secondary); line-height: 1.6; margin: .35rem 0; }
+.academic-record .academic-date { margin: 0; font-size: .82rem; font-weight: 650; }
+.academic-current .academic-record { border: 1px solid var(--glass-border); border-radius: 1rem; background: var(--bg-secondary); padding: clamp(1rem, 3vw, 2rem); }
+.academic-current .academic-date { color: var(--text-primary); }
+.academic-current h3 { font-family: var(--font-heading); font-size: clamp(1.45rem, 3vw, 2.2rem); max-width: 34ch; }
+.academic-record a, .academic-achievement a { display: inline-block; margin-top: .4rem; }
+.academic-achievement { border-top: 1px solid var(--glass-border); padding-top: 1.5rem; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .academic-path li::after { transition: transform .18s ease-out; }
+  .academic-path li:hover::after, .academic-path li:focus-within::after { transform: scale(1.35); }
+}
