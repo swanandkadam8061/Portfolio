@@ -52,6 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     navToggle.addEventListener('click', () => toggleMenu());
+
+    // Close button inside mobile menu
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    if (mobileMenuClose) mobileMenuClose.addEventListener('click', () => toggleMenu(false));
+
     window.matchMedia('(min-width: 1101px)').addEventListener('change', (event) => {
       if (event.matches && mobileMenu.classList.contains('open')) toggleMenu(false);
     });
@@ -180,12 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const showToast = (message) => {
     if (!toastNotification) return;
     if (toastMsg) toastMsg.textContent = message;
-    toastNotification.classList.add('show');
+    toastNotification.classList.add('visible');
     toastNotification.setAttribute('aria-hidden', 'false');
 
     clearTimeout(toastTimeout);
     toastTimeout = setTimeout(() => {
-      toastNotification.classList.remove('show');
+      toastNotification.classList.remove('visible');
       toastNotification.setAttribute('aria-hidden', 'true');
     }, 2800);
   };

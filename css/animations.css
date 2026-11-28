@@ -1,26 +1,17 @@
 /* ===================================================
    css/animations.css — Swanand Kadam Portfolio
    Smooth, Minimalist, 60fps & Reduced-Motion Compliant
-   Monochromatic Theme with Crimson Red Accents
    =================================================== */
 
 /* ---------- Status Pulse Dot ---------- */
 @keyframes pulse-ring {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  70% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
+  0%   { transform: scale(0.95); opacity: 0.8; }
+  70%  { transform: scale(2.2);  opacity: 0;   }
+  100% { transform: scale(2.2);  opacity: 0;   }
 }
 
-.pulse-dot::after {
+.pulse-dot::after,
+.status-live-dot::after {
   content: '';
   position: absolute;
   inset: -3px;
@@ -34,7 +25,8 @@
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -43,67 +35,66 @@
   transform: translateY(0);
 }
 
-/* Staggered Child Reveal for Grids */
+/* Staggered child reveal */
 .reveal-stagger > * {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal.visible.reveal-stagger > *:nth-child(1) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.04s;
-}
+.reveal.visible.reveal-stagger > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.04s; }
+.reveal.visible.reveal-stagger > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.10s; }
+.reveal.visible.reveal-stagger > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+.reveal.visible.reveal-stagger > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.22s; }
+.reveal.visible.reveal-stagger > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.28s; }
+.reveal.visible.reveal-stagger > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.34s; }
 
-.reveal.visible.reveal-stagger > *:nth-child(2) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.10s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(3) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.16s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(4) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.22s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(5) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.28s;
-}
-
-.reveal.visible.reveal-stagger > *:nth-child(6) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.34s;
-}
-
-/* ---------- Hero Entrance Animation ---------- */
+/* ---------- Hero Entrance ---------- */
 @keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .hero-content {
-  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-visual {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
 }
 
-.hero-visual {
-  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+/* ---------- Locker Badge Float ---------- */
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0px) rotate(var(--badge-rot, 0deg)); }
+  50%       { transform: translateY(-6px) rotate(var(--badge-rot, 0deg)); }
+}
+
+.locker-badge {
+  animation: badge-float 3.6s ease-in-out infinite;
+}
+.locker-badge--ai  { animation-delay: 0s;    --badge-rot: -6deg; }
+.locker-badge--web { animation-delay: 0.9s;  --badge-rot: 4deg; }
+.locker-badge--py  { animation-delay: 1.8s;  --badge-rot: -3deg; }
+.locker-badge--os  { animation-delay: 0.45s; --badge-rot: 7deg; }
+
+/* ---------- Scroll Hint Bounce ---------- */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%       { transform: translateY(6px); opacity: 1; }
+}
+
+.scroll-line {
+  animation: scroll-bounce 1.6s ease-in-out infinite;
+}
+
+/* ---------- Navbar Slide In ---------- */
+@keyframes navSlideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.navbar {
+  animation: navSlideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ---------- Accessibility: Prefers Reduced Motion ---------- */
@@ -129,6 +120,14 @@
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .locker-badge {
+    animation: none !important;
+  }
+
+  .scroll-line {
+    animation: none !important;
   }
 
   .custom-cursor,

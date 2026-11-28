@@ -9,15 +9,17 @@
 
   // Knowledge base about Swanand Kadam & Projects
   const topics = [
-    { words: /voicekhata|ledger|shopkeeper|speech/, section: 'projects', answer: 'VoiceKhata is a team project for neighbourhood shops. Swanand connected the review form to the signed-in ledger, fixed Hindi item parsing, and improved Whisper retries.' },
-    { words: /brain trust|groq|openrouter/, section: 'projects', answer: 'Brain Trust sends a shared conversation to multiple models. Swanand built its browser workspace and Node.js gateway.' },
-    { words: /perplexity|token|distilgpt/, section: 'projects', answer: 'Perplexity Explorer runs DistilGPT-2 in the browser to show how individual words affect a sentence’s score.' },
-    { words: /contact|email|reach|github|linkedin/, section: 'contact', answer: 'Email Swanand at swanandkadam8061@gmail.com. His contact card also links to GitHub and LinkedIn.' },
-    { words: /skill|python|tech|stack|language|ai tool/, section: 'skills', answer: 'Swanand uses Python, JavaScript, HTML and CSS. His toolkit links to examples of Whisper, Transformers.js, Node.js, FastAPI and SQLite in his work.' },
-    { words: /hobb|interest|gaming|sports|anime|fashion|movie|fitness/, section: 'beyond', answer: 'Outside of code, Swanand enjoys weight training, sports, gaming, anime, fashion, movies and series.' },
-    { words: /open.source|course|education|learn|journey/, section: 'contributions', answer: 'Swanand is studying computer science. His S&AI coursework includes Python labs on genetic algorithms, prediction metrics, embeddings and data preparation.' },
-    { words: /project|portfolio|work/, section: 'projects', answer: 'Selected projects include VoiceKhata, Brain Trust, Perplexity Explorer and this interactive portfolio. Each project lists Swanand’s contribution and links to the code.' },
-    { words: /who|about|swanand/, section: 'about', answer: 'Swanand Kadam is a computer science student in India and an aspiring software developer interested in AI, web development and open-source tools.' }
+    { words: /voicekhata|ledger|shopkeeper|speech/, section: 'projects', answer: 'VoiceKhata is a browser-based voice-powered ledger app for shopkeepers built during a hackathon using HTML5, CSS3, Vanilla JS, Web Speech API, and localStorage. Live demo: https://nishantekka2007-sys.github.io/voicekhata-hackday/' },
+    { words: /brain trust|groq|openrouter|compare/, section: 'projects', answer: 'Brain Trust sends a shared conversation to multiple models on Groq or OpenRouter so you can compare responses side by side. Built with Node.js & JavaScript: https://github.com/swanandkadam8061/Brain-Trust' },
+    { words: /perplexity|distilgpt|token|transformers/, section: 'projects', answer: 'Perplexity Explorer runs DistilGPT-2 in the browser via Transformers.js to visualize how each token affects a sentence’s perplexity score: https://github.com/swanandkadam8061/Perplexity-Explorer' },
+    { words: /github|commit|heatmap|activity|streak/, section: 'github-activity', answer: 'You can view Swanand’s live 52-week GitHub commit heatmap and streaks in the GitHub Activity section (@swanandkadam8061).' },
+    { words: /assistant|ollama|guide|gemma|browser ai/, section: 'projects', answer: 'This portfolio includes a client-side Browser AI Portfolio Assistant with an intent engine, optional local Ollama endpoint support, and interactive Three.js 3D guide characters.' },
+    { words: /s&ai|sai|open.source|pull request|pr|ai-for-beginners/, section: 'contributions', answer: 'Swanand contributes to S-AI-Projects/AI-For-Beginners (GitHub author search: swanandkadam8061), working on Python notebook setups and curriculum documentation.' },
+    { words: /contact|email|reach|github|linkedin/, section: 'contact', answer: 'You can reach Swanand at swanandkadam8061@gmail.com, on GitHub (swanandkadam8061), or on LinkedIn (swanand-kadam-3455813a0).' },
+    { words: /skill|python|tech|stack|language|ai tool|three\.js|webgl/, section: 'skills', answer: 'Swanand works with Python, JavaScript, HTML5, CSS3, Vanilla JS, Web Speech API, Three.js, WebGL, Ollama API, and Jupyter Notebooks.' },
+    { words: /education|college|b\.tech|degree|school|hackathon|achievement/, section: 'education', answer: 'Swanand is a first-year B.Tech Computer Science & Engineering student, S&AI Open-Source Program participant, and VoiceKhata hackathon contributor.' },
+    { words: /project|portfolio|work/, section: 'projects', answer: 'Selected projects include VoiceKhata (voice ledger for shopkeepers), the Browser-Based AI Portfolio Assistant, and S&AI AI-For-Beginners curriculum contributions.' },
+    { words: /who|about|swanand|interest|hobby/, section: 'about', answer: 'Swanand Kadam is a first-year B.Tech CS student in India passionate about AI, Generative AI, Web Development, and open-source software. He is actively seeking software engineering internships.' }
   ];
 
   // State
@@ -220,12 +222,18 @@
   }
 
   function setupEvents() {
-    aiToggleBtn.addEventListener('click', () => {
-      aiModal.showModal();
-      chatInput.focus();
-    });
-    aiCloseBtn.addEventListener('click', () => aiModal.close());
-    aiModal.addEventListener('close', () => { if (isListening) recognition.stop(); });
+    if (aiToggleBtn && aiModal) {
+      aiToggleBtn.addEventListener('click', () => {
+        aiModal.showModal();
+        if (chatInput) chatInput.focus();
+      });
+    }
+    if (aiCloseBtn && aiModal) {
+      aiCloseBtn.addEventListener('click', () => aiModal.close());
+    }
+    if (aiModal) {
+      aiModal.addEventListener('close', () => { if (isListening && recognition) recognition.stop(); });
+    }
 
     // Send button & enter key
     if (sendBtn) {
